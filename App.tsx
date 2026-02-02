@@ -8,6 +8,7 @@ import { PortfolioGallery } from './components/PortfolioGallery';
 import { EmailCaptureModal } from './components/EmailCaptureModal';
 import { ServicesIndex } from './components/ServicesIndex';
 import { ServiceDetail } from './components/ServiceDetail';
+import { ProjectDetail } from './components/ProjectDetail';
 import { COMMUNITIES, PROJECTS, PROCESS_STEPS, TESTIMONIALS, AWARDS, SERVICES } from './constants';
 import { 
   ArrowRight, 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [communityFilter, setCommunityFilter] = useState<string>('All');
   const [selectedService, setSelectedService] = useState<string>('');
+  const [selectedProject, setSelectedProject] = useState<string>('');
 
   // Check if email was already submitted
   useEffect(() => {
@@ -65,8 +67,14 @@ const App: React.FC = () => {
   };
 
   const handleNavigate = (page: string) => {
+    // Handle project detail navigation (e.g., "project:palm-1")
+    if (page.startsWith('project:')) {
+      const projectId = page.replace('project:', '');
+      setSelectedProject(projectId);
+      setActivePage('project-detail');
+    }
     // Handle service detail navigation (e.g., "service:luxury-villa-renovation")
-    if (page.startsWith('service:')) {
+    else if (page.startsWith('service:')) {
       const serviceId = page.replace('service:', '');
       setSelectedService(serviceId);
       setActivePage('service-detail');
@@ -484,6 +492,7 @@ const App: React.FC = () => {
             onFavoritesThresholdReached={handleFavoritesThresholdReached}
             hasSubmittedEmail={hasSubmittedEmail}
             initialFilter={communityFilter}
+            onViewProject={(projectId) => handleNavigate(`project:${projectId}`)}
             onRequestProject={(project) => {
               // Store the inspiration project for the form
               localStorage.setItem('smartreno_inspiration_project', JSON.stringify({
@@ -493,6 +502,16 @@ const App: React.FC = () => {
               }));
               setIsFormOpen(true);
             }}
+          />
+        )}
+
+        {/* Project Detail Page */}
+        {activePage === 'project-detail' && (
+          <ProjectDetail
+            projectId={selectedProject}
+            onBack={() => handleNavigate('portfolio')}
+            onConsultationClick={() => setIsFormOpen(true)}
+            onViewProject={(projectId) => handleNavigate(`project:${projectId}`)}
           />
         )}
 

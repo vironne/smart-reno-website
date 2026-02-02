@@ -58,21 +58,103 @@ export const PROJECTS = [
     id: 'palm-1',
     title: 'Palm Jumeirah Signature Villa',
     location: 'Palm Jumeirah',
+    propertyType: 'Signature Villa',
     investment: 'AED 1.8M',
     timeline: '6 Months',
     style: 'Contemporary Italian',
+    completion: 'March 2024',
     beforeImage: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1200',
-    afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200'
+    afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
+    description: 'A complete transformation of this iconic Signature Villa on Palm Jumeirah, blending contemporary Italian design with the coastal lifestyle Dubai offers.',
+    gallery: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600566753190-17f0bbc564ce?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200'
+    ],
+    rooms: [
+      {
+        name: 'Living Room',
+        beforeImage: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1200',
+        afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
+        description: 'Open-plan living with double-height ceilings and panoramic sea views'
+      },
+      {
+        name: 'Kitchen',
+        beforeImage: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=1200',
+        afterImage: 'https://images.unsplash.com/photo-1600566753190-17f0bbc564ce?auto=format&fit=crop&q=80&w=1200',
+        description: 'Bespoke Italian kitchen with Gaggenau appliances and Calacatta marble island'
+      },
+      {
+        name: 'Master Suite',
+        beforeImage: 'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?auto=format&fit=crop&q=80&w=1200',
+        afterImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200',
+        description: 'Luxurious master bedroom with walk-in wardrobe and spa bathroom'
+      },
+      {
+        name: 'Pool & Terrace',
+        beforeImage: 'https://images.unsplash.com/photo-1560185009-dddeb820c7b7?auto=format&fit=crop&q=80&w=1200',
+        afterImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200',
+        description: 'Infinity pool with outdoor kitchen and Mediterranean landscaping'
+      }
+    ],
+    testimonial: {
+      quote: 'Smart Renovation transformed our villa beyond our wildest dreams. The attention to detail and quality of materials is exceptional.',
+      author: 'Jonathan & Sarah Wright',
+      role: 'Villa Owners'
+    },
+    materials: [
+      'Calacatta Oro Italian Marble',
+      'German Gaggenau Appliances',
+      'Hansgrohe Axor Fixtures',
+      'European Oak Flooring',
+      'Poliform Custom Wardrobes',
+      'Flos Designer Lighting',
+      'Molteni&C Furniture'
+    ],
+    challenges: [
+      {
+        challenge: 'Structural modifications for open-plan living',
+        solution: 'Engineered steel beam system to remove load-bearing walls while maintaining structural integrity'
+      },
+      {
+        challenge: 'Integrating smart home throughout a 15,000 sqft villa',
+        solution: 'Comprehensive Lutron and Control4 system with hidden infrastructure'
+      },
+      {
+        challenge: 'Nakheel approval for pool extension',
+        solution: 'Detailed architectural submissions and liaison with Nakheel engineering team'
+      }
+    ]
   },
   {
     id: 'palm-2',
     title: 'Garden Villa Transformation',
     location: 'Palm Jumeirah',
+    propertyType: 'Garden Villa',
     investment: 'AED 2.2M',
     timeline: '8 Months',
     style: 'Modern Minimalist',
+    completion: 'January 2024',
     beforeImage: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=1200',
-    afterImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200'
+    afterImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200',
+    description: 'A minimalist transformation focusing on clean lines, natural materials, and seamless indoor-outdoor living.',
+    gallery: [
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600566753190-17f0bbc564ce?auto=format&fit=crop&q=80&w=1200',
+      'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&q=80&w=1200'
+    ],
+    materials: [
+      'Portuguese Limestone',
+      'Miele Appliances',
+      'Dornbracht Fixtures',
+      'Wide-plank Oak Flooring'
+    ]
   },
   {
     id: 'emirates-1',

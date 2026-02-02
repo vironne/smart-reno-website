@@ -8,6 +8,7 @@ interface PortfolioGalleryProps {
   hasSubmittedEmail: boolean;
   initialFilter?: string;
   onRequestProject?: (project: Project) => void;
+  onViewProject?: (projectId: string) => void;
 }
 
 const FAVORITES_THRESHOLD = 10;
@@ -17,7 +18,8 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
   onFavoritesThresholdReached,
   hasSubmittedEmail,
   initialFilter = 'All',
-  onRequestProject
+  onRequestProject,
+  onViewProject
 }) => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [filter, setFilter] = useState<string>(initialFilter);
@@ -134,7 +136,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
                 {/* Image */}
                 <div
                   className="relative h-[300px] overflow-hidden cursor-pointer"
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => onViewProject ? onViewProject(project.id) : setSelectedProject(project)}
                 >
                   <img
                     src={project.afterImage}

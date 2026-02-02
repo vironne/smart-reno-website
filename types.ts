@@ -8,15 +8,38 @@ export interface Community {
   description: string;
 }
 
+export interface ProjectRoom {
+  name: string;
+  beforeImage: string;
+  afterImage: string;
+  description?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
   location: string;
+  propertyType: string;
   investment: string;
   timeline: string;
   style: string;
+  completion: string;
   beforeImage: string;
   afterImage: string;
+  // Extended fields for detail page
+  gallery?: string[];
+  rooms?: ProjectRoom[];
+  testimonial?: {
+    quote: string;
+    author: string;
+    role?: string;
+  };
+  materials?: string[];
+  challenges?: {
+    challenge: string;
+    solution: string;
+  }[];
+  description?: string;
 }
 
 export interface Service {
