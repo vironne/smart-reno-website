@@ -163,8 +163,8 @@ const App: React.FC = () => {
               <div className="w-20 h-20 bg-[#C9A96E]/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-[#C9A96E] group-hover:text-white">
                 <span className="text-3xl">👥</span>
               </div>
-              <h3 className="text-2xl font-playfair font-bold mb-4">Founder-Led</h3>
-              <p className="text-[#707070] leading-relaxed mb-6">Marco & Cinzia personally oversee every project. Your villa transformation is never delegated to junior teams.</p>
+              <h3 className="text-2xl font-playfair font-bold mb-4">Haute Couture Approach</h3>
+              <p className="text-[#707070] leading-relaxed mb-6">Marco & Cinzia personally oversee every project like master tailors. Your villa transformation is bespoke, never off-the-rack or delegated.</p>
               <button onClick={() => setActivePage('founders')} className="text-[#C9A96E] font-semibold hover:underline">Meet Our Team →</button>
             </div>
           </div>
@@ -327,6 +327,16 @@ const App: React.FC = () => {
   const renderFounders = () => (
     <div className="animate-in fade-in py-24">
       <section className="container mx-auto px-6 md:px-12">
+        {/* Haute Couture Header */}
+        <div className="text-center mb-20">
+          <span className="text-[#C9A96E] text-sm uppercase tracking-widest font-bold block mb-4">THE HAUTE COUTURE OF RENOVATION</span>
+          <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-6">Meet the Master Tailors</h1>
+          <p className="text-xl text-[#707070] max-w-3xl mx-auto leading-relaxed">
+            Like the finest Milanese fashion houses, we believe luxury cannot be mass-produced.
+            Every villa we transform is a bespoke creation, personally crafted by our founders.
+          </p>
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-20 items-center mb-32">
           <div className="lg:w-1/2">
             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" className="rounded-2xl shadow-2xl" alt="Marco" />
@@ -335,8 +345,8 @@ const App: React.FC = () => {
             <span className="text-[#C9A96E] font-bold uppercase tracking-widest text-sm">FOUNDER & CREATIVE DIRECTOR</span>
             <h2 className="text-5xl font-playfair font-bold my-6">Marco P.</h2>
             <p className="text-lg text-[#707070] leading-relaxed mb-8 italic">"Every villa tells a story. My job is to ensure that story is written in Italian marble and European light."</p>
-            <p className="text-[#707070] leading-relaxed mb-8">With over 30 years of personal experience in high-end structural renovations, Marco leads the design and site engineering teams. He personally sources every slab of marble and every fixture for our Signature projects.</p>
-            <Button variant="outline">Schedule a Briefing with Marco</Button>
+            <p className="text-[#707070] leading-relaxed mb-8">With over 30 years of personal experience in high-end structural renovations, Marco leads the design and site engineering teams. Like a master tailor measuring for a bespoke suit, he personally sources every slab of marble and every fixture, ensuring each element is cut precisely for your space.</p>
+            <Button variant="outline" onClick={() => setIsFormOpen(true)}>Schedule a Briefing with Marco</Button>
           </div>
         </div>
         <div className="flex flex-col lg:flex-row-reverse gap-20 items-center">
@@ -347,8 +357,8 @@ const App: React.FC = () => {
             <span className="text-[#C9A96E] font-bold uppercase tracking-widest text-sm">CO-FOUNDER & RELATIONS DIRECTOR</span>
             <h2 className="text-5xl font-playfair font-bold my-6">Cinzia D.</h2>
             <p className="text-lg text-[#707070] leading-relaxed mb-8 italic">"We don't just build rooms; we curate experiences for Dubai's most discerning families."</p>
-            <p className="text-[#707070] leading-relaxed mb-8">Cinzia manages our client partnerships and project lifecycle. She ensures that the "personal touch" remains the cornerstone of Smart Renovation, handling every communication with the discretion and care it deserves.</p>
-            <Button variant="outline">Consult with Cinzia</Button>
+            <p className="text-[#707070] leading-relaxed mb-8">Cinzia manages our client partnerships with the attentiveness of a private couturier. She ensures that the "haute couture" experience extends beyond design—handling every communication with the discretion, care, and personalized attention it deserves.</p>
+            <Button variant="outline" onClick={() => setIsFormOpen(true)}>Consult with Cinzia</Button>
           </div>
         </div>
       </section>
@@ -438,6 +448,15 @@ const App: React.FC = () => {
             onFavoritesThresholdReached={handleFavoritesThresholdReached}
             hasSubmittedEmail={hasSubmittedEmail}
             initialFilter={communityFilter}
+            onRequestProject={(project) => {
+              // Store the inspiration project for the form
+              localStorage.setItem('smartreno_inspiration_project', JSON.stringify({
+                title: project.title,
+                style: project.style,
+                location: project.location
+              }));
+              setIsFormOpen(true);
+            }}
           />
         )}
 

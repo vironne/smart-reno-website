@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, MapPin, Clock, X } from 'lucide-react';
+import { Heart, MapPin, Clock, X, Sparkles } from 'lucide-react';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
 
@@ -7,6 +7,7 @@ interface PortfolioGalleryProps {
   onFavoritesThresholdReached: () => void;
   hasSubmittedEmail: boolean;
   initialFilter?: string;
+  onRequestProject?: (project: Project) => void;
 }
 
 const FAVORITES_THRESHOLD = 10;
@@ -15,7 +16,8 @@ const STORAGE_KEY = 'smartreno_favorites';
 export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
   onFavoritesThresholdReached,
   hasSubmittedEmail,
-  initialFilter = 'All'
+  initialFilter = 'All',
+  onRequestProject
 }) => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [filter, setFilter] = useState<string>(initialFilter);
@@ -240,7 +242,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
                     <div className="font-bold text-lg">{selectedProject.style}</div>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 mb-8">
                   <div>
                     <div className="text-xs text-[#707070] uppercase mb-2">Before</div>
                     <img
@@ -258,6 +260,23 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
                     />
                   </div>
                 </div>
+
+                {/* Call to Action Button */}
+                <button
+                  onClick={() => {
+                    if (onRequestProject) {
+                      onRequestProject(selectedProject);
+                    }
+                    setSelectedProject(null);
+                  }}
+                  className="w-full bg-gradient-to-r from-[#C9A96E] to-[#B8956A] hover:from-[#B8956A] hover:to-[#A88559] text-white py-4 px-6 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
+                >
+                  <Sparkles size={22} />
+                  I Want This Style for My Villa
+                </button>
+                <p className="text-center text-sm text-[#707070] mt-3">
+                  Start your consultation with this project as inspiration
+                </p>
               </div>
             </div>
           </div>
