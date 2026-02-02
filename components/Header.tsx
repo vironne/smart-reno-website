@@ -53,17 +53,35 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
             </div>
           </div>
 
-          <button onClick={() => onNavigate('portfolio')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">Portfolio</button>
-          
+          <button onClick={() => onNavigate('services')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">Services</button>
+
           <div className="group relative">
-            <button onClick={() => onNavigate('communities')} className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors">
+            <button onClick={() => onNavigate('services')} className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors">
               Communities <ChevronDown size={14} />
             </button>
             <div className="absolute top-full -left-4 hidden group-hover:block pt-5 animate-in fade-in slide-in-from-top-2 duration-200">
               <div className="bg-white shadow-xl border border-gray-100 rounded-lg py-4 w-64 max-h-[400px] overflow-y-auto">
-                <button onClick={() => onNavigate('palm-jumeirah')} className="w-full text-left block px-6 py-2 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">Palm Jumeirah</button>
-                <button className="w-full text-left block px-6 py-2 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">Emirates Hills</button>
-                <button className="w-full text-left block px-6 py-2 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">Arabian Ranches</button>
+                <button onClick={() => onNavigate('services')} className="w-full text-left block px-6 py-3 text-sm font-semibold text-[#C9A96E] border-b border-gray-100 hover:bg-[#F5F1E8]">View All Projects</button>
+                <button onClick={() => onNavigate('community:Palm Jumeirah')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="font-medium">Palm Jumeirah</span>
+                  <span className="block text-xs text-gray-400 mt-0.5">40+ villas renovated</span>
+                </button>
+                <button onClick={() => onNavigate('community:Emirates Hills')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="font-medium">Emirates Hills</span>
+                  <span className="block text-xs text-gray-400 mt-0.5">15+ villas renovated</span>
+                </button>
+                <button onClick={() => onNavigate('community:Arabian Ranches')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="font-medium">Arabian Ranches</span>
+                  <span className="block text-xs text-gray-400 mt-0.5">22+ villas renovated</span>
+                </button>
+                <button onClick={() => onNavigate('community:Dubai Hills Estate')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="font-medium">Dubai Hills Estate</span>
+                  <span className="block text-xs text-gray-400 mt-0.5">12+ villas renovated</span>
+                </button>
+                <button onClick={() => onNavigate('community:Jumeirah Islands')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="font-medium">Jumeirah Islands</span>
+                  <span className="block text-xs text-gray-400 mt-0.5">8+ villas renovated</span>
+                </button>
               </div>
             </div>
           </div>
@@ -93,8 +111,15 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
               <button onClick={() => { onNavigate('awards-recognition'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Awards</button>
               <button onClick={() => { onNavigate('founders'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Meet Founders</button>
             </div>
-            <button onClick={() => { onNavigate('portfolio'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left">Portfolio</button>
-            <button onClick={() => { onNavigate('palm-jumeirah'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left">Palm Jumeirah</button>
+            <button onClick={() => { onNavigate('services'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left">Services</button>
+            <div className="flex flex-col gap-3 pl-4 border-l-2 border-[#C9A96E]/20">
+              <span className="text-sm font-montserrat uppercase tracking-wider text-gray-400">Communities</span>
+              <button onClick={() => { onNavigate('community:Palm Jumeirah'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Palm Jumeirah</button>
+              <button onClick={() => { onNavigate('community:Emirates Hills'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Emirates Hills</button>
+              <button onClick={() => { onNavigate('community:Arabian Ranches'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Arabian Ranches</button>
+              <button onClick={() => { onNavigate('community:Dubai Hills Estate'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Dubai Hills</button>
+              <button onClick={() => { onNavigate('community:Jumeirah Islands'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Jumeirah Islands</button>
+            </div>
           </nav>
           <div className="mt-auto flex flex-col gap-4">
             <a href="tel:+97142350599" className="flex items-center justify-center gap-3 p-4 bg-[#F5F1E8] rounded-lg font-semibold">

@@ -6,6 +6,7 @@ import { Project } from '../types';
 interface PortfolioGalleryProps {
   onFavoritesThresholdReached: () => void;
   hasSubmittedEmail: boolean;
+  initialFilter?: string;
 }
 
 const FAVORITES_THRESHOLD = 10;
@@ -13,14 +14,22 @@ const STORAGE_KEY = 'smartreno_favorites';
 
 export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
   onFavoritesThresholdReached,
-  hasSubmittedEmail
+  hasSubmittedEmail,
+  initialFilter = 'All'
 }) => {
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [filter, setFilter] = useState<string>('All');
+  const [filter, setFilter] = useState<string>(initialFilter);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [hasTriggeredModal, setHasTriggeredModal] = useState(false);
 
   const locations = ['All', ...Array.from(new Set(PROJECTS.map(p => p.location)))];
+
+  // Update filter when initialFilter prop changes
+  useEffect(() => {
+    if (initialFilter && initialFilter !== 'All') {
+      setFilter(initialFilter);
+    }
+  }, [initialFilter]);
 
   // Load favorites from localStorage on mount
   useEffect(() => {

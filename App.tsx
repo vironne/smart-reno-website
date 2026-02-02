@@ -30,6 +30,7 @@ const App: React.FC = () => {
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
   const [favoritesCount, setFavoritesCount] = useState(0);
+  const [communityFilter, setCommunityFilter] = useState<string>('All');
 
   // Check if email was already submitted
   useEffect(() => {
@@ -60,6 +61,21 @@ const App: React.FC = () => {
     // Here you would typically send this to your backend/CRM
   };
 
+  const handleNavigate = (page: string) => {
+    // Handle community filter navigation (e.g., "community:Palm Jumeirah")
+    if (page.startsWith('community:')) {
+      const community = page.replace('community:', '');
+      setCommunityFilter(community);
+      setActivePage('services');
+    } else if (page === 'services') {
+      setCommunityFilter('All');
+      setActivePage('services');
+    } else {
+      setActivePage(page);
+    }
+    window.scrollTo(0, 0);
+  };
+
   const renderHome = () => (
     <div className="animate-in fade-in duration-700">
       {/* 1. Hero Section (Video Background Experience) */}
@@ -88,7 +104,7 @@ const App: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button variant="primary-large" onClick={() => setIsFormOpen(true)}>Schedule Your Consultation</Button>
-              <Button variant="outline-white" className="px-10 py-4 text-lg" onClick={() => setActivePage('portfolio')}>Explore Portfolio</Button>
+              <Button variant="outline-white" className="px-10 py-4 text-lg" onClick={() => handleNavigate('services')}>Explore Our Work</Button>
             </div>
           </div>
         </div>
@@ -103,10 +119,10 @@ const App: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {COMMUNITIES.map(community => (
-              <div 
-                key={community.id} 
+              <div
+                key={community.id}
                 className="group relative h-[400px] rounded-2xl overflow-hidden shadow-xl cursor-pointer"
-                onClick={() => setActivePage(community.slug)}
+                onClick={() => handleNavigate(`community:${community.name}`)}
               >
                 <img src={community.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={community.name} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -404,27 +420,24 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <Header 
-        onConsultationClick={() => setIsFormOpen(true)} 
-        onNavigate={(page) => {
-          setActivePage(page);
-          window.scrollTo(0, 0);
-        }} 
+      <Header
+        onConsultationClick={() => setIsFormOpen(true)}
+        onNavigate={handleNavigate}
       />
       
       <main className="pt-[80px]">
         {activePage === 'home' && renderHome()}
-        {activePage === 'palm-jumeirah' && renderCommunityPage()}
         {activePage === 'heritage' && renderHeritage()}
         {activePage === 'awards-recognition' && renderAwards()}
         {activePage === 'founders' && renderFounders()}
         {activePage === 'client-testimonials' && renderTestimonials()}
         
-        {/* Portfolio Page with Favorites */}
-        {activePage === 'portfolio' && (
+        {/* Services/Portfolio Page with Favorites */}
+        {activePage === 'services' && (
           <PortfolioGallery
             onFavoritesThresholdReached={handleFavoritesThresholdReached}
             hasSubmittedEmail={hasSubmittedEmail}
+            initialFilter={communityFilter}
           />
         )}
 
@@ -476,10 +489,10 @@ const App: React.FC = () => {
             <div>
               <h4 className="text-lg font-bold mb-8 font-playfair underline decoration-[#C9A96E] underline-offset-8">Communities</h4>
               <ul className="space-y-4 text-white/60 text-sm">
-                <li className="hover:text-[#C9A96E] cursor-pointer" onClick={() => setActivePage('palm-jumeirah')}>Palm Jumeirah</li>
-                <li className="hover:text-[#C9A96E] cursor-pointer">Emirates Hills</li>
-                <li className="hover:text-[#C9A96E] cursor-pointer">Arabian Ranches</li>
-                <li className="hover:text-[#C9A96E] cursor-pointer">Dubai Hills</li>
+                <li className="hover:text-[#C9A96E] cursor-pointer" onClick={() => handleNavigate('community:Palm Jumeirah')}>Palm Jumeirah</li>
+                <li className="hover:text-[#C9A96E] cursor-pointer" onClick={() => handleNavigate('community:Emirates Hills')}>Emirates Hills</li>
+                <li className="hover:text-[#C9A96E] cursor-pointer" onClick={() => handleNavigate('community:Arabian Ranches')}>Arabian Ranches</li>
+                <li className="hover:text-[#C9A96E] cursor-pointer" onClick={() => handleNavigate('community:Dubai Hills Estate')}>Dubai Hills</li>
               </ul>
             </div>
 
