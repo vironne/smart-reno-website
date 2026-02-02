@@ -1,0 +1,8 @@
+{
+  "name": "Smart Renovation Dubai",
+  "description": "Premium luxury villa renovation website for Smart Renovation Dubai, featuring intelligent lead qualification, community-specific landing pages, and Italian design excellence.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
