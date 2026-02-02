@@ -1,9 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Button } from './components/Button';
 import { SmartConsultationForm } from './components/SmartConsultationForm';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
+import { PortfolioGallery } from './components/PortfolioGallery';
+import { EmailCaptureModal } from './components/EmailCaptureModal';
 import { COMMUNITIES, PROJECTS, PROCESS_STEPS, TESTIMONIALS, AWARDS } from './constants';
 import { 
   ArrowRight, 
@@ -25,6 +27,38 @@ import {
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState('home');
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
+  const [favoritesCount, setFavoritesCount] = useState(0);
+
+  // Check if email was already submitted
+  useEffect(() => {
+    const submitted = localStorage.getItem('smartreno_email_submitted');
+    if (submitted) {
+      setHasSubmittedEmail(true);
+    }
+    const favorites = localStorage.getItem('smartreno_favorites');
+    if (favorites) {
+      setFavoritesCount(JSON.parse(favorites).length);
+    }
+  }, []);
+
+  const handleFavoritesThresholdReached = () => {
+    const favorites = localStorage.getItem('smartreno_favorites');
+    if (favorites) {
+      setFavoritesCount(JSON.parse(favorites).length);
+    }
+    setIsEmailModalOpen(true);
+  };
+
+  const handleEmailSubmit = (email: string) => {
+    console.log('Email captured:', email);
+    localStorage.setItem('smartreno_email_submitted', 'true');
+    localStorage.setItem('smartreno_user_email', email);
+    setHasSubmittedEmail(true);
+    setIsEmailModalOpen(false);
+    // Here you would typically send this to your backend/CRM
+  };
 
   const renderHome = () => (
     <div className="animate-in fade-in duration-700">
@@ -386,8 +420,16 @@ const App: React.FC = () => {
         {activePage === 'founders' && renderFounders()}
         {activePage === 'client-testimonials' && renderTestimonials()}
         
-        {/* Placeholder for generic navigation */}
-        {(['portfolio', 'process', 'communities', 'about'].includes(activePage)) && (
+        {/* Portfolio Page with Favorites */}
+        {activePage === 'portfolio' && (
+          <PortfolioGallery
+            onFavoritesThresholdReached={handleFavoritesThresholdReached}
+            hasSubmittedEmail={hasSubmittedEmail}
+          />
+        )}
+
+        {/* Placeholder for other pages */}
+        {(['process', 'communities', 'about'].includes(activePage)) && (
           <div className="py-40 text-center animate-in fade-in">
             <h1 className="text-4xl font-playfair mb-8 capitalize">{activePage} Overview</h1>
             <p className="text-[#707070] mb-8">Detailed content coming soon.</p>
@@ -471,6 +513,14 @@ const App: React.FC = () => {
       </footer>
 
       {isFormOpen && <SmartConsultationForm onClose={() => setIsFormOpen(false)} />}
+
+      {/* Email Capture Modal - triggers after 10 favorites */}
+      <EmailCaptureModal
+        isOpen={isEmailModalOpen}
+        onClose={() => setIsEmailModalOpen(false)}
+        onSubmit={handleEmailSubmit}
+        favoritesCount={favoritesCount}
+      />
     </div>
   );
 };
