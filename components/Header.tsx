@@ -53,10 +53,55 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
             </div>
           </div>
 
-          <button onClick={() => onNavigate('services')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">Services</button>
-
           <div className="group relative">
             <button onClick={() => onNavigate('services')} className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors">
+              Services <ChevronDown size={14} />
+            </button>
+            <div className="absolute top-full -left-4 hidden group-hover:block pt-5 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="bg-white shadow-xl border border-gray-100 rounded-lg py-4 w-72 max-h-[400px] overflow-y-auto">
+                <button onClick={() => onNavigate('services')} className="w-full text-left block px-6 py-3 text-sm font-semibold text-[#C9A96E] border-b border-gray-100 hover:bg-[#F5F1E8]">All Services Overview</button>
+                <button onClick={() => onNavigate('service:luxury-villa-renovation')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="flex items-center gap-3">
+                    <span className="text-xl">🏛️</span>
+                    <span>
+                      <span className="font-medium block">Luxury Villa Renovation</span>
+                      <span className="text-xs text-gray-400">Complete transformations</span>
+                    </span>
+                  </span>
+                </button>
+                <button onClick={() => onNavigate('service:villa-extension-remodeling')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="flex items-center gap-3">
+                    <span className="text-xl">🏗️</span>
+                    <span>
+                      <span className="font-medium block">Villa Extension & Remodeling</span>
+                      <span className="text-xs text-gray-400">Expand your space</span>
+                    </span>
+                  </span>
+                </button>
+                <button onClick={() => onNavigate('service:kitchen-bathroom-renovation')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="flex items-center gap-3">
+                    <span className="text-xl">🍳</span>
+                    <span>
+                      <span className="font-medium block">Kitchen & Bathroom</span>
+                      <span className="text-xs text-gray-400">Luxury upgrades</span>
+                    </span>
+                  </span>
+                </button>
+                <button onClick={() => onNavigate('service:landscape-pool-design')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
+                  <span className="flex items-center gap-3">
+                    <span className="text-xl">🏊</span>
+                    <span>
+                      <span className="font-medium block">Landscape & Pool Design</span>
+                      <span className="text-xs text-gray-400">Outdoor living</span>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="group relative">
+            <button onClick={() => onNavigate('portfolio')} className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors">
               Communities <ChevronDown size={14} />
             </button>
             <div className="absolute top-full -left-4 hidden group-hover:block pt-5 animate-in fade-in slide-in-from-top-2 duration-200">
@@ -112,6 +157,13 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
               <button onClick={() => { onNavigate('founders'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Meet Founders</button>
             </div>
             <button onClick={() => { onNavigate('services'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left">Services</button>
+            <div className="flex flex-col gap-3 pl-4 border-l-2 border-[#C9A96E]/20">
+              <button onClick={() => { onNavigate('service:luxury-villa-renovation'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">🏛️ Villa Renovation</button>
+              <button onClick={() => { onNavigate('service:villa-extension-remodeling'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">🏗️ Extensions</button>
+              <button onClick={() => { onNavigate('service:kitchen-bathroom-renovation'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">🍳 Kitchen & Bath</button>
+              <button onClick={() => { onNavigate('service:landscape-pool-design'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">🏊 Landscape & Pool</button>
+            </div>
+            <button onClick={() => { onNavigate('portfolio'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left">Portfolio</button>
             <div className="flex flex-col gap-3 pl-4 border-l-2 border-[#C9A96E]/20">
               <span className="text-sm font-montserrat uppercase tracking-wider text-gray-400">Communities</span>
               <button onClick={() => { onNavigate('community:Palm Jumeirah'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Palm Jumeirah</button>

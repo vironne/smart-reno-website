@@ -19,6 +19,19 @@ export interface Project {
   afterImage: string;
 }
 
+export interface Service {
+  id: string;
+  title: string;
+  shortTitle: string;
+  description: string;
+  fullDescription: string;
+  icon: string;
+  image: string;
+  features: string[];
+  investmentRange: string;
+  timeline: string;
+}
+
 export interface FormStep {
   id: number;
   title: string;

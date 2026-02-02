@@ -6,7 +6,9 @@ import { SmartConsultationForm } from './components/SmartConsultationForm';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { PortfolioGallery } from './components/PortfolioGallery';
 import { EmailCaptureModal } from './components/EmailCaptureModal';
-import { COMMUNITIES, PROJECTS, PROCESS_STEPS, TESTIMONIALS, AWARDS } from './constants';
+import { ServicesIndex } from './components/ServicesIndex';
+import { ServiceDetail } from './components/ServiceDetail';
+import { COMMUNITIES, PROJECTS, PROCESS_STEPS, TESTIMONIALS, AWARDS, SERVICES } from './constants';
 import { 
   ArrowRight, 
   Star, 
@@ -31,6 +33,7 @@ const App: React.FC = () => {
   const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [communityFilter, setCommunityFilter] = useState<string>('All');
+  const [selectedService, setSelectedService] = useState<string>('');
 
   // Check if email was already submitted
   useEffect(() => {
@@ -62,13 +65,21 @@ const App: React.FC = () => {
   };
 
   const handleNavigate = (page: string) => {
+    // Handle service detail navigation (e.g., "service:luxury-villa-renovation")
+    if (page.startsWith('service:')) {
+      const serviceId = page.replace('service:', '');
+      setSelectedService(serviceId);
+      setActivePage('service-detail');
+    }
     // Handle community filter navigation (e.g., "community:Palm Jumeirah")
-    if (page.startsWith('community:')) {
+    else if (page.startsWith('community:')) {
       const community = page.replace('community:', '');
       setCommunityFilter(community);
-      setActivePage('services');
-    } else if (page === 'services') {
+      setActivePage('portfolio');
+    } else if (page === 'portfolio') {
       setCommunityFilter('All');
+      setActivePage('portfolio');
+    } else if (page === 'services') {
       setActivePage('services');
     } else {
       setActivePage(page);
@@ -104,7 +115,7 @@ const App: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button variant="primary-large" onClick={() => setIsFormOpen(true)}>Schedule Your Consultation</Button>
-              <Button variant="outline-white" className="px-10 py-4 text-lg" onClick={() => handleNavigate('services')}>Explore Our Work</Button>
+              <Button variant="outline-white" className="px-10 py-4 text-lg" onClick={() => handleNavigate('portfolio')}>Explore Our Work</Button>
             </div>
           </div>
         </div>
@@ -442,8 +453,33 @@ const App: React.FC = () => {
         {activePage === 'founders' && renderFounders()}
         {activePage === 'client-testimonials' && renderTestimonials()}
         
-        {/* Services/Portfolio Page with Favorites */}
+        {/* Services Index Page */}
         {activePage === 'services' && (
+          <ServicesIndex
+            onNavigate={(serviceId) => handleNavigate(`service:${serviceId}`)}
+            onConsultationClick={() => setIsFormOpen(true)}
+          />
+        )}
+
+        {/* Service Detail Page */}
+        {activePage === 'service-detail' && (
+          <ServiceDetail
+            serviceId={selectedService}
+            onBack={() => handleNavigate('services')}
+            onConsultationClick={() => setIsFormOpen(true)}
+            onViewProject={(id) => {
+              // Check if it's a service or project
+              if (SERVICES.find(s => s.id === id)) {
+                handleNavigate(`service:${id}`);
+              } else {
+                handleNavigate('portfolio');
+              }
+            }}
+          />
+        )}
+
+        {/* Portfolio Page with Favorites */}
+        {activePage === 'portfolio' && (
           <PortfolioGallery
             onFavoritesThresholdReached={handleFavoritesThresholdReached}
             hasSubmittedEmail={hasSubmittedEmail}

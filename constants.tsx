@@ -176,6 +176,85 @@ export const PROJECTS = [
   }
 ];
 
+export const SERVICES = [
+  {
+    id: 'luxury-villa-renovation',
+    title: 'Luxury Villa Renovation',
+    shortTitle: 'Villa Renovation',
+    description: 'Complete villa transformations with Italian craftsmanship',
+    fullDescription: 'Transform your villa into a masterpiece of Italian design. Our comprehensive renovation service covers everything from structural changes to the finest finishing touches, delivered with the precision of Milanese artisans.',
+    icon: '🏛️',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
+    features: [
+      'Complete interior redesign',
+      'Structural modifications & extensions',
+      'Premium European materials',
+      'Smart home integration',
+      'Bespoke furniture & joinery',
+      'Full project management'
+    ],
+    investmentRange: 'AED 800K - 5M+',
+    timeline: '4-12 months'
+  },
+  {
+    id: 'villa-extension-remodeling',
+    title: 'Villa Extension & Remodeling',
+    shortTitle: 'Extensions',
+    description: 'Expand your living space with seamless additions',
+    fullDescription: 'Add valuable square footage to your property with extensions that blend seamlessly with your existing architecture. From new bedrooms to entertainment pavilions, we handle all permits and construction.',
+    icon: '🏗️',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200',
+    features: [
+      'Architectural planning & 3D visualization',
+      'Municipality & developer approvals',
+      'Foundation & structural work',
+      'Seamless integration with existing villa',
+      'MEP (Mechanical, Electrical, Plumbing)',
+      'Interior finishing & styling'
+    ],
+    investmentRange: 'AED 500K - 3M+',
+    timeline: '6-14 months'
+  },
+  {
+    id: 'kitchen-bathroom-renovation',
+    title: 'Kitchen & Bathroom Renovation',
+    shortTitle: 'Kitchen & Bath',
+    description: 'Luxurious kitchen and bathroom transformations',
+    fullDescription: 'Elevate the heart of your home with bespoke kitchens featuring Italian cabinetry, premium appliances, and stunning countertops. Our bathroom designs rival 5-star hotel spas.',
+    icon: '🍳',
+    image: 'https://images.unsplash.com/photo-1600566753190-17f0bbc564ce?auto=format&fit=crop&q=80&w=1200',
+    features: [
+      'Italian kitchen cabinetry',
+      'Premium appliance packages',
+      'Natural stone countertops',
+      'Luxury bathroom fixtures',
+      'Underfloor heating',
+      'Custom lighting design'
+    ],
+    investmentRange: 'AED 150K - 800K',
+    timeline: '6-12 weeks'
+  },
+  {
+    id: 'landscape-pool-design',
+    title: 'Landscape & Pool Design',
+    shortTitle: 'Landscape & Pool',
+    description: 'Resort-style outdoor living spaces',
+    fullDescription: 'Create your private oasis with stunning pool designs, outdoor kitchens, and Mediterranean-inspired landscaping. We transform outdoor areas into extensions of your luxury lifestyle.',
+    icon: '🏊',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200',
+    features: [
+      'Custom pool design & construction',
+      'Outdoor kitchen & BBQ areas',
+      'Pergolas & shade structures',
+      'Landscape architecture',
+      'Lighting & irrigation systems',
+      'Fire pits & water features'
+    ],
+    investmentRange: 'AED 200K - 1.5M',
+    timeline: '8-16 weeks'
+  }
+];
+
 export const PROCESS_STEPS = [
   {
     title: "Concept & Design",
