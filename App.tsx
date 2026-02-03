@@ -9,6 +9,7 @@ import { EmailCaptureModal } from './components/EmailCaptureModal';
 import { ServicesIndex } from './components/ServicesIndex';
 import { ServiceDetail } from './components/ServiceDetail';
 import { ProjectDetail } from './components/ProjectDetail';
+import { VillaRenovationGuide, MaterialsGuide, NOCApprovalsGuide, BlogPage } from './components/ResourcePages';
 import { COMMUNITIES, PROJECTS, PROCESS_STEPS, TESTIMONIALS, AWARDS, SERVICES } from './constants';
 import {
   ArrowRight,
@@ -630,6 +631,32 @@ const App: React.FC = () => {
         {activePage === 'communities' && renderCommunitiesHub()}
         {activePage === 'process' && renderProcess()}
 
+        {/* Resource Pages */}
+        {activePage === 'villa-guide' && (
+          <VillaRenovationGuide
+            onConsultationClick={() => setIsFormOpen(true)}
+            onNavigate={handleNavigate}
+          />
+        )}
+        {activePage === 'materials-guide' && (
+          <MaterialsGuide
+            onConsultationClick={() => setIsFormOpen(true)}
+            onNavigate={handleNavigate}
+          />
+        )}
+        {activePage === 'noc-guide' && (
+          <NOCApprovalsGuide
+            onConsultationClick={() => setIsFormOpen(true)}
+            onNavigate={handleNavigate}
+          />
+        )}
+        {activePage === 'blog' && (
+          <BlogPage
+            onConsultationClick={() => setIsFormOpen(true)}
+            onNavigate={handleNavigate}
+          />
+        )}
+
         {/* Services Index Page */}
         {activePage === 'services' && (
           <ServicesIndex
@@ -743,17 +770,25 @@ const App: React.FC = () => {
             <div>
               <h4 className="text-sm font-bold mb-6 uppercase tracking-wider text-[#C9A96E]">Resources</h4>
               <ul className="space-y-3 text-white/60 text-sm">
-                <li className="flex items-center gap-2 hover:text-[#C9A96E] cursor-pointer transition-colors">
-                  <FileText size={12} /> Villa Renovation Guide
+                <li>
+                  <button onClick={() => handleNavigate('villa-guide')} className="flex items-center gap-2 hover:text-[#C9A96E] transition-colors">
+                    <FileText size={12} /> Villa Renovation Guide
+                  </button>
                 </li>
-                <li className="flex items-center gap-2 hover:text-[#C9A96E] cursor-pointer transition-colors">
-                  <FileText size={12} /> Materials Guide
+                <li>
+                  <button onClick={() => handleNavigate('materials-guide')} className="flex items-center gap-2 hover:text-[#C9A96E] transition-colors">
+                    <FileText size={12} /> Materials Guide
+                  </button>
                 </li>
-                <li className="flex items-center gap-2 hover:text-[#C9A96E] cursor-pointer transition-colors">
-                  <FileText size={12} /> NOC Approvals Guide
+                <li>
+                  <button onClick={() => handleNavigate('noc-guide')} className="flex items-center gap-2 hover:text-[#C9A96E] transition-colors">
+                    <FileText size={12} /> NOC Approvals Guide
+                  </button>
                 </li>
-                <li className="flex items-center gap-2 hover:text-[#C9A96E] cursor-pointer transition-colors">
-                  <BookOpen size={12} /> Blog
+                <li>
+                  <button onClick={() => handleNavigate('blog')} className="flex items-center gap-2 hover:text-[#C9A96E] transition-colors">
+                    <BookOpen size={12} /> Blog
+                  </button>
                 </li>
               </ul>
             </div>
