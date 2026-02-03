@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, MessageCircle, Star, Calendar } from 'lucide-react';
 import { Button } from './Button';
 
@@ -14,6 +14,8 @@ const WHATSAPP_MESSAGE = encodeURIComponent('Hello! I\'m interested in discussin
 export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const aboutRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,13 +25,30 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
+        setIsAboutOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${WHATSAPP_MESSAGE}`;
+
+  const handleNavigate = (page: string) => {
+    setIsAboutOpen(false);
+    setIsMenuOpen(false);
+    onNavigate(page);
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg py-2 md:py-3' : 'bg-white/90 backdrop-blur-md py-3 md:py-5'}`}>
       <div className="container mx-auto px-4 md:px-6 lg:px-12 flex items-center justify-between h-14 md:h-16">
         {/* Logo - smaller on mobile */}
-        <div className="flex-shrink-0 cursor-pointer" onClick={() => onNavigate('home')}>
+        <div className="flex-shrink-0 cursor-pointer" onClick={() => handleNavigate('home')}>
           <div className="flex items-center gap-1.5 md:gap-2">
             <div className="w-8 h-8 md:w-10 md:h-10 bg-[#C9A96E] rounded-sm flex items-center justify-center text-white font-bold text-lg md:text-xl">S</div>
             <div className="flex flex-col">
@@ -41,46 +60,51 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-          <button onClick={() => onNavigate('home')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
+          <button onClick={() => handleNavigate('home')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
             Home
           </button>
 
-          {/* ABOUT - Dropdown */}
-          <div className="group relative">
-            <button className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors">
-              About <ChevronDown size={14} />
+          {/* ABOUT - Dropdown (Click + Hover) */}
+          <div className="relative" ref={aboutRef}>
+            <button
+              onClick={() => setIsAboutOpen(!isAboutOpen)}
+              className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors"
+            >
+              About <ChevronDown size={14} className={`transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
             </button>
-            <div className="absolute top-full -left-4 hidden group-hover:block pt-5 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="bg-white shadow-xl border border-gray-100 rounded-lg py-4 w-64 overflow-hidden">
-                <button onClick={() => onNavigate('heritage')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
-                  Our Italian Heritage
-                </button>
-                <button onClick={() => onNavigate('awards-recognition')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors flex items-center gap-2">
-                  <span>Awards & Recognition</span>
-                  <Star size={14} className="text-[#C9A96E] fill-[#C9A96E]" />
-                </button>
-                <button onClick={() => onNavigate('founders')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
-                  Meet Marco & Cinzia
-                </button>
-                <button onClick={() => onNavigate('client-testimonials')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
-                  Client Testimonials
-                </button>
-                <button onClick={() => onNavigate('process')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
-                  Our Process
-                </button>
+            {isAboutOpen && (
+              <div className="absolute top-full -left-4 pt-3 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                <div className="bg-white shadow-xl border border-gray-100 rounded-lg py-4 w-64 overflow-hidden">
+                  <button onClick={() => handleNavigate('heritage')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
+                    Our Italian Heritage
+                  </button>
+                  <button onClick={() => handleNavigate('awards-recognition')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors flex items-center gap-2">
+                    <span>Awards & Recognition</span>
+                    <Star size={14} className="text-[#C9A96E] fill-[#C9A96E]" />
+                  </button>
+                  <button onClick={() => handleNavigate('founders')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
+                    Meet Marco & Cinzia
+                  </button>
+                  <button onClick={() => handleNavigate('client-testimonials')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
+                    Client Testimonials
+                  </button>
+                  <button onClick={() => handleNavigate('process')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
+                    Our Process
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
-          <button onClick={() => onNavigate('services')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
+          <button onClick={() => handleNavigate('services')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
             Services
           </button>
 
-          <button onClick={() => onNavigate('communities')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
+          <button onClick={() => handleNavigate('communities')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
             Communities
           </button>
 
-          <button onClick={() => onNavigate('portfolio')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
+          <button onClick={() => handleNavigate('portfolio')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
             Portfolio
           </button>
         </nav>
@@ -133,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
         <div className="lg:hidden fixed inset-0 top-[56px] md:top-[72px] bg-white z-40 p-6 md:p-8 flex flex-col gap-4 animate-in slide-in-from-right duration-300 overflow-y-auto">
           <nav className="flex flex-col gap-3 text-lg font-playfair">
             {/* HOME */}
-            <button onClick={() => { onNavigate('home'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-3 text-left font-bold">
+            <button onClick={() => handleNavigate('home')} className="border-b border-gray-100 pb-3 text-left font-bold">
               Home
             </button>
 
@@ -141,28 +165,28 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
             <div className="border-b border-gray-100 pb-3">
               <span className="text-xs font-montserrat uppercase tracking-wider text-gray-400 block mb-2">About</span>
               <div className="flex flex-col gap-2 pl-3 border-l-2 border-[#C9A96E]/20">
-                <button onClick={() => { onNavigate('heritage'); setIsMenuOpen(false); }} className="text-base opacity-80 text-left">Our Italian Heritage</button>
-                <button onClick={() => { onNavigate('awards-recognition'); setIsMenuOpen(false); }} className="text-base opacity-80 text-left flex items-center gap-2">
+                <button onClick={() => handleNavigate('heritage')} className="text-base opacity-80 text-left">Our Italian Heritage</button>
+                <button onClick={() => handleNavigate('awards-recognition')} className="text-base opacity-80 text-left flex items-center gap-2">
                   Awards <Star size={12} className="text-[#C9A96E] fill-[#C9A96E]" />
                 </button>
-                <button onClick={() => { onNavigate('founders'); setIsMenuOpen(false); }} className="text-base opacity-80 text-left">Meet Marco & Cinzia</button>
-                <button onClick={() => { onNavigate('client-testimonials'); setIsMenuOpen(false); }} className="text-base opacity-80 text-left">Client Testimonials</button>
-                <button onClick={() => { onNavigate('process'); setIsMenuOpen(false); }} className="text-base opacity-80 text-left">Our Process</button>
+                <button onClick={() => handleNavigate('founders')} className="text-base opacity-80 text-left">Meet Marco & Cinzia</button>
+                <button onClick={() => handleNavigate('client-testimonials')} className="text-base opacity-80 text-left">Client Testimonials</button>
+                <button onClick={() => handleNavigate('process')} className="text-base opacity-80 text-left">Our Process</button>
               </div>
             </div>
 
             {/* SERVICES */}
-            <button onClick={() => { onNavigate('services'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-3 text-left font-bold">
+            <button onClick={() => handleNavigate('services')} className="border-b border-gray-100 pb-3 text-left font-bold">
               Services
             </button>
 
             {/* COMMUNITIES */}
-            <button onClick={() => { onNavigate('communities'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-3 text-left font-bold">
+            <button onClick={() => handleNavigate('communities')} className="border-b border-gray-100 pb-3 text-left font-bold">
               Communities
             </button>
 
             {/* PORTFOLIO */}
-            <button onClick={() => { onNavigate('portfolio'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-3 text-left font-bold">
+            <button onClick={() => handleNavigate('portfolio')} className="border-b border-gray-100 pb-3 text-left font-bold">
               Portfolio
             </button>
           </nav>
