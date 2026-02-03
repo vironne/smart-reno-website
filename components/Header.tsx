@@ -1,12 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, MessageCircle, Star } from 'lucide-react';
 import { Button } from './Button';
 
 interface HeaderProps {
   onConsultationClick: () => void;
   onNavigate: (page: string) => void;
 }
+
+const WHATSAPP_NUMBER = '+971501234567'; // Replace with actual WhatsApp number
+const WHATSAPP_MESSAGE = encodeURIComponent('Hello! I\'m interested in discussing a villa renovation project.');
 
 export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,6 +22,8 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${WHATSAPP_MESSAGE}`;
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg py-3' : 'bg-white/90 backdrop-blur-md py-5'}`}>
@@ -36,110 +41,71 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-8">
-          <button onClick={() => onNavigate('home')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">Home</button>
-          
-          {/* About Dropdown */}
+          {/* HOME - Direct link */}
+          <button onClick={() => onNavigate('home')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
+            Home
+          </button>
+
+          {/* ABOUT - Dropdown */}
           <div className="group relative">
             <button className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors">
               About <ChevronDown size={14} />
             </button>
             <div className="absolute top-full -left-4 hidden group-hover:block pt-5 animate-in fade-in slide-in-from-top-2 duration-200">
               <div className="bg-white shadow-xl border border-gray-100 rounded-lg py-4 w-64 overflow-hidden">
-                <button onClick={() => onNavigate('heritage')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">Our Heritage</button>
-                <button onClick={() => onNavigate('awards-recognition')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">Awards & Recognition</button>
-                <button onClick={() => onNavigate('founders')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">Meet Marco & Cinzia</button>
-                <button onClick={() => onNavigate('client-testimonials')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">Client Stories</button>
-              </div>
-            </div>
-          </div>
-
-          <div className="group relative">
-            <button onClick={() => onNavigate('services')} className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors">
-              Services <ChevronDown size={14} />
-            </button>
-            <div className="absolute top-full -left-4 hidden group-hover:block pt-5 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="bg-white shadow-xl border border-gray-100 rounded-lg py-4 w-72 max-h-[400px] overflow-y-auto">
-                <button onClick={() => onNavigate('services')} className="w-full text-left block px-6 py-3 text-sm font-semibold text-[#C9A96E] border-b border-gray-100 hover:bg-[#F5F1E8]">All Services Overview</button>
-                <button onClick={() => onNavigate('service:luxury-villa-renovation')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="flex items-center gap-3">
-                    <span className="text-xl">🏛️</span>
-                    <span>
-                      <span className="font-medium block">Luxury Villa Renovation</span>
-                      <span className="text-xs text-gray-400">Complete transformations</span>
-                    </span>
-                  </span>
+                <button onClick={() => onNavigate('heritage')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
+                  Our Italian Heritage
                 </button>
-                <button onClick={() => onNavigate('service:villa-extension-remodeling')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="flex items-center gap-3">
-                    <span className="text-xl">🏗️</span>
-                    <span>
-                      <span className="font-medium block">Villa Extension & Remodeling</span>
-                      <span className="text-xs text-gray-400">Expand your space</span>
-                    </span>
-                  </span>
+                <button onClick={() => onNavigate('awards-recognition')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors flex items-center gap-2">
+                  <span>Awards & Recognition</span>
+                  <Star size={14} className="text-[#C9A96E] fill-[#C9A96E]" />
                 </button>
-                <button onClick={() => onNavigate('service:kitchen-bathroom-renovation')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="flex items-center gap-3">
-                    <span className="text-xl">🍳</span>
-                    <span>
-                      <span className="font-medium block">Kitchen & Bathroom</span>
-                      <span className="text-xs text-gray-400">Luxury upgrades</span>
-                    </span>
-                  </span>
+                <button onClick={() => onNavigate('founders')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
+                  Meet Marco & Cinzia
                 </button>
-                <button onClick={() => onNavigate('service:landscape-pool-design')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="flex items-center gap-3">
-                    <span className="text-xl">🏊</span>
-                    <span>
-                      <span className="font-medium block">Landscape & Pool Design</span>
-                      <span className="text-xs text-gray-400">Outdoor living</span>
-                    </span>
-                  </span>
+                <button onClick={() => onNavigate('client-testimonials')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
+                  Client Testimonials
+                </button>
+                <button onClick={() => onNavigate('process')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
+                  Our Process
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="group relative">
-            <button onClick={() => onNavigate('portfolio')} className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors">
-              Communities <ChevronDown size={14} />
-            </button>
-            <div className="absolute top-full -left-4 hidden group-hover:block pt-5 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="bg-white shadow-xl border border-gray-100 rounded-lg py-4 w-64 max-h-[400px] overflow-y-auto">
-                <button onClick={() => onNavigate('services')} className="w-full text-left block px-6 py-3 text-sm font-semibold text-[#C9A96E] border-b border-gray-100 hover:bg-[#F5F1E8]">View All Projects</button>
-                <button onClick={() => onNavigate('community:Palm Jumeirah')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="font-medium">Palm Jumeirah</span>
-                  <span className="block text-xs text-gray-400 mt-0.5">40+ villas renovated</span>
-                </button>
-                <button onClick={() => onNavigate('community:Emirates Hills')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="font-medium">Emirates Hills</span>
-                  <span className="block text-xs text-gray-400 mt-0.5">15+ villas renovated</span>
-                </button>
-                <button onClick={() => onNavigate('community:Arabian Ranches')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="font-medium">Arabian Ranches</span>
-                  <span className="block text-xs text-gray-400 mt-0.5">22+ villas renovated</span>
-                </button>
-                <button onClick={() => onNavigate('community:Dubai Hills Estate')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="font-medium">Dubai Hills Estate</span>
-                  <span className="block text-xs text-gray-400 mt-0.5">12+ villas renovated</span>
-                </button>
-                <button onClick={() => onNavigate('community:Jumeirah Islands')} className="w-full text-left block px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E]">
-                  <span className="font-medium">Jumeirah Islands</span>
-                  <span className="block text-xs text-gray-400 mt-0.5">8+ villas renovated</span>
-                </button>
-              </div>
-            </div>
-          </div>
+          {/* SERVICES - Single page link */}
+          <button onClick={() => onNavigate('services')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
+            Services
+          </button>
+
+          {/* COMMUNITIES - Hub page link */}
+          <button onClick={() => onNavigate('communities')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
+            Communities
+          </button>
+
+          {/* PORTFOLIO - Filterable grid */}
+          <button onClick={() => onNavigate('portfolio')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
+            Portfolio
+          </button>
         </nav>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-6">
-          <a href="tel:+97142350599" className="hidden lg:flex items-center gap-2 text-sm font-semibold hover:text-[#C9A96E] transition-colors">
-            <Phone size={16} className="text-[#C9A96E]" />
-            +971 4 235 0599
+        <div className="flex items-center gap-4">
+          {/* WhatsApp */}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden lg:flex items-center gap-2 text-sm font-semibold hover:text-[#25D366] transition-colors"
+          >
+            <MessageCircle size={18} className="text-[#25D366]" />
+            <span className="hidden xl:inline">WhatsApp</span>
           </a>
+
+          {/* Book Consultation CTA */}
           <Button onClick={onConsultationClick}>Book Consultation</Button>
-          
+
+          {/* Mobile menu toggle */}
           <button className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -148,35 +114,53 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[72px] bg-white z-40 p-8 flex flex-col gap-6 animate-in slide-in-from-right duration-300">
-          <nav className="flex flex-col gap-6 text-xl font-playfair">
-            <button onClick={() => { onNavigate('home'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left">Home</button>
-            <div className="flex flex-col gap-4 pl-4 border-l-2 border-[#C9A96E]/20">
-              <button onClick={() => { onNavigate('heritage'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Our Heritage</button>
-              <button onClick={() => { onNavigate('awards-recognition'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Awards</button>
-              <button onClick={() => { onNavigate('founders'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Meet Founders</button>
+        <div className="lg:hidden fixed inset-0 top-[72px] bg-white z-40 p-8 flex flex-col gap-6 animate-in slide-in-from-right duration-300 overflow-y-auto">
+          <nav className="flex flex-col gap-4 text-xl font-playfair">
+            {/* HOME */}
+            <button onClick={() => { onNavigate('home'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left font-bold">
+              Home
+            </button>
+
+            {/* ABOUT Section */}
+            <div className="border-b border-gray-100 pb-4">
+              <span className="text-sm font-montserrat uppercase tracking-wider text-gray-400 block mb-3">About</span>
+              <div className="flex flex-col gap-3 pl-4 border-l-2 border-[#C9A96E]/20">
+                <button onClick={() => { onNavigate('heritage'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Our Italian Heritage</button>
+                <button onClick={() => { onNavigate('awards-recognition'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">
+                  Awards & Recognition <Star size={14} className="text-[#C9A96E] fill-[#C9A96E]" />
+                </button>
+                <button onClick={() => { onNavigate('founders'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Meet Marco & Cinzia</button>
+                <button onClick={() => { onNavigate('client-testimonials'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Client Testimonials</button>
+                <button onClick={() => { onNavigate('process'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Our Process</button>
+              </div>
             </div>
-            <button onClick={() => { onNavigate('services'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left">Services</button>
-            <div className="flex flex-col gap-3 pl-4 border-l-2 border-[#C9A96E]/20">
-              <button onClick={() => { onNavigate('service:luxury-villa-renovation'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">🏛️ Villa Renovation</button>
-              <button onClick={() => { onNavigate('service:villa-extension-remodeling'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">🏗️ Extensions</button>
-              <button onClick={() => { onNavigate('service:kitchen-bathroom-renovation'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">🍳 Kitchen & Bath</button>
-              <button onClick={() => { onNavigate('service:landscape-pool-design'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left flex items-center gap-2">🏊 Landscape & Pool</button>
-            </div>
-            <button onClick={() => { onNavigate('portfolio'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left">Portfolio</button>
-            <div className="flex flex-col gap-3 pl-4 border-l-2 border-[#C9A96E]/20">
-              <span className="text-sm font-montserrat uppercase tracking-wider text-gray-400">Communities</span>
-              <button onClick={() => { onNavigate('community:Palm Jumeirah'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Palm Jumeirah</button>
-              <button onClick={() => { onNavigate('community:Emirates Hills'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Emirates Hills</button>
-              <button onClick={() => { onNavigate('community:Arabian Ranches'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Arabian Ranches</button>
-              <button onClick={() => { onNavigate('community:Dubai Hills Estate'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Dubai Hills</button>
-              <button onClick={() => { onNavigate('community:Jumeirah Islands'); setIsMenuOpen(false); }} className="text-lg opacity-80 text-left">Jumeirah Islands</button>
-            </div>
+
+            {/* SERVICES */}
+            <button onClick={() => { onNavigate('services'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left font-bold">
+              Services
+            </button>
+
+            {/* COMMUNITIES */}
+            <button onClick={() => { onNavigate('communities'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left font-bold">
+              Communities
+            </button>
+
+            {/* PORTFOLIO */}
+            <button onClick={() => { onNavigate('portfolio'); setIsMenuOpen(false); }} className="border-b border-gray-100 pb-4 text-left font-bold">
+              Portfolio
+            </button>
           </nav>
+
+          {/* Mobile Action Buttons */}
           <div className="mt-auto flex flex-col gap-4">
-            <a href="tel:+97142350599" className="flex items-center justify-center gap-3 p-4 bg-[#F5F1E8] rounded-lg font-semibold">
-              <Phone size={20} className="text-[#C9A96E]" />
-              Call +971 4 235 0599
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 p-4 bg-[#25D366]/10 rounded-lg font-semibold text-[#25D366]"
+            >
+              <MessageCircle size={20} />
+              Chat on WhatsApp
             </a>
             <Button variant="primary-large" onClick={() => { onConsultationClick(); setIsMenuOpen(false); }}>
               Book Free Consultation
