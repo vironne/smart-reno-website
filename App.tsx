@@ -183,7 +183,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Award badge */}
-        <div style={{
+        <div className="m3-award-badge" style={{
           position: 'absolute', bottom: '48px', right: '52px',
           border: '1px solid rgba(237,230,217,0.12)', padding: '14px 20px',
         }}>
@@ -215,7 +215,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div style={{ padding: '0 60px', maxWidth: '1200px', width: '100%' }}>
+        <div className="m3-statement" style={{ padding: '0 60px', maxWidth: '1200px', width: '100%' }}>
           <h2 style={{
             fontFamily: 'var(--display)', fontWeight: 900, textTransform: 'uppercase',
             letterSpacing: '-0.03em', lineHeight: 0.88,
@@ -235,7 +235,7 @@ const App: React.FC = () => {
           position: 'absolute', bottom: 0, left: 0, right: 0,
           background: 'rgba(12,11,9,0.2)',
           display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-        }}>
+        }} className="m3-stat-strip">
           {[
             { num: '55', sup: '+', label: 'Years' },
             { num: '500', sup: '+', label: 'Projects' },
@@ -262,7 +262,7 @@ const App: React.FC = () => {
 
       {/* ═══ S2: THE NUMBERS — paper grid ═══ */}
       <section style={{ background: s.paper, minHeight: '100vh', display: 'flex' }}>
-        <div style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', minHeight: '100vh' }}>
+        <div className="m3-stats-grid" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', minHeight: '100vh' }}>
           {[
             { num: '55', sup: '+', label: 'Years of Excellence', ghost: 'Est. 1970 · Dubai, UAE' },
             { num: '500', sup: '+', label: 'Projects Delivered', ghost: 'Villas, kitchens, offices' },
@@ -308,7 +308,7 @@ const App: React.FC = () => {
 
       {/* ═══ S3: SERVICES — ink background, numbered list ═══ */}
       <section style={{ background: s.ink, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <div style={{
+        <div className="m3-section" style={{
           padding: '48px 60px 24px',
           borderBottom: '1px solid rgba(237,230,217,0.06)',
         }}>
@@ -322,6 +322,7 @@ const App: React.FC = () => {
             const isHovered = hoveredService === i;
             return (
               <div key={svc.id}
+                className="m3-service-item"
                 onMouseEnter={() => setHoveredService(i)}
                 onMouseLeave={() => setHoveredService(null)}
                 onClick={() => handleNavigate(`service:${svc.id}`)}
@@ -333,7 +334,7 @@ const App: React.FC = () => {
                   background: isHovered ? 'rgba(237,230,217,0.02)' : 'transparent',
                 }}
               >
-                <span style={{
+                <span className="m3-service-num" style={{
                   fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900,
                   color: isHovered ? 'rgba(196,85,42,0.2)' : 'rgba(237,230,217,0.08)',
                   minWidth: '72px', lineHeight: 1, transition: 'color 0.3s',
@@ -344,13 +345,13 @@ const App: React.FC = () => {
                   color: isHovered ? s.paper : 'rgba(237,230,217,0.7)',
                   flex: 1, lineHeight: 1, transition: 'color 0.3s',
                 }}>{svc.shortTitle}</span>
-                <span style={{
+                <span className="m3-service-time" style={{
                   fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
                   letterSpacing: '0.14em', textTransform: 'uppercase',
                   color: isHovered ? s.rust : 'rgba(237,230,217,0.2)',
                   whiteSpace: 'nowrap', transition: 'color 0.3s',
                 }}>{svc.timeline}</span>
-                <span style={{
+                <span className="m3-service-arrow" style={{
                   fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700,
                   color: s.rust, opacity: isHovered ? 1 : 0,
                   transform: isHovered ? 'translateX(0)' : 'translateX(-12px)',
@@ -363,8 +364,8 @@ const App: React.FC = () => {
       </section>
 
       {/* ═══ S4: FEATURED PROJECT ═══ */}
-      <section style={{ background: s.ink, minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-        <div style={{ position: 'relative', overflow: 'hidden' }}>
+      <section className="m3-split" style={{ background: s.ink, minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+        <div className="m3-split-img" style={{ position: 'relative', overflow: 'hidden' }}>
           <img
             src={PROJECTS[0].afterImage}
             alt={PROJECTS[0].title}
@@ -378,7 +379,7 @@ const App: React.FC = () => {
             background: 'linear-gradient(to right, rgba(12,11,9,0.4) 0%, transparent 100%)',
           }}></div>
         </div>
-        <div style={{
+        <div className="m3-split-text" style={{
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
           padding: '72px 64px',
         }}>
@@ -431,7 +432,7 @@ const App: React.FC = () => {
             textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 0.9, color: s.ink,
           }}>How We <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Work</em></h2>
         </div>
-        <div style={{
+        <div className="m3-process-grid" style={{
           flex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
           gap: 0, background: s.newsprint,
         }}>
@@ -487,7 +488,7 @@ const App: React.FC = () => {
       </section>
 
       {/* ═══ TESTIMONIALS — editorial ═══ */}
-      <section style={{ background: s.ink, padding: '100px 60px' }}>
+      <section className="m3-section" style={{ background: s.ink, padding: '100px 60px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
             <h2 style={{
@@ -495,7 +496,7 @@ const App: React.FC = () => {
               textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 0.9, color: s.paper,
             }}>Client <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Stories</em></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)' }}>
+          <div className="m3-testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)' }}>
             {TESTIMONIALS.map((t, idx) => (
               <div key={idx} style={{
                 background: s.ink, padding: '48px 40px', position: 'relative',
@@ -528,9 +529,9 @@ const App: React.FC = () => {
 
       {/* ═══ CTA — split manifesto + form ═══ */}
       <section style={{ background: s.ink }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '100vh' }}>
+        <div className="m3-cta-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '100vh' }}>
           {/* Left: Manifesto */}
-          <div style={{
+          <div className="m3-cta-left" style={{
             display: 'flex', flexDirection: 'column', justifyContent: 'center',
             padding: '80px 64px', borderRight: '1px solid rgba(237,230,217,0.06)',
           }}>
@@ -566,7 +567,7 @@ const App: React.FC = () => {
           </div>
 
           {/* Right: Mini form */}
-          <div style={{
+          <div className="m3-cta-right" style={{
             display: 'flex', flexDirection: 'column', justifyContent: 'center',
             padding: '80px 64px',
           }}>
@@ -575,7 +576,7 @@ const App: React.FC = () => {
               textTransform: 'uppercase', letterSpacing: '-0.01em', color: s.paper,
               marginBottom: '32px',
             }}>Book Free Consultation</div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+            <div className="m3-form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
               <div>
                 <label style={formLabelStyle}>First Name</label>
                 <input type="text" placeholder="Marco" style={formInputStyle} />
@@ -611,12 +612,12 @@ const App: React.FC = () => {
         </div>
 
         {/* Communities grid before footer */}
-        <div style={{ padding: '60px', borderTop: '1px solid rgba(237,230,217,0.06)' }}>
+        <div className="m3-section" style={{ padding: '60px', borderTop: '1px solid rgba(237,230,217,0.06)' }}>
           <h3 style={{
             fontFamily: 'var(--display)', fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 900,
             textTransform: 'uppercase', color: s.paper, marginBottom: '32px',
           }}>Communities We <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Serve</em></h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)' }}>
+          <div className="m3-communities-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)' }}>
             {COMMUNITIES.map((c) => (
               <button key={c.id} onClick={() => handleNavigate(`community:${c.name}`)} style={{
                 background: s.ink, padding: '24px', textAlign: 'left', border: 'none', cursor: 'pointer',
@@ -639,7 +640,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Footer strip */}
-        <div style={{
+        <div className="m3-footer-strip" style={{
           background: 'rgba(237,230,217,0.03)',
           borderTop: '1px solid rgba(237,230,217,0.06)',
           padding: '16px 64px',
@@ -650,7 +651,7 @@ const App: React.FC = () => {
             fontFamily: 'var(--display)', fontSize: '16px', fontWeight: 900,
             textTransform: 'uppercase', letterSpacing: '-0.01em', color: 'rgba(237,230,217,0.4)',
           }}>Smart·<em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Renovation</em></span>
-          <div style={{ display: 'flex', gap: '24px' }}>
+          <div className="m3-footer-links" style={{ display: 'flex', gap: '24px' }}>
             {[
               { label: '+971 4 235 0599', href: 'tel:+97142350599' },
               { label: 'Dubai, UAE', href: '#' },
@@ -682,7 +683,7 @@ const App: React.FC = () => {
       <section style={{
         background: s.ink, padding: '160px 60px 100px', minHeight: '60vh',
         display: 'flex', alignItems: 'flex-end',
-      }}>
+      }} className="m3-section-hero">
         <div style={{ maxWidth: '900px' }}>
           <span style={{ ...tagStyle, color: s.rust }}>OUR STORY</span>
           <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
@@ -694,7 +695,7 @@ const App: React.FC = () => {
           </p>
         </div>
       </section>
-      <section style={{ background: s.paper, padding: '80px 60px' }}>
+      <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           {[
             { year: '1970', title: 'The Italian Roots', desc: 'Our family established a luxury furniture and design workshop in Milan, specializing in bespoke Italian interiors.' },
@@ -702,11 +703,11 @@ const App: React.FC = () => {
             { year: '2015', title: 'Landing in Dubai', desc: 'Bringing the "Turnkey Italian" concept to the Middle East, starting with a single Signature Villa on Palm Jumeirah.' },
             { year: '2026', title: 'Dubai\'s Premier Firm', desc: 'Today, we are a 6-time award-winning firm with over 400 villas transformed across the UAE.' },
           ].map((item, i) => (
-            <div key={i} style={{
+            <div key={i} className="m3-heritage-item" style={{
               display: 'flex', gap: '40px', padding: '40px 0',
               borderBottom: i < 3 ? `1px solid ${s.newsprint}` : 'none',
             }}>
-              <div style={{
+              <div className="m3-heritage-num" style={{
                 fontFamily: 'var(--display)', fontSize: '64px', fontWeight: 900,
                 color: 'rgba(12,11,9,0.06)', lineHeight: 0.85, minWidth: '80px',
               }}>{String(i + 1).padStart(2, '0')}</div>
@@ -725,7 +726,7 @@ const App: React.FC = () => {
   /* ═══ AWARDS PAGE ═══ */
   const renderAwards = () => (
     <div>
-      <section style={{ background: s.ink, padding: '160px 60px 80px' }}>
+      <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px' }}>
         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
           <span style={{ ...tagStyle, color: s.rust }}>RECOGNITION</span>
           <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
@@ -733,8 +734,8 @@ const App: React.FC = () => {
           </h1>
         </div>
       </section>
-      <section style={{ background: s.paper, padding: '80px 60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '1000px', margin: '0 auto' }}>
+      <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
+        <div className="m3-awards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '1000px', margin: '0 auto' }}>
           {AWARDS.map((award, i) => (
             <div key={i} style={{ background: s.paper, padding: '40px', textAlign: 'center' }}>
               <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: s.rust, marginBottom: '12px' }}>{award.year}</div>
@@ -750,7 +751,7 @@ const App: React.FC = () => {
   /* ═══ FOUNDERS PAGE ═══ */
   const renderFounders = () => (
     <div>
-      <section style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
+      <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
         <span style={{ ...tagStyle, color: s.rust }}>THE HAUTE COUTURE OF RENOVATION</span>
         <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
           Meet the Master<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Tailors</span>
@@ -765,7 +766,7 @@ const App: React.FC = () => {
             { name: 'Marco P.', role: 'FOUNDER & CREATIVE DIRECTOR', quote: '"Every villa tells a story. My job is to ensure that story is written in Italian marble and European light."', bio: 'With over 30 years of personal experience in high-end structural renovations, Marco leads the design and site engineering teams.', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800' },
             { name: 'Cinzia D.', role: 'CO-FOUNDER & RELATIONS DIRECTOR', quote: '"We don\'t just build rooms; we curate experiences for Dubai\'s most discerning families."', bio: 'Cinzia manages our client partnerships with the attentiveness of a private couturier.', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800' },
           ].map((person, i) => (
-            <div key={i} style={{
+            <div key={i} className="m3-founders-grid" style={{
               display: 'grid', gridTemplateColumns: i % 2 === 0 ? '1fr 1fr' : '1fr 1fr',
               gap: '64px', marginBottom: i === 0 ? '80px' : 0, alignItems: 'center',
               direction: i % 2 === 1 ? 'rtl' : 'ltr',
@@ -817,7 +818,7 @@ const App: React.FC = () => {
   /* ═══ COMMUNITIES HUB ═══ */
   const renderCommunitiesHub = () => (
     <div>
-      <section style={{ background: s.ink, padding: '160px 60px 80px' }}>
+      <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px' }}>
         <span style={{ ...tagStyle, color: s.rust }}>WHERE WE WORK</span>
         <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
           Dubai <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Communities</span>
@@ -830,7 +831,7 @@ const App: React.FC = () => {
       {/* Flagship grid */}
       <section style={{ background: s.paper, padding: '80px 60px' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>Flagship Communities</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint }}>
+        <div className="m3-flagship-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint }}>
           {FLAGSHIP_COMMUNITIES.map((c) => (
             <div key={c.id} onClick={() => handleNavigate(`community:${c.name}`)} style={{
               position: 'relative', height: '350px', overflow: 'hidden', cursor: 'pointer', background: s.ink,
@@ -849,7 +850,7 @@ const App: React.FC = () => {
       {/* Other communities */}
       <section style={{ background: s.paper, padding: '0 60px 80px' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>Other Communities</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint }}>
+        <div className="m3-communities-other" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint }}>
           {OTHER_COMMUNITIES.map((c) => (
             <button key={c.id} onClick={() => handleNavigate(`community:${c.name}`)} style={{
               background: s.paper, padding: '24px', textAlign: 'left', border: 'none', cursor: 'pointer',
@@ -878,7 +879,7 @@ const App: React.FC = () => {
   /* ═══ PROCESS PAGE ═══ */
   const renderProcess = () => (
     <div>
-      <section style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
+      <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
         <span style={{ ...tagStyle, color: s.rust }}>HOW WE WORK</span>
         <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
           Our Seamless <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Process</span>
@@ -911,7 +912,7 @@ const App: React.FC = () => {
       {/* Timeline */}
       <section style={{ background: s.ink, padding: '80px 60px' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, textAlign: 'center', marginBottom: '48px' }}>Typical Timeline</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '800px', margin: '0 auto' }}>
+        <div className="m3-timeline-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '800px', margin: '0 auto' }}>
           {[
             { phase: 'Design', duration: '4-6 weeks' },
             { phase: 'Permits', duration: '2-4 weeks' },

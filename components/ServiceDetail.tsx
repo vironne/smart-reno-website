@@ -72,11 +72,11 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
 
       {/* Features */}
       <section style={{ background: s.paper, padding: '80px 60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', maxWidth: '1100px', margin: '0 auto', alignItems: 'start' }}>
+        <div className="m3-detail-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', maxWidth: '1100px', margin: '0 auto', alignItems: 'start' }}>
           <div>
             <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>WHAT'S INCLUDED</span>
             <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginTop: '12px', marginBottom: '32px' }}>Our {service.shortTitle} Package</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div className="m3-features-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               {service.features.map((feature, idx) => (
                 <div key={idx} style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
@@ -90,7 +90,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
           </div>
 
           <div style={{
-            background: s.ink, padding: '48px', position: 'sticky', top: '100px',
+            background: s.ink, padding: '48px', position: 'sticky' as const, top: '100px',
           }}>
             <h3 style={{
               fontFamily: 'var(--display)', fontSize: '24px', fontWeight: 700,
@@ -125,7 +125,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
           <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>OUR WORK</span>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginTop: '8px' }}>Related Projects</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '1100px', margin: '0 auto' }}>
+        <div className="m3-related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '1100px', margin: '0 auto' }}>
           {relatedProjects.map(project => (
             <div key={project.id} onClick={() => onViewProject(project.id)} style={{
               background: s.ink, cursor: 'pointer', transition: 'background 0.3s',
@@ -145,7 +145,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
       {/* Other Services */}
       <section style={{ background: s.paper, padding: '80px 60px' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, textAlign: 'center', marginBottom: '32px' }}>Explore Other Services</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '1000px', margin: '0 auto' }}>
+        <div className="m3-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '1000px', margin: '0 auto' }}>
           {SERVICES.filter(sv => sv.id !== serviceId).map(other => (
             <button key={other.id} onClick={() => onViewProject(other.id)} style={{
               background: s.paper, padding: '24px', textAlign: 'left',

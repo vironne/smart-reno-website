@@ -59,7 +59,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
   return (
     <div>
       {/* Hero */}
-      <section style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
+      <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
         <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: s.rust }}>OUR WORK</span>
         <h1 style={{
           fontFamily: 'var(--display)', fontSize: 'clamp(48px, 8vw, 96px)', fontWeight: 900,
@@ -72,7 +72,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
       </section>
 
       {/* Favorites & Filters */}
-      <section style={{ background: s.paper, padding: '32px 60px', borderBottom: `1px solid ${s.newsprint}` }}>
+      <section className="m3-section" style={{ background: s.paper, padding: '32px 60px', borderBottom: `1px solid ${s.newsprint}` }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Heart size={16} style={{ color: favorites.length > 0 ? '#ef4444' : s.stone, fill: favorites.length > 0 ? '#ef4444' : 'none' }} />
@@ -80,7 +80,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
               {favorites.length} saved
             </span>
           </div>
-          <div style={{ display: 'flex', gap: '2px', background: s.newsprint }}>
+          <div className="m3-filter-bar" style={{ display: 'flex', gap: '2px', background: s.newsprint }}>
             {locations.map(loc => (
               <button key={loc} onClick={() => setFilter(loc)} style={{
                 padding: '8px 16px', fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600,
@@ -95,8 +95,8 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
       </section>
 
       {/* Grid */}
-      <section style={{ background: s.paper, padding: '0 60px 80px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint, marginTop: '1px' }}>
+      <section className="m3-section" style={{ background: s.paper, padding: '0 60px 80px' }}>
+        <div className="m3-portfolio-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint, marginTop: '1px' }}>
           {filteredProjects.map(project => {
             const isFavorite = favorites.includes(project.id);
             const isHovered = hoveredCard === project.id;

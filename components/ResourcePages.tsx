@@ -14,7 +14,7 @@ interface ResourcePageProps {
 const s = { ink: '#0C0B09', paper: '#EDE6D9', newsprint: '#D9D1C0', rust: '#C4552A', stone: '#928378' };
 
 const heroSection = (tag: string, title: React.ReactNode, desc: string) => (
-  <section style={{ background: s.ink, padding: '160px 60px 80px' }}>
+  <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px' }}>
     <div style={{ maxWidth: '800px' }}>
       <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: s.rust }}>{tag}</span>
       <h1 style={{
@@ -31,7 +31,7 @@ const heroSection = (tag: string, title: React.ReactNode, desc: string) => (
 );
 
 const ctaSection = (title: string, desc: string, btnText: string, onClick: () => void) => (
-  <section style={{ background: s.rust, padding: '80px 60px', textAlign: 'center' }}>
+  <section className="m3-section" style={{ background: s.rust, padding: '80px 60px', textAlign: 'center' }}>
     <h2 style={{ fontFamily: 'var(--display)', fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '12px' }}>{title}</h2>
     <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.6)', marginBottom: '32px', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}>{desc}</p>
     <Button variant="white" onClick={onClick}>{btnText}</Button>
@@ -51,9 +51,9 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
     </div>
 
     {/* TOC */}
-    <section style={{ background: s.newsprint, padding: '60px' }}>
+    <section className="m3-section" style={{ background: s.newsprint, padding: '60px' }}>
       <h2 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '24px' }}>What You'll Learn</h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.paper }}>
+      <div className="m3-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.paper }}>
         {[
           { icon: '📋', title: 'Planning', desc: 'Budget, timeline, scope' },
           { icon: '📄', title: 'Permits', desc: 'NOCs and legal' },
@@ -70,7 +70,7 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
     </section>
 
     {/* Planning */}
-    <section style={{ background: s.paper, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '24px' }}>1. Planning Your Renovation</h2>
 
@@ -94,7 +94,7 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
 
         <h3 style={{ fontFamily: 'var(--display)', fontSize: '24px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginTop: '32px', marginBottom: '16px' }}>Timeline Expectations</h3>
         <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8, marginBottom: '24px' }}>Realistic timelines help set proper expectations.</p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: s.newsprint, marginBottom: '32px' }}>
+        <div className="m3-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: s.newsprint, marginBottom: '32px' }}>
           {[
             { scope: 'Kitchen Only', time: '6-10 weeks' },
             { scope: 'Bathroom Only', time: '4-8 weeks' },
@@ -120,7 +120,7 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
     </section>
 
     {/* Common Mistakes */}
-    <section style={{ background: s.newsprint, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.newsprint, padding: '80px 60px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>2. Common Mistakes to Avoid</h2>
         {[
@@ -156,10 +156,10 @@ export const MaterialsGuide: React.FC<ResourcePageProps> = ({ onConsultationClic
     </div>
 
     {/* Flooring */}
-    <section style={{ background: s.paper, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>Flooring Options</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: s.newsprint }}>
+        <div className="m3-materials-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: s.newsprint }}>
           {[
             { name: 'Italian Marble', price: 'AED 400-2,000/sqm', pros: ['Timeless elegance', 'Stays cool', 'Increases value'], cons: ['Requires sealing', 'Can be slippery'], best: 'Living areas, lobbies', img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=600' },
             { name: 'European Oak', price: 'AED 250-800/sqm', pros: ['Warm aesthetic', 'Comfortable'], cons: ['Expands with humidity', 'Scratches'], best: 'Bedrooms, offices', img: 'https://images.unsplash.com/photo-1600566753190-17f0bbc564ce?auto=format&fit=crop&q=80&w=600' },
@@ -190,10 +190,10 @@ export const MaterialsGuide: React.FC<ResourcePageProps> = ({ onConsultationClic
     </section>
 
     {/* Kitchen Appliances */}
-    <section style={{ background: s.newsprint, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.newsprint, padding: '80px 60px' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>Premium Kitchen Appliances</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.paper }}>
+        <div className="m3-appliances-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.paper }}>
           {[
             { brand: 'Gaggenau', country: 'Germany', spec: 'Built-in, steam ovens', note: 'Gold standard. Excellent local service.' },
             { brand: 'Miele', country: 'Germany', spec: 'Dishwashers, laundry, coffee', note: '20+ year lifespan. Strong UAE presence.' },
@@ -211,10 +211,10 @@ export const MaterialsGuide: React.FC<ResourcePageProps> = ({ onConsultationClic
     </section>
 
     {/* Bathroom */}
-    <section style={{ background: s.paper, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>Bathroom Fixtures</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+        <div className="m3-bathroom-cols" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
           <div>
             <h4 style={{ fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: s.rust, marginBottom: '12px' }}>Faucets & Showers</h4>
             {['Hansgrohe Axor — German minimalist', 'Dornbracht — Ultra-luxury', 'Gessi — Italian elegance', 'Grohe — Reliable mid-to-high'].map((b, i) =>
@@ -251,7 +251,7 @@ export const NOCApprovalsGuide: React.FC<ResourcePageProps> = ({ onConsultationC
     </div>
 
     {/* What is NOC */}
-    <section style={{ background: s.paper, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '24px' }}>What is an NOC?</h2>
         <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8, marginBottom: '24px' }}>A No Objection Certificate is an official document from the developer or community management stating they have "no objection" to your proposed renovation work.</p>
@@ -263,7 +263,7 @@ export const NOCApprovalsGuide: React.FC<ResourcePageProps> = ({ onConsultationC
     </section>
 
     {/* Community Requirements */}
-    <section style={{ background: s.newsprint, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.newsprint, padding: '80px 60px' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>By Community</h2>
         {[
@@ -273,7 +273,7 @@ export const NOCApprovalsGuide: React.FC<ResourcePageProps> = ({ onConsultationC
           { community: 'Dubai Hills Estate (Emaar)', strictness: 'Moderate', timeline: '2-3 weeks', notes: 'Clear guidelines. Online submission portal available.' },
           { community: 'Jumeirah Islands (Nakheel)', strictness: 'Moderate', timeline: '2-4 weeks', notes: 'Lake-facing properties have additional restrictions.' },
         ].map((item, idx) => (
-          <div key={idx} style={{
+          <div key={idx} className="m3-noc-item" style={{
             padding: '24px 0', borderBottom: idx < 4 ? `1px solid ${s.paper}` : 'none',
             display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '24px',
           }}>
@@ -296,10 +296,10 @@ export const NOCApprovalsGuide: React.FC<ResourcePageProps> = ({ onConsultationC
     </section>
 
     {/* What needs NOC */}
-    <section style={{ background: s.paper, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>What Requires an NOC?</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+        <div className="m3-noc-cols" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
           <div style={{ borderLeft: `3px solid #15803d`, paddingLeft: '20px' }}>
             <h3 style={{ fontFamily: 'var(--display)', fontSize: '16px', fontWeight: 700, textTransform: 'uppercase', color: '#15803d', marginBottom: '12px' }}>Usually NO NOC</h3>
             {['Interior painting', 'Replacing fixtures (like-for-like)', 'Minor repairs', 'Furniture changes', 'AC maintenance', 'Garden plants'].map((item, i) =>
@@ -317,7 +317,7 @@ export const NOCApprovalsGuide: React.FC<ResourcePageProps> = ({ onConsultationC
     </section>
 
     {/* Process */}
-    <section style={{ background: s.newsprint, padding: '80px 60px' }}>
+    <section className="m3-section" style={{ background: s.newsprint, padding: '80px 60px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>Application Process</h2>
         {[
@@ -371,8 +371,8 @@ export const BlogPage: React.FC<ResourcePageProps> = ({ onConsultationClick, onN
       )}
 
       {/* Grid */}
-      <section style={{ background: s.paper, padding: '60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint }}>
+      <section className="m3-section" style={{ background: s.paper, padding: '60px' }}>
+        <div className="m3-blog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint }}>
           {posts.map(post => (
             <article key={post.id} style={{ background: s.paper, cursor: 'pointer' }}>
               <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
@@ -395,7 +395,7 @@ export const BlogPage: React.FC<ResourcePageProps> = ({ onConsultationClick, onN
       </section>
 
       {/* Newsletter */}
-      <section style={{ background: s.ink, padding: '80px 60px', textAlign: 'center' }}>
+      <section className="m3-section" style={{ background: s.ink, padding: '80px 60px', textAlign: 'center' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '12px' }}>Stay Inspired</h2>
         <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '24px' }}>Subscribe for design trends and exclusive project reveals.</p>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', maxWidth: '400px', margin: '0 auto' }}>

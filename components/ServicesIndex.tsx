@@ -16,7 +16,7 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
   return (
     <div>
       {/* Hero */}
-      <section style={{
+      <section className="m3-section-hero" style={{
         background: s.ink, padding: '160px 60px 80px', textAlign: 'center',
       }}>
         <span style={{
@@ -44,6 +44,7 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
           const isHovered = hovered === i;
           return (
             <div key={service.id}
+              className="m3-svc-index-item"
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
               onClick={() => onNavigate(service.id)}
@@ -73,7 +74,7 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
                   marginTop: '8px', transition: 'color 0.3s', maxWidth: '500px',
                 }}>{service.description}</div>
               </div>
-              <div style={{ textAlign: 'right', marginRight: '24px' }}>
+              <div className="m3-svc-index-meta" style={{ textAlign: 'right', marginRight: '24px' }}>
                 <div style={{
                   fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
                   letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -86,7 +87,7 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
                   color: 'rgba(237,230,217,0.15)', marginTop: '4px',
                 }}>{service.investmentRange}</div>
               </div>
-              <span style={{
+              <span className="m3-svc-index-arrow" style={{
                 fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700,
                 color: s.rust, opacity: isHovered ? 1 : 0,
                 transform: isHovered ? 'translateX(0)' : 'translateX(-12px)',

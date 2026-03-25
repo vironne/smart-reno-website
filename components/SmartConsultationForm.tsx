@@ -87,7 +87,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
             <div>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Where is your property?</h2>
               <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '40px' }}>We specialize in Dubai's premier residential communities.</p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+              <div className="m3-consult-options-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                 {['Palm Jumeirah', 'Emirates Hills', 'Arabian Ranches', 'Dubai Hills', 'Jumeirah Islands', 'Other'].map(loc => (
                   <label key={loc} style={optionStyle(formData.location === loc.toLowerCase().replace(' ', '-'))}>
                     <input type="radio" style={{ display: 'none' }} name="location" onChange={() => setFormData({...formData, location: loc.toLowerCase().replace(' ', '-')})} />
@@ -102,7 +102,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
             <div>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Property Type</h2>
               <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '40px' }}>Select the type of renovation required.</p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+              <div className="m3-consult-options-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                 {['Villa', 'Penthouse', 'Apartment'].map(type => (
                   <label key={type} style={{ ...optionStyle(formData.propertyType === type.toLowerCase()), textAlign: 'center', padding: '40px 24px' }}>
                     <input type="radio" style={{ display: 'none' }} name="propertyType" onChange={() => setFormData({...formData, propertyType: type.toLowerCase()})} />
@@ -190,7 +190,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
             <div>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Contact Details</h2>
               <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '40px' }}>Marco personally reviews every inquiry.</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="m3-form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
                   <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.3)', display: 'block', marginBottom: '6px' }}>First Name</label>
                   <input style={inputStyle} placeholder="First Name" required value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} />

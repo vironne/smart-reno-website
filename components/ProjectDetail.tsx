@@ -44,9 +44,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
   return (
     <div>
       {/* Hero — spotlight style */}
-      <section style={{ background: s.ink, minHeight: '70vh', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+      <section className="m3-project-hero" style={{ background: s.ink, minHeight: '70vh', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
         {/* Image with gallery */}
-        <div style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="m3-project-hero-img" style={{ position: 'relative', overflow: 'hidden' }}>
           <img src={gallery[currentImageIndex]} alt={project.title} style={{
             width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.65) contrast(1.1)',
           }} />
@@ -129,7 +129,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
             <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>ROOM BY ROOM</span>
             <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginTop: '8px' }}>Before & After</h2>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2px', marginBottom: '48px', background: s.newsprint }}>
+          <div className="m3-room-tabs" style={{ display: 'flex', justifyContent: 'center', gap: '2px', marginBottom: '48px', background: s.newsprint }}>
             {project.rooms.map((room, idx) => (
               <button key={idx} onClick={() => setActiveRoom(idx)} style={{
                 padding: '10px 24px', fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
@@ -179,7 +179,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
             <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>PREMIUM SELECTIONS</span>
             <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginTop: '8px' }}>Materials & Finishes</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '800px', margin: '0 auto' }}>
+          <div className="m3-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '800px', margin: '0 auto' }}>
             {project.materials.map((material, idx) => (
               <div key={idx} style={{
                 background: s.paper, padding: '20px', textAlign: 'center',
@@ -199,7 +199,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
             <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>EXPERTISE IN ACTION</span>
             <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginTop: '8px' }}>Challenges & Solutions</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.paper, maxWidth: '1000px', margin: '0 auto' }}>
+          <div className="m3-challenges-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.paper, maxWidth: '1000px', margin: '0 auto' }}>
             {project.challenges.map((item, idx) => (
               <div key={idx} style={{ background: s.newsprint, padding: '32px' }}>
                 <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#b91c1c', marginBottom: '8px' }}>Challenge</div>
@@ -217,7 +217,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink }}>Our <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Process</em></h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '1000px', margin: '0 auto' }}>
+        <div className="m3-process-steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '1000px', margin: '0 auto' }}>
           {PROCESS_STEPS.map((step, idx) => (
             <div key={idx} style={{ background: s.paper, padding: '32px', textAlign: 'center' }}>
               <div style={{ fontSize: '32px', marginBottom: '12px' }}>{step.icon}</div>
@@ -235,7 +235,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
           <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>MORE INSPIRATION</span>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginTop: '8px' }}>Related Projects</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '1100px', margin: '0 auto' }}>
+        <div className="m3-related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '1100px', margin: '0 auto' }}>
           {relatedProjects.map(related => (
             <div key={related.id} onClick={() => onViewProject(related.id)} style={{ background: s.ink, cursor: 'pointer' }}>
               <div style={{ height: '250px', overflow: 'hidden' }}>
