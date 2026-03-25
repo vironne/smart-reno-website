@@ -37,7 +37,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
           <img src={service.image} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.65) contrast(1.1)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(12,11,9,0.85) 0%, rgba(12,11,9,0.3) 50%, rgba(12,11,9,0.2) 100%)' }}></div>
         </div>
-        <div style={{ position: 'relative', padding: '0 60px 64px', maxWidth: '900px' }}>
+        <div className="m3-svc-hero-content" style={{ position: 'relative', padding: '0 60px 64px', maxWidth: '900px' }}>
           <button onClick={onBack} style={{
             fontFamily: 'var(--ui)', fontSize: '11px', letterSpacing: '0.15em',
             textTransform: 'uppercase', color: 'rgba(237,230,217,0.5)', background: 'none',
@@ -71,7 +71,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
       </section>
 
       {/* Features */}
-      <section style={{ background: s.paper, padding: '80px 60px' }}>
+      <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
         <div className="m3-detail-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', maxWidth: '1100px', margin: '0 auto', alignItems: 'start' }}>
           <div>
             <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>WHAT'S INCLUDED</span>
@@ -120,7 +120,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
       </section>
 
       {/* Related Projects */}
-      <section style={{ background: s.ink, padding: '80px 60px' }}>
+      <section className="m3-section" style={{ background: s.ink, padding: '80px 60px' }}>
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
           <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>OUR WORK</span>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginTop: '8px' }}>Related Projects</h2>
@@ -143,7 +143,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
       </section>
 
       {/* Other Services */}
-      <section style={{ background: s.paper, padding: '80px 60px' }}>
+      <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, textAlign: 'center', marginBottom: '32px' }}>Explore Other Services</h2>
         <div className="m3-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '1000px', margin: '0 auto' }}>
           {SERVICES.filter(sv => sv.id !== serviceId).map(other => (

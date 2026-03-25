@@ -36,6 +36,8 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 img { max-width: 100%; height: auto; }
@@ -83,15 +85,38 @@ img { max-width: 100%; height: auto; }
 /* ═══ LINKS ═══ */
 a { text-decoration: none; color: inherit; }
 
+
 /* ═══════════════════════════════════════════
-   RESPONSIVE GRID UTILITIES
-   These use !important to override inline styles
+   HERO NAV CLEARANCE
+   Fixed nav is ~70px tall. These ensure content
+   never overlaps with the navigation bar.
 ═══════════════════════════════════════════ */
 
-/* --- Desktop padding default --- */
+/* Homepage hero: flex-centered in viewport,
+   padding-top pushes center point below nav */
+.m3-hero {
+  padding-top: 80px !important;
+  padding-bottom: 40px !important;
+}
+
+/* Sub-page heroes: explicit top padding */
+.m3-section-hero {
+  padding-top: 160px !important;
+}
+
+/* ServiceDetail hero: content inside absolute-positioned overlay */
+.m3-svc-hero-content {
+  padding-top: 160px !important;
+}
+
+
+/* ═══════════════════════════════════════════
+   DESKTOP DEFAULTS (≥ 769px)
+═══════════════════════════════════════════ */
 @media (min-width: 769px) {
   :root { --pad: 60px; }
 }
+
 
 /* ═══════════════════════════════════════════
    TABLET BREAKPOINT (≤ 768px)
@@ -99,83 +124,126 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 768px) {
   :root { --pad: 24px; }
 
-  /* Hide desktop-only elements */
+  /* ── Hide desktop-only elements ── */
   .m3-section-num,
   .m3-scroll-hint,
   .m3-award-badge { display: none !important; }
 
-  /* --- Section padding override --- */
-  .m3-section { padding: 60px 24px !important; }
-  .m3-section-hero { padding: 120px 24px 60px !important; }
+  /* ── Hero nav clearance ── */
+  .m3-hero {
+    padding-top: 70px !important;
+    padding-bottom: 32px !important;
+  }
 
-  /* --- Grid → stacked --- */
-  .m3-grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
-  .m3-grid-3 { grid-template-columns: 1fr !important; }
-  .m3-grid-2 { grid-template-columns: 1fr !important; }
-  .m3-grid-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .m3-section-hero {
+    padding: 120px 24px 60px !important;
+  }
 
-  /* Stats grid: 2x2 */
-  .m3-stats-grid { grid-template-columns: repeat(2, 1fr) !important; min-height: auto !important; }
-  .m3-stats-grid > div { border-right: none !important; border-bottom: 1px solid var(--newsprint) !important; }
+  .m3-svc-hero-content {
+    padding: 120px 24px 48px !important;
+  }
 
-  /* Service items: tighter padding */
-  .m3-service-item { padding: 16px 24px !important; }
-  .m3-service-num { font-size: 20px !important; min-width: 40px !important; }
+  /* ── Section padding ── */
+  .m3-section {
+    padding: 60px 24px !important;
+  }
+
+  /* ── Grid → stacked ── */
+  .m3-grid-4  { grid-template-columns: repeat(2, 1fr) !important; }
+  .m3-grid-3  { grid-template-columns: 1fr !important; }
+  .m3-grid-2  { grid-template-columns: 1fr !important; }
+  .m3-grid-5  { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* ── Stats grid: 2×2 ── */
+  .m3-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    min-height: auto !important;
+  }
+  .m3-stats-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid var(--newsprint) !important;
+    padding: 36px 24px !important;
+  }
+
+  /* ── Stat strip (rust section) ── */
+  .m3-stat-strip { grid-template-columns: repeat(2, 1fr) !important; }
+  .m3-stat-strip > div { padding: 16px 20px !important; }
+
+  /* ── Statement section ── */
+  .m3-statement { padding: 0 24px !important; }
+
+  /* ── Service items ── */
+  .m3-service-item {
+    padding: 20px 24px !important;
+    min-height: 56px !important;
+    gap: 12px !important;
+  }
+  .m3-service-num { font-size: 20px !important; min-width: 36px !important; }
   .m3-service-arrow { display: none !important; }
   .m3-service-time { display: none !important; }
 
-  /* Project spotlight: stack */
+  /* ── Project spotlight: stack ── */
   .m3-split { grid-template-columns: 1fr !important; }
-  .m3-split-img { height: 50vh !important; min-height: 300px !important; }
+  .m3-split-img { height: 50vh !important; min-height: 280px !important; }
   .m3-split-text { padding: 40px 24px !important; }
 
-  /* CTA section */
-  .m3-cta-split { grid-template-columns: 1fr !important; min-height: auto !important; }
-  .m3-cta-left { padding: 60px 24px !important; border-right: none !important; border-bottom: 1px solid rgba(237,230,217,0.06) !important; }
+  /* ── Process grid: stack with gaps ── */
+  .m3-process-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1px !important;
+  }
+  .m3-process-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid var(--newsprint) !important;
+    padding: 36px 24px !important;
+  }
+
+  /* ── Testimonials: stack with spacing ── */
+  .m3-testimonials-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1px !important;
+  }
+  .m3-testimonials-grid > div {
+    padding: 36px 24px !important;
+  }
+
+  /* ── CTA split: stack ── */
+  .m3-cta-split {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+  }
+  .m3-cta-left {
+    padding: 60px 24px !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(237,230,217,0.06) !important;
+  }
   .m3-cta-right { padding: 60px 24px !important; }
 
-  /* Process grid */
-  .m3-process-grid { grid-template-columns: 1fr !important; }
-  .m3-process-grid > div { border-right: none !important; border-bottom: 1px solid var(--newsprint) !important; }
-
-  /* Testimonials */
-  .m3-testimonials-grid { grid-template-columns: 1fr !important; }
-
-  /* Awards */
-  .m3-awards-grid { grid-template-columns: repeat(2, 1fr) !important; }
-
-  /* Communities */
+  /* ── Communities ── */
   .m3-communities-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .m3-communities-other { grid-template-columns: repeat(2, 1fr) !important; }
 
-  /* Flagship */
+  /* ── Flagship ── */
   .m3-flagship-grid { grid-template-columns: 1fr !important; }
   .m3-flagship-grid > div { height: 280px !important; }
 
-  /* Footer strip */
-  .m3-footer-strip { 
-    flex-direction: column !important; 
-    padding: 24px !important; 
+  /* ── Awards ── */
+  .m3-awards-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* ── Footer strip ── */
+  .m3-footer-strip {
+    flex-direction: column !important;
+    padding: 24px !important;
     text-align: center !important;
-    gap: 12px !important;
+    gap: 16px !important;
   }
-  .m3-footer-links { 
-    flex-wrap: wrap !important; 
+  .m3-footer-links {
+    flex-wrap: wrap !important;
     justify-content: center !important;
     gap: 16px !important;
   }
 
-  /* Stat strip (rust section) */
-  .m3-stat-strip { grid-template-columns: repeat(2, 1fr) !important; }
-  .m3-stat-strip > div { padding: 16px 20px !important; }
-
-  /* Statement section */
-  .m3-statement { padding: 0 24px !important; }
-
-  /* Hero description */
-  .m3-hero-desc { font-size: 17px !important; }
-
-  /* Founders grid */
+  /* ── Founders grid ── */
   .m3-founders-grid {
     grid-template-columns: 1fr !important;
     gap: 32px !important;
@@ -183,86 +251,107 @@ a { text-decoration: none; color: inherit; }
   }
   .m3-founders-grid img { height: 350px !important; }
 
-  /* Timeline grid */
-  .m3-timeline-grid { grid-template-columns: repeat(2, 1fr) !important; }
-
-  /* Heritage list items */
-  .m3-heritage-item { flex-direction: column !important; gap: 16px !important; }
+  /* ── Heritage items ── */
+  .m3-heritage-item {
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 32px 0 !important;
+  }
   .m3-heritage-num { font-size: 40px !important; min-width: auto !important; }
 
-  /* Form row */
-  .m3-form-row { grid-template-columns: 1fr !important; }
+  /* ── Timeline grid ── */
+  .m3-timeline-grid { grid-template-columns: repeat(2, 1fr) !important; }
 
-  /* Marquee */
+  /* ── Form rows ── */
+  .m3-form-row { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+  /* ── Marquee ── */
   .m3-marquee-item { font-size: 10px !important; padding: 0 16px !important; }
 
-  /* Materials grid */
+  /* ── Materials grid ── */
   .m3-materials-grid { grid-template-columns: 1fr !important; }
 
-  /* NOC columns */
+  /* ── NOC columns ── */
   .m3-noc-cols { grid-template-columns: 1fr !important; }
 
-  /* Blog grid */
+  /* ── Blog grid ── */
   .m3-blog-grid { grid-template-columns: 1fr !important; }
 
-  /* Portfolio grid */
+  /* ── Portfolio grid ── */
   .m3-portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; }
 
-  /* Filter bar */
-  .m3-filter-bar { 
-    overflow-x: auto !important; 
+  /* ── Filter bar ── */
+  .m3-filter-bar {
+    overflow-x: auto !important;
     flex-wrap: nowrap !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
   .m3-filter-bar::-webkit-scrollbar { display: none; }
 
-  /* Features 2-col */
+  /* ── Features 2-col ── */
   .m3-features-grid { grid-template-columns: 1fr !important; }
 
-  /* Service detail split */
-  .m3-detail-split { grid-template-columns: 1fr !important; }
+  /* ── Service detail split ── */
+  .m3-detail-split { grid-template-columns: 1fr !important; gap: 32px !important; }
   .m3-detail-sidebar { position: static !important; }
 
-  /* Project detail hero */
-  .m3-project-hero { grid-template-columns: 1fr !important; min-height: auto !important; }
-  .m3-project-hero-img { height: 50vh !important; }
+  /* ── Project detail hero: stack ── */
+  .m3-project-hero {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+  }
+  .m3-project-hero-img { height: 50vh !important; min-height: 280px !important; }
+  .m3-project-hero > div:last-child { padding: 40px 24px !important; }
 
-  /* Challenges grid */
+  /* ── Challenges grid ── */
   .m3-challenges-grid { grid-template-columns: 1fr !important; }
 
-  /* Process steps in project */
+  /* ── Process steps (project) ── */
   .m3-process-steps-grid { grid-template-columns: repeat(2, 1fr) !important; }
 
-  /* Related projects */
+  /* ── Related projects ── */
   .m3-related-grid { grid-template-columns: 1fr !important; }
 
-  /* Room tabs */
-  .m3-room-tabs { 
-    overflow-x: auto !important; 
+  /* ── Room tabs ── */
+  .m3-room-tabs {
+    overflow-x: auto !important;
     flex-wrap: nowrap !important;
     -webkit-overflow-scrolling: touch;
     justify-content: flex-start !important;
   }
 
-  /* Appliances grid */
+  /* ── Appliances grid ── */
   .m3-appliances-grid { grid-template-columns: 1fr !important; }
 
-  /* Bathroom cols */
+  /* ── Bathroom cols ── */
   .m3-bathroom-cols { grid-template-columns: 1fr !important; }
 
-  /* NOC community items */
+  /* ── NOC community items ── */
   .m3-noc-item { flex-direction: column !important; }
 
-  /* Consultation form */
+  /* ── Consultation form ── */
   .m3-consult-options-3 { grid-template-columns: 1fr !important; }
   .m3-consult-options-2 { grid-template-columns: 1fr !important; }
 
-  /* Services index items */
-  .m3-svc-index-item { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+  /* ── Services index ── */
+  .m3-svc-index-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding: 24px !important;
+  }
   .m3-svc-index-arrow { display: none !important; }
   .m3-svc-index-meta { text-align: left !important; }
+
+  /* ── Process page steps ── */
+  .m3-process-page-item {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .m3-process-page-num { font-size: 40px !important; min-width: auto !important; }
 }
+
 
 /* ═══════════════════════════════════════════
    PHONE BREAKPOINT (≤ 480px)
@@ -270,13 +359,19 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 480px) {
   :root { --pad: 16px; }
 
+  .m3-hero {
+    padding-top: 60px !important;
+    padding-bottom: 24px !important;
+  }
+
   .m3-section { padding: 48px 16px !important; }
   .m3-section-hero { padding: 100px 16px 48px !important; }
+  .m3-svc-hero-content { padding: 100px 16px 40px !important; }
 
   .m3-grid-4 { grid-template-columns: 1fr !important; }
   .m3-grid-5 { grid-template-columns: 1fr !important; }
   .m3-stats-grid { grid-template-columns: 1fr !important; }
-  .m3-stat-strip { grid-template-columns: repeat(2, 1fr) !important; }
+  .m3-stat-strip { grid-template-columns: 1fr !important; }
 
   .m3-communities-grid { grid-template-columns: 1fr !important; }
   .m3-communities-other { grid-template-columns: 1fr !important; }
@@ -287,17 +382,22 @@ a { text-decoration: none; color: inherit; }
   .m3-portfolio-grid { grid-template-columns: 1fr !important; }
   .m3-process-steps-grid { grid-template-columns: 1fr !important; }
 
-  .m3-cta-left { padding: 48px 16px !important; }
+  .m3-cta-left  { padding: 48px 16px !important; }
   .m3-cta-right { padding: 48px 16px !important; }
+
+  .m3-split-text { padding: 32px 16px !important; }
+  .m3-project-hero > div:last-child { padding: 32px 16px !important; }
 }
 
+
 /* ═══════════════════════════════════════════
-   TOUCH DEVICE: hide custom cursor
+   TOUCH DEVICE
 ═══════════════════════════════════════════ */
 @media (hover: none) and (pointer: coarse) {
   body { cursor: auto !important; }
   #c, #cr { display: none !important; }
 }
+
 
 /* ═══════════════════════════════════════════
    SCROLL-SNAP: disable on mobile
@@ -306,6 +406,7 @@ a { text-decoration: none; color: inherit; }
   html { scroll-snap-type: none !important; }
   section { scroll-snap-align: none !important; }
 }
+
 
 /* ═══════════════════════════════════════════
    MOBILE NAV

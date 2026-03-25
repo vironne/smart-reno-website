@@ -39,7 +39,7 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
       </section>
 
       {/* Service List — M3 numbered list */}
-      <section style={{ background: s.ink, minHeight: '80vh', display: 'flex', flexDirection: 'column' }}>
+      <section className="m3-section" style={{ background: s.ink, minHeight: '80vh', display: 'flex', flexDirection: 'column' }}>
         {SERVICES.map((service, i) => {
           const isHovered = hovered === i;
           return (
@@ -99,7 +99,7 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
       </section>
 
       {/* CTA */}
-      <section style={{
+      <section className="m3-section" style={{
         background: s.rust, padding: '80px 60px', textAlign: 'center',
       }}>
         <h2 style={{

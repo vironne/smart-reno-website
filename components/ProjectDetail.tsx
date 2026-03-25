@@ -124,7 +124,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
 
       {/* Before/After by Room */}
       {project.rooms && project.rooms.length > 0 && (
-        <section style={{ background: s.paper, padding: '80px 60px' }}>
+        <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>ROOM BY ROOM</span>
             <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginTop: '8px' }}>Before & After</h2>
@@ -157,7 +157,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
 
       {/* Testimonial */}
       {project.testimonial && (
-        <section style={{ background: s.ink, padding: '80px 60px', textAlign: 'center' }}>
+        <section className="m3-section" style={{ background: s.ink, padding: '80px 60px', textAlign: 'center' }}>
           <div style={{ maxWidth: '700px', margin: '0 auto' }}>
             <Quote size={40} style={{ color: 'rgba(237,230,217,0.08)', marginBottom: '24px' }} />
             <blockquote style={{
@@ -174,7 +174,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
 
       {/* Materials */}
       {project.materials && project.materials.length > 0 && (
-        <section style={{ background: s.paper, padding: '80px 60px' }}>
+        <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>PREMIUM SELECTIONS</span>
             <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginTop: '8px' }}>Materials & Finishes</h2>
@@ -194,7 +194,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
 
       {/* Challenges */}
       {project.challenges && project.challenges.length > 0 && (
-        <section style={{ background: s.newsprint, padding: '80px 60px' }}>
+        <section className="m3-section" style={{ background: s.newsprint, padding: '80px 60px' }}>
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>EXPERTISE IN ACTION</span>
             <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginTop: '8px' }}>Challenges & Solutions</h2>
@@ -213,7 +213,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
       )}
 
       {/* Process */}
-      <section style={{ background: s.paper, padding: '80px 60px' }}>
+      <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink }}>Our <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Process</em></h2>
         </div>
@@ -230,7 +230,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
       </section>
 
       {/* Related Projects */}
-      <section style={{ background: s.ink, padding: '80px 60px' }}>
+      <section className="m3-section" style={{ background: s.ink, padding: '80px 60px' }}>
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
           <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>MORE INSPIRATION</span>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginTop: '8px' }}>Related Projects</h2>
@@ -251,7 +251,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ projectId, onBack,
       </section>
 
       {/* Final CTA */}
-      <section style={{ background: s.rust, padding: '80px 60px', textAlign: 'center' }}>
+      <section className="m3-section" style={{ background: s.rust, padding: '80px 60px', textAlign: 'center' }}>
         <h2 style={{
           fontFamily: 'var(--display)', fontSize: 'clamp(36px, 5vw, 64px)', fontWeight: 900,
           textTransform: 'uppercase', color: s.paper, marginBottom: '16px',
