@@ -13,7 +13,7 @@ interface PortfolioGalleryProps {
 
 const FAVORITES_THRESHOLD = 10;
 const STORAGE_KEY = 'smartreno_favorites';
-const s = { ink: '#0C0B09', paper: '#EDE6D9', newsprint: '#D9D1C0', rust: '#C4552A', stone: '#928378' };
+const s = { ink: '#1a1714', paper: '#F5F0EB', newsprint: '#ebe5dd', rust: '#B8976A', stone: '#6b5e52' };
 
 export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
   onFavoritesThresholdReached, hasSubmittedEmail, initialFilter = 'All',
@@ -67,7 +67,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
         }}>Portfolio</h1>
         <p style={{
           fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
-          color: 'rgba(237,230,217,0.45)', marginTop: '20px', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto',
+          color: 'rgba(245,240,235,0.45)', marginTop: '20px', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto',
         }}>Explore our collection of luxury villa transformations across Dubai's premier communities.</p>
       </section>
 
@@ -117,7 +117,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
                   {/* Hover overlay */}
                   <div style={{
                     position: 'absolute', inset: 0,
-                    background: isHovered ? 'rgba(12,11,9,0.5)' : 'rgba(12,11,9,0)',
+                    background: isHovered ? 'rgba(26,23,20,0.5)' : 'rgba(26,23,20,0)',
                     transition: 'background 0.3s',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
@@ -133,7 +133,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
                 {/* Favorite btn */}
                 <button onClick={(e) => { e.stopPropagation(); toggleFavorite(project.id); }} style={{
                   position: 'absolute', top: '12px', right: '12px', width: '36px', height: '36px',
-                  background: isFavorite ? '#ef4444' : 'rgba(237,230,217,0.9)',
+                  background: isFavorite ? '#ef4444' : 'rgba(245,240,235,0.9)',
                   border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   transition: 'all 0.3s',
                 }}>
@@ -157,7 +157,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
       {/* Modal */}
       {selectedProject && (
         <div onClick={() => setSelectedProject(null)} style={{
-          position: 'fixed', inset: 0, background: 'rgba(12,11,9,0.85)', zIndex: 50,
+          position: 'fixed', inset: 0, background: 'rgba(26,23,20,0.85)', zIndex: 50,
           display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px',
         }}>
           <div onClick={e => e.stopPropagation()} style={{

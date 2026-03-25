@@ -8,7 +8,7 @@ interface ServicesIndexProps {
   onConsultationClick: () => void;
 }
 
-const s = { ink: '#0C0B09', paper: '#EDE6D9', newsprint: '#D9D1C0', rust: '#C4552A', stone: '#928378' };
+const s = { ink: '#1a1714', paper: '#F5F0EB', newsprint: '#ebe5dd', rust: '#B8976A', stone: '#6b5e52' };
 
 export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onConsultationClick }) => {
   const [hovered, setHovered] = useState<number | null>(null);
@@ -29,11 +29,11 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
           color: s.paper, marginTop: '16px',
         }}>
           Bespoke<br/>
-          <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Services</span>
+          <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Services</span>
         </h1>
         <p style={{
           fontFamily: 'var(--serif)', fontSize: '20px', fontStyle: 'italic',
-          color: 'rgba(237,230,217,0.45)', marginTop: '24px', maxWidth: '560px',
+          color: 'rgba(245,240,235,0.45)', marginTop: '24px', maxWidth: '560px',
           marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6,
         }}>From complete villa transformations to stunning kitchens and resort-style pools.</p>
       </section>
@@ -51,26 +51,26 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
               style={{
                 display: 'flex', alignItems: 'center',
                 padding: isHovered ? '32px 60px 32px 76px' : '32px 60px',
-                borderBottom: '1px solid rgba(237,230,217,0.05)',
+                borderBottom: '1px solid rgba(245,240,235,0.05)',
                 cursor: 'pointer', transition: 'all 0.3s',
-                background: isHovered ? 'rgba(237,230,217,0.02)' : 'transparent',
+                background: isHovered ? 'rgba(245,240,235,0.02)' : 'transparent',
               }}
             >
               <span style={{
                 fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900,
-                color: isHovered ? 'rgba(196,85,42,0.3)' : 'rgba(237,230,217,0.08)',
+                color: isHovered ? 'rgba(184,151,106,0.3)' : 'rgba(245,240,235,0.08)',
                 minWidth: '72px', lineHeight: 1, transition: 'color 0.3s',
               }}>{String(i + 1).padStart(2, '0')}</span>
               <div style={{ flex: 1 }}>
                 <div style={{
                   fontFamily: 'var(--display)', fontSize: 'clamp(28px, 4vw, 56px)', fontWeight: 700,
                   textTransform: 'uppercase', letterSpacing: '-0.01em',
-                  color: isHovered ? s.paper : 'rgba(237,230,217,0.7)',
+                  color: isHovered ? s.paper : 'rgba(245,240,235,0.7)',
                   lineHeight: 1, transition: 'color 0.3s',
                 }}>{service.title}</div>
                 <div style={{
                   fontFamily: 'var(--serif)', fontSize: '15px', fontStyle: 'italic',
-                  color: isHovered ? 'rgba(237,230,217,0.5)' : 'rgba(237,230,217,0.2)',
+                  color: isHovered ? 'rgba(245,240,235,0.5)' : 'rgba(245,240,235,0.2)',
                   marginTop: '8px', transition: 'color 0.3s', maxWidth: '500px',
                 }}>{service.description}</div>
               </div>
@@ -78,13 +78,13 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
                 <div style={{
                   fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
                   letterSpacing: '0.14em', textTransform: 'uppercase',
-                  color: isHovered ? s.rust : 'rgba(237,230,217,0.2)',
+                  color: isHovered ? s.rust : 'rgba(245,240,235,0.2)',
                   transition: 'color 0.3s',
                 }}>{service.timeline}</div>
                 <div style={{
                   fontFamily: 'var(--ui)', fontSize: '9px',
                   letterSpacing: '0.1em', textTransform: 'uppercase',
-                  color: 'rgba(237,230,217,0.15)', marginTop: '4px',
+                  color: 'rgba(245,240,235,0.15)', marginTop: '4px',
                 }}>{service.investmentRange}</div>
               </div>
               <span className="m3-svc-index-arrow" style={{
@@ -108,7 +108,7 @@ export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onCons
         }}>Not Sure Which Service?</h2>
         <p style={{
           fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
-          color: 'rgba(237,230,217,0.6)', marginBottom: '32px', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto',
+          color: 'rgba(245,240,235,0.6)', marginBottom: '32px', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto',
         }}>Book a free consultation. We'll assess your villa and recommend the perfect approach.</p>
         <Button variant="white" onClick={onConsultationClick}>Book Free Consultation</Button>
       </section>

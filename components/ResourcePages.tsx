@@ -11,7 +11,7 @@ interface ResourcePageProps {
   onNavigate: (page: string) => void;
 }
 
-const s = { ink: '#0C0B09', paper: '#EDE6D9', newsprint: '#D9D1C0', rust: '#C4552A', stone: '#928378' };
+const s = { ink: '#1a1714', paper: '#F5F0EB', newsprint: '#ebe5dd', rust: '#B8976A', stone: '#6b5e52' };
 
 const heroSection = (tag: string, title: React.ReactNode, desc: string) => (
   <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px' }}>
@@ -24,7 +24,7 @@ const heroSection = (tag: string, title: React.ReactNode, desc: string) => (
       }}>{title}</h1>
       <p style={{
         fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
-        color: 'rgba(237,230,217,0.5)', marginTop: '20px', maxWidth: '600px', lineHeight: 1.7,
+        color: 'rgba(245,240,235,0.5)', marginTop: '20px', maxWidth: '600px', lineHeight: 1.7,
       }}>{desc}</p>
     </div>
   </section>
@@ -33,7 +33,7 @@ const heroSection = (tag: string, title: React.ReactNode, desc: string) => (
 const ctaSection = (title: string, desc: string, btnText: string, onClick: () => void) => (
   <section className="m3-section" style={{ background: s.rust, padding: '80px 60px', textAlign: 'center' }}>
     <h2 style={{ fontFamily: 'var(--display)', fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '12px' }}>{title}</h2>
-    <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.6)', marginBottom: '32px', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}>{desc}</p>
+    <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(245,240,235,0.6)', marginBottom: '32px', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}>{desc}</p>
     <Button variant="white" onClick={onClick}>{btnText}</Button>
   </section>
 );
@@ -42,7 +42,7 @@ const ctaSection = (title: string, desc: string, btnText: string, onClick: () =>
 export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultationClick, onNavigate }) => (
   <div>
     {heroSection('COMPREHENSIVE GUIDE',
-      <>The Ultimate Dubai Villa<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Renovation Guide 2026</span></>,
+      <>The Ultimate Dubai Villa<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Renovation Guide 2026</span></>,
       'Everything you need to know about renovating your villa in Dubai. From planning and permits to materials and timelines.'
     )}
     <div style={{ background: s.ink, padding: '0 60px 48px', display: 'flex', gap: '12px' }}>
@@ -75,7 +75,7 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '24px' }}>1. Planning Your Renovation</h2>
 
         <h3 style={{ fontFamily: 'var(--display)', fontSize: '24px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginTop: '32px', marginBottom: '16px' }}>Setting Your Budget</h3>
-        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8, marginBottom: '24px' }}>Villa renovation costs in Dubai vary significantly based on scope, materials, and location.</p>
+        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(26,23,20,0.55)', lineHeight: 1.8, marginBottom: '24px' }}>Villa renovation costs in Dubai vary significantly based on scope, materials, and location.</p>
 
         <div style={{ border: `1px solid ${s.newsprint}`, padding: '24px', marginBottom: '32px' }}>
           <h4 style={{ fontFamily: 'var(--display)', fontSize: '18px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '16px' }}>Investment Ranges</h4>
@@ -93,7 +93,7 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
         </div>
 
         <h3 style={{ fontFamily: 'var(--display)', fontSize: '24px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginTop: '32px', marginBottom: '16px' }}>Timeline Expectations</h3>
-        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8, marginBottom: '24px' }}>Realistic timelines help set proper expectations.</p>
+        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(26,23,20,0.55)', lineHeight: 1.8, marginBottom: '24px' }}>Realistic timelines help set proper expectations.</p>
         <div className="m3-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: s.newsprint, marginBottom: '32px' }}>
           {[
             { scope: 'Kitchen Only', time: '6-10 weeks' },
@@ -109,7 +109,7 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
         </div>
 
         <h3 style={{ fontFamily: 'var(--display)', fontSize: '24px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginTop: '32px', marginBottom: '16px' }}>Choosing the Right Contractor</h3>
-        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8, marginBottom: '16px' }}>The contractor you choose will make or break your renovation.</p>
+        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(26,23,20,0.55)', lineHeight: 1.8, marginBottom: '16px' }}>The contractor you choose will make or break your renovation.</p>
         {['Valid Trade License', 'Portfolio of Similar Projects', 'Clear Contract', 'Insurance', 'References'].map((item, idx) => (
           <div key={idx} style={{ display: 'flex', gap: '10px', marginBottom: '8px' }}>
             <span style={{ color: s.rust, fontWeight: 700 }}>✓</span>
@@ -134,7 +134,7 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
             padding: '24px 0', borderBottom: idx < 4 ? `1px solid ${s.paper}` : 'none',
           }}>
             <div style={{ fontFamily: 'var(--display)', fontSize: '18px', fontWeight: 700, textTransform: 'uppercase', color: '#b91c1c', marginBottom: '8px' }}>{item.mistake}</div>
-            <p style={{ fontFamily: 'var(--serif)', fontSize: '15px', fontStyle: 'italic', color: 'rgba(12,11,9,0.6)', lineHeight: 1.7 }}>{item.solution}</p>
+            <p style={{ fontFamily: 'var(--serif)', fontSize: '15px', fontStyle: 'italic', color: 'rgba(26,23,20,0.6)', lineHeight: 1.7 }}>{item.solution}</p>
           </div>
         ))}
       </div>
@@ -148,7 +148,7 @@ export const VillaRenovationGuide: React.FC<ResourcePageProps> = ({ onConsultati
 export const MaterialsGuide: React.FC<ResourcePageProps> = ({ onConsultationClick, onNavigate }) => (
   <div>
     {heroSection('MATERIALS GUIDE',
-      <>Premium Materials for<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Dubai Villas</span></>,
+      <>Premium Materials for<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Dubai Villas</span></>,
       'A comprehensive guide to selecting the right materials for Dubai\'s unique climate.'
     )}
     <div style={{ background: s.ink, padding: '0 60px 48px' }}>
@@ -230,7 +230,7 @@ export const MaterialsGuide: React.FC<ResourcePageProps> = ({ onConsultationClic
         </div>
         <div style={{ background: s.ink, padding: '24px 32px', marginTop: '32px' }}>
           <div style={{ fontFamily: 'var(--display)', fontSize: '16px', fontWeight: 700, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Pro Tip: Dubai Water Quality</div>
-          <p style={{ fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic', color: 'rgba(237,230,217,0.55)', lineHeight: 1.7 }}>Dubai's desalinated water is hard. Invest in a whole-house softener and choose fixtures with easy-clean coatings.</p>
+          <p style={{ fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic', color: 'rgba(245,240,235,0.55)', lineHeight: 1.7 }}>Dubai's desalinated water is hard. Invest in a whole-house softener and choose fixtures with easy-clean coatings.</p>
         </div>
       </div>
     </section>
@@ -243,7 +243,7 @@ export const MaterialsGuide: React.FC<ResourcePageProps> = ({ onConsultationClic
 export const NOCApprovalsGuide: React.FC<ResourcePageProps> = ({ onConsultationClick, onNavigate }) => (
   <div>
     {heroSection('APPROVALS GUIDE',
-      <>NOC & Permit Guide for<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Dubai Villas</span></>,
+      <>NOC & Permit Guide for<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Dubai Villas</span></>,
       'Navigate Dubai\'s approval process with confidence. Learn which permits you need and avoid costly delays.'
     )}
     <div style={{ background: s.ink, padding: '0 60px 48px' }}>
@@ -254,7 +254,7 @@ export const NOCApprovalsGuide: React.FC<ResourcePageProps> = ({ onConsultationC
     <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '36px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '24px' }}>What is an NOC?</h2>
-        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8, marginBottom: '24px' }}>A No Objection Certificate is an official document from the developer or community management stating they have "no objection" to your proposed renovation work.</p>
+        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(26,23,20,0.55)', lineHeight: 1.8, marginBottom: '24px' }}>A No Objection Certificate is an official document from the developer or community management stating they have "no objection" to your proposed renovation work.</p>
         <div style={{ background: '#fef2f2', borderLeft: `3px solid #b91c1c`, padding: '20px 24px' }}>
           <div style={{ fontFamily: 'var(--display)', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', color: '#b91c1c', marginBottom: '8px' }}>Important Warning</div>
           <p style={{ fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic', color: '#b91c1c', lineHeight: 1.6 }}>Starting work without proper NOCs can result in stop-work orders, fines up to AED 50,000, and being required to restore the property at your expense.</p>
@@ -366,7 +366,7 @@ export const BlogPage: React.FC<ResourcePageProps> = ({ onConsultationClick, onN
   return (
     <div>
       {heroSection('INSIGHTS & INSPIRATION',
-        <>Smart Renovation<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Blog</span></>,
+        <>Smart Renovation<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Blog</span></>,
         'Expert insights on villa renovation, interior design trends, and luxury living in Dubai.'
       )}
 
@@ -397,11 +397,11 @@ export const BlogPage: React.FC<ResourcePageProps> = ({ onConsultationClick, onN
       {/* Newsletter */}
       <section className="m3-section" style={{ background: s.ink, padding: '80px 60px', textAlign: 'center' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '12px' }}>Stay Inspired</h2>
-        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '24px' }}>Subscribe for design trends and exclusive project reveals.</p>
+        <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(245,240,235,0.4)', marginBottom: '24px' }}>Subscribe for design trends and exclusive project reveals.</p>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', maxWidth: '400px', margin: '0 auto' }}>
           <input type="email" placeholder="Enter your email" style={{
             flex: 1, background: 'transparent', border: 'none',
-            borderBottom: '1px solid rgba(237,230,217,0.2)',
+            borderBottom: '1px solid rgba(245,240,235,0.2)',
             padding: '10px 0', fontFamily: 'var(--serif)', fontSize: '16px',
             fontStyle: 'italic', color: s.paper, outline: 'none',
           }} />

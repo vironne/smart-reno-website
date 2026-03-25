@@ -52,12 +52,12 @@ const OTHER_COMMUNITIES = ALL_COMMUNITIES.slice(5);
 
 /* ═══ M3 Inline Style Helpers ═══ */
 const s = {
-  ink: '#0C0B09',
-  paper: '#EDE6D9',
-  newsprint: '#D9D1C0',
-  rust: '#C4552A',
-  rustPale: '#E8896B',
-  stone: '#928378',
+  ink: '#1a1714',
+  paper: '#F5F0EB',
+  newsprint: '#ebe5dd',
+  rust: '#B8976A',
+  rustPale: '#C9A97D',
+  stone: '#6b5e52',
 };
 
 const App: React.FC = () => {
@@ -136,7 +136,7 @@ const App: React.FC = () => {
           <p style={{
             fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600,
             letterSpacing: '0.35em', textTransform: 'uppercase',
-            color: 'rgba(237,230,217,0.3)', marginBottom: '32px',
+            color: 'rgba(245,240,235,0.3)', marginBottom: '32px',
           }}>Award-Winning · Dubai · Since 1970</p>
 
           <h1 style={{
@@ -147,7 +147,7 @@ const App: React.FC = () => {
             <span style={{ display: 'block' }}>We Build</span>
             <span style={{
               display: 'block',
-              WebkitTextStroke: '1.5px rgba(237,230,217,0.2)',
+              WebkitTextStroke: '1.5px rgba(245,240,235,0.2)',
               color: 'transparent',
             }}>Interiors</span>
             <span style={{
@@ -158,7 +158,7 @@ const App: React.FC = () => {
 
           <p style={{
             fontFamily: 'var(--serif)', fontSize: '22px', fontStyle: 'italic',
-            color: 'rgba(237,230,217,0.45)', marginTop: '40px',
+            color: 'rgba(245,240,235,0.45)', marginTop: '40px',
             maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6,
           }}>Interior renovation rooted in Italian craftsmanship. Five decades of European expertise, brought to Dubai's most exceptional spaces.</p>
 
@@ -172,11 +172,11 @@ const App: React.FC = () => {
               color: s.paper, background: 'none', border: 'none', cursor: 'pointer',
               display: 'flex', alignItems: 'center', gap: '12px', transition: 'color 0.25s',
             }}>Book Free Consultation <span style={{ fontSize: '16px' }}>→</span></button>
-            <div style={{ width: '1px', height: '32px', background: 'rgba(237,230,217,0.15)' }}></div>
+            <div style={{ width: '1px', height: '32px', background: 'rgba(245,240,235,0.15)' }}></div>
             <button onClick={() => handleNavigate('portfolio')} style={{
               fontFamily: 'var(--display)', fontSize: '14px', fontWeight: 700,
               textTransform: 'uppercase', letterSpacing: '0.04em',
-              color: 'rgba(237,230,217,0.35)', background: 'none', border: 'none', cursor: 'pointer',
+              color: 'rgba(245,240,235,0.35)', background: 'none', border: 'none', cursor: 'pointer',
               display: 'flex', alignItems: 'center', gap: '8px',
             }}>View Portfolio <span style={{ fontSize: '11px' }}>↗</span></button>
           </div>
@@ -185,7 +185,7 @@ const App: React.FC = () => {
         {/* Award badge */}
         <div className="m3-award-badge" style={{
           position: 'absolute', bottom: '48px', right: '52px',
-          border: '1px solid rgba(237,230,217,0.12)', padding: '14px 20px',
+          border: '1px solid rgba(245,240,235,0.12)', padding: '14px 20px',
         }}>
           <div style={{
             fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
@@ -193,7 +193,7 @@ const App: React.FC = () => {
           }}>ALA 2025</div>
           <div style={{
             fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic',
-            color: 'rgba(237,230,217,0.6)',
+            color: 'rgba(245,240,235,0.6)',
           }}>Boutique Firm of the Year</div>
         </div>
       </section>
@@ -222,10 +222,10 @@ const App: React.FC = () => {
             fontSize: 'clamp(48px, 10vw, 144px)', color: s.paper,
           }}>
             We Don't<br/>
-            <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.6)', display: 'block' }}>Decorate.</span>
+            <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.6)', display: 'block' }}>Decorate.</span>
             We Transform.
             <span style={{
-              fontSize: '0.55em', color: 'rgba(237,230,217,0.35)', display: 'block', letterSpacing: '0.02em',
+              fontSize: '0.55em', color: 'rgba(245,240,235,0.35)', display: 'block', letterSpacing: '0.02em',
             }}>500 projects. 0 delays. 6 awards.</span>
           </h2>
         </div>
@@ -233,7 +233,7 @@ const App: React.FC = () => {
         {/* Stat strip */}
         <div style={{
           position: 'absolute', bottom: 0, left: 0, right: 0,
-          background: 'rgba(12,11,9,0.2)',
+          background: 'rgba(26,23,20,0.2)',
           display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
         }} className="m3-stat-strip">
           {[
@@ -244,16 +244,16 @@ const App: React.FC = () => {
           ].map((stat, i) => (
             <div key={i} style={{
               padding: '20px 40px', textAlign: 'center',
-              borderRight: i < 3 ? '1px solid rgba(237,230,217,0.1)' : 'none',
+              borderRight: i < 3 ? '1px solid rgba(245,240,235,0.1)' : 'none',
             }}>
               <div style={{
                 fontFamily: 'var(--display)', fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 900,
                 color: s.paper, lineHeight: 1,
-              }}>{stat.num}<sup style={{ fontSize: '0.38em', color: 'rgba(237,230,217,0.6)', verticalAlign: 'super' }}>{stat.sup}</sup></div>
+              }}>{stat.num}<sup style={{ fontSize: '0.38em', color: 'rgba(245,240,235,0.6)', verticalAlign: 'super' }}>{stat.sup}</sup></div>
               <div style={{
                 fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
                 letterSpacing: '0.2em', textTransform: 'uppercase',
-                color: 'rgba(237,230,217,0.5)', marginTop: '4px',
+                color: 'rgba(245,240,235,0.5)', marginTop: '4px',
               }}>{stat.label}</div>
             </div>
           ))}
@@ -291,13 +291,13 @@ const App: React.FC = () => {
                 <div style={{
                   fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 700,
                   letterSpacing: '0.22em', textTransform: 'uppercase',
-                  color: isHovered ? 'rgba(237,230,217,0.4)' : s.stone,
+                  color: isHovered ? 'rgba(245,240,235,0.4)' : s.stone,
                   marginTop: '14px', textAlign: 'center', transition: 'color 0.35s',
                 }}>{cell.label}</div>
                 <div style={{
                   fontFamily: 'var(--display)', fontSize: 'clamp(11px, 1.2vw, 16px)',
                   fontWeight: 300, fontStyle: 'italic',
-                  color: isHovered ? 'rgba(237,230,217,0.2)' : s.newsprint,
+                  color: isHovered ? 'rgba(245,240,235,0.2)' : s.newsprint,
                   marginTop: '6px', textAlign: 'center', transition: 'color 0.35s',
                 }}>{cell.ghost}</div>
               </div>
@@ -310,7 +310,7 @@ const App: React.FC = () => {
       <section className="m3-section" style={{ background: s.ink, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <div className="m3-section" style={{
           padding: '48px 60px 24px',
-          borderBottom: '1px solid rgba(237,230,217,0.06)',
+          borderBottom: '1px solid rgba(245,240,235,0.06)',
         }}>
           <h2 style={{
             fontFamily: 'var(--display)', fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: 900,
@@ -329,26 +329,26 @@ const App: React.FC = () => {
                 style={{
                   display: 'flex', alignItems: 'center',
                   padding: isHovered ? '0 60px 0 76px' : '0 60px',
-                  borderBottom: i < SERVICES.length - 1 ? '1px solid rgba(237,230,217,0.05)' : 'none',
+                  borderBottom: i < SERVICES.length - 1 ? '1px solid rgba(245,240,235,0.05)' : 'none',
                   cursor: 'pointer', transition: 'all 0.3s', flex: 1,
-                  background: isHovered ? 'rgba(237,230,217,0.02)' : 'transparent',
+                  background: isHovered ? 'rgba(245,240,235,0.02)' : 'transparent',
                 }}
               >
                 <span className="m3-service-num" style={{
                   fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900,
-                  color: isHovered ? 'rgba(196,85,42,0.2)' : 'rgba(237,230,217,0.08)',
+                  color: isHovered ? 'rgba(184,151,106,0.2)' : 'rgba(245,240,235,0.08)',
                   minWidth: '72px', lineHeight: 1, transition: 'color 0.3s',
                 }}>{String(i + 1).padStart(2, '0')}</span>
                 <span style={{
                   fontFamily: 'var(--display)', fontSize: 'clamp(24px, 3.5vw, 52px)', fontWeight: 700,
                   textTransform: 'uppercase', letterSpacing: '-0.01em',
-                  color: isHovered ? s.paper : 'rgba(237,230,217,0.7)',
+                  color: isHovered ? s.paper : 'rgba(245,240,235,0.7)',
                   flex: 1, lineHeight: 1, transition: 'color 0.3s',
                 }}>{svc.shortTitle}</span>
                 <span className="m3-service-time" style={{
                   fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
                   letterSpacing: '0.14em', textTransform: 'uppercase',
-                  color: isHovered ? s.rust : 'rgba(237,230,217,0.2)',
+                  color: isHovered ? s.rust : 'rgba(245,240,235,0.2)',
                   whiteSpace: 'nowrap', transition: 'color 0.3s',
                 }}>{svc.timeline}</span>
                 <span className="m3-service-arrow" style={{
@@ -376,7 +376,7 @@ const App: React.FC = () => {
           />
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'linear-gradient(to right, rgba(12,11,9,0.4) 0%, transparent 100%)',
+            background: 'linear-gradient(to right, rgba(26,23,20,0.4) 0%, transparent 100%)',
           }}></div>
         </div>
         <div className="m3-split-text" style={{
@@ -395,13 +395,13 @@ const App: React.FC = () => {
             }}>
               {PROJECTS[0].location.split(' ')[0]}<br/>
               <span style={{
-                WebkitTextStroke: '1px rgba(237,230,217,0.2)', color: 'transparent', display: 'block',
+                WebkitTextStroke: '1px rgba(245,240,235,0.2)', color: 'transparent', display: 'block',
               }}>{PROJECTS[0].location.split(' ').slice(1).join(' ') || 'Villa'}</span>
               Villa.
             </h2>
             <div style={{
               display: 'flex', gap: '24px', paddingTop: '24px',
-              borderTop: '1px solid rgba(237,230,217,0.08)', marginTop: '24px',
+              borderTop: '1px solid rgba(245,240,235,0.08)', marginTop: '24px',
             }}>
               <span style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: s.stone }}>{PROJECTS[0].style || 'Full Renovation'}</span>
               <span style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: s.stone }}>Dubai · {PROJECTS[0].completion || '2024'}</span>
@@ -411,7 +411,7 @@ const App: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <span style={{
               fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
-              letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.25)',
+              letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.25)',
             }}>ALA 2025 · Boutique Firm of the Year</span>
             <button onClick={() => handleNavigate(`project:${PROJECTS[0].id}`)} style={{
               fontFamily: 'var(--display)', fontSize: '24px', fontWeight: 700,
@@ -456,7 +456,7 @@ const App: React.FC = () => {
                 <div>
                   <div style={{
                     fontFamily: 'var(--display)', fontSize: '96px', fontWeight: 900,
-                    color: isHovered ? 'rgba(237,230,217,0.04)' : 'rgba(12,11,9,0.06)',
+                    color: isHovered ? 'rgba(245,240,235,0.04)' : 'rgba(26,23,20,0.06)',
                     lineHeight: 0.85, marginBottom: '20px', transition: 'color 0.4s',
                   }}>{step.num}</div>
                   <div style={{
@@ -467,7 +467,7 @@ const App: React.FC = () => {
                   }}>{step.title}</div>
                   <p style={{
                     fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic',
-                    color: isHovered ? 'rgba(237,230,217,0.5)' : 'rgba(12,11,9,0.55)',
+                    color: isHovered ? 'rgba(245,240,235,0.5)' : 'rgba(26,23,20,0.55)',
                     lineHeight: 1.8, transition: 'color 0.4s',
                   }}>{step.desc}</p>
                 </div>
@@ -476,7 +476,7 @@ const App: React.FC = () => {
                     <span key={ti} style={{
                       fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
                       letterSpacing: '0.14em', textTransform: 'uppercase',
-                      color: s.rust, border: `1px solid rgba(196,85,42,${isHovered ? '0.4' : '0.3'})`,
+                      color: s.rust, border: `1px solid rgba(184,151,106,${isHovered ? '0.4' : '0.3'})`,
                       padding: '3px 10px', transition: 'color 0.4s, border-color 0.4s',
                     }}>{tag}</span>
                   ))}
@@ -496,12 +496,12 @@ const App: React.FC = () => {
               textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 0.9, color: s.paper,
             }}>Client <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Stories</em></h2>
           </div>
-          <div className="m3-testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)' }}>
+          <div className="m3-testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(245,240,235,0.06)' }}>
             {TESTIMONIALS.map((t, idx) => (
               <div key={idx} style={{
                 background: s.ink, padding: '48px 40px', position: 'relative',
               }}>
-                <Quote size={32} style={{ color: 'rgba(237,230,217,0.06)', position: 'absolute', top: '24px', right: '24px' }} />
+                <Quote size={32} style={{ color: 'rgba(245,240,235,0.06)', position: 'absolute', top: '24px', right: '24px' }} />
                 <div style={{ display: 'flex', gap: '3px', marginBottom: '24px' }}>
                   {[...Array(t.rating)].map((_, i) => (
                     <Star key={i} size={14} fill={s.rust} style={{ color: s.rust }} />
@@ -509,9 +509,9 @@ const App: React.FC = () => {
                 </div>
                 <p style={{
                   fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
-                  color: 'rgba(237,230,217,0.7)', lineHeight: 1.8, marginBottom: '32px',
+                  color: 'rgba(245,240,235,0.7)', lineHeight: 1.8, marginBottom: '32px',
                 }}>"{t.quote}"</p>
-                <div style={{ borderTop: '1px solid rgba(237,230,217,0.06)', paddingTop: '16px' }}>
+                <div style={{ borderTop: '1px solid rgba(245,240,235,0.06)', paddingTop: '16px' }}>
                   <div style={{
                     fontFamily: 'var(--ui)', fontSize: '12px', fontWeight: 700,
                     letterSpacing: '0.1em', textTransform: 'uppercase', color: s.paper,
@@ -533,7 +533,7 @@ const App: React.FC = () => {
           {/* Left: Manifesto */}
           <div className="m3-cta-left" style={{
             display: 'flex', flexDirection: 'column', justifyContent: 'center',
-            padding: '80px 64px', borderRight: '1px solid rgba(237,230,217,0.06)',
+            padding: '80px 64px', borderRight: '1px solid rgba(245,240,235,0.06)',
           }}>
             <h2 style={{
               fontFamily: 'var(--display)', fontSize: 'clamp(48px, 8vw, 112px)', fontWeight: 900,
@@ -545,7 +545,7 @@ const App: React.FC = () => {
             </h2>
             <p style={{
               fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
-              color: 'rgba(237,230,217,0.45)', lineHeight: 1.75,
+              color: 'rgba(245,240,235,0.45)', lineHeight: 1.75,
               maxWidth: '380px', marginBottom: '36px',
             }}>Free consultation with Marco and Cinzia. We visit your property, listen to your vision and tell you exactly what's possible — no obligation.</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -557,7 +557,7 @@ const App: React.FC = () => {
               ].map((g, i) => (
                 <span key={i} style={{
                   fontFamily: 'var(--ui)', fontSize: '12px', fontWeight: 500,
-                  letterSpacing: '0.04em', color: 'rgba(237,230,217,0.4)',
+                  letterSpacing: '0.04em', color: 'rgba(245,240,235,0.4)',
                   display: 'flex', alignItems: 'center', gap: '10px',
                 }}>
                   <span style={{ color: s.rust, fontWeight: 700 }}>✓</span> {g}
@@ -606,24 +606,24 @@ const App: React.FC = () => {
             }}>Send My Brief →</button>
             <p style={{
               fontFamily: 'var(--serif)', fontSize: '13px', fontStyle: 'italic',
-              color: 'rgba(237,230,217,0.25)', textAlign: 'center', marginTop: '10px',
+              color: 'rgba(245,240,235,0.25)', textAlign: 'center', marginTop: '10px',
             }}>We respond within 24 hours. No spam. Free site visit included.</p>
           </div>
         </div>
 
         {/* Communities grid before footer */}
-        <div className="m3-section" style={{ padding: '60px', borderTop: '1px solid rgba(237,230,217,0.06)' }}>
+        <div className="m3-section" style={{ padding: '60px', borderTop: '1px solid rgba(245,240,235,0.06)' }}>
           <h3 style={{
             fontFamily: 'var(--display)', fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 900,
             textTransform: 'uppercase', color: s.paper, marginBottom: '32px',
           }}>Communities We <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Serve</em></h3>
-          <div className="m3-communities-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)' }}>
+          <div className="m3-communities-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1px', background: 'rgba(245,240,235,0.06)' }}>
             {COMMUNITIES.map((c) => (
               <button key={c.id} onClick={() => handleNavigate(`community:${c.name}`)} style={{
                 background: s.ink, padding: '24px', textAlign: 'left', border: 'none', cursor: 'pointer',
                 transition: 'background 0.3s',
               }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(237,230,217,0.03)'; }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(245,240,235,0.03)'; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = s.ink; }}
               >
                 <div style={{
@@ -641,15 +641,15 @@ const App: React.FC = () => {
 
         {/* Footer strip */}
         <div className="m3-footer-strip" style={{
-          background: 'rgba(237,230,217,0.03)',
-          borderTop: '1px solid rgba(237,230,217,0.06)',
+          background: 'rgba(245,240,235,0.03)',
+          borderTop: '1px solid rgba(245,240,235,0.06)',
           padding: '16px 64px',
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           flexWrap: 'wrap', gap: '16px',
         }}>
           <span style={{
             fontFamily: 'var(--display)', fontSize: '16px', fontWeight: 900,
-            textTransform: 'uppercase', letterSpacing: '-0.01em', color: 'rgba(237,230,217,0.4)',
+            textTransform: 'uppercase', letterSpacing: '-0.01em', color: 'rgba(245,240,235,0.4)',
           }}>Smart·<em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Renovation</em></span>
           <div className="m3-footer-links" style={{ display: 'flex', gap: '24px' }}>
             {[
@@ -660,17 +660,17 @@ const App: React.FC = () => {
             ].map((link, i) => (
               <a key={i} href={link.href} style={{
                 fontFamily: 'var(--ui)', fontSize: '10px', letterSpacing: '0.15em',
-                textTransform: 'uppercase', color: 'rgba(237,230,217,0.2)',
+                textTransform: 'uppercase', color: 'rgba(245,240,235,0.2)',
                 transition: 'color 0.25s',
               }}
-                onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.55)'; }}
-                onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.2)'; }}
+                onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'rgba(245,240,235,0.55)'; }}
+                onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(245,240,235,0.2)'; }}
               >{link.label}</a>
             ))}
           </div>
           <span style={{
             fontFamily: 'var(--ui)', fontSize: '10px', letterSpacing: '0.08em',
-            color: 'rgba(237,230,217,0.15)',
+            color: 'rgba(245,240,235,0.15)',
           }}>© 2025 Smart Renovation LLC</span>
         </div>
       </section>
@@ -688,9 +688,9 @@ const App: React.FC = () => {
           <span style={{ ...tagStyle, color: s.rust }}>OUR STORY</span>
           <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
             From Milan to Dubai:<br/>
-            <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>50 Years of Excellence</span>
+            <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>50 Years of Excellence</span>
           </h1>
-          <p style={{ ...bodyTextStyle, color: 'rgba(237,230,217,0.5)', marginTop: '24px', maxWidth: '600px' }}>
+          <p style={{ ...bodyTextStyle, color: 'rgba(245,240,235,0.5)', marginTop: '24px', maxWidth: '600px' }}>
             Smart Renovation isn't just a fit-out company; it's a legacy of Italian craftsmanship that began in the workshops of Lombardy in 1970 and blossomed in the luxury estates of Dubai.
           </p>
         </div>
@@ -709,12 +709,12 @@ const App: React.FC = () => {
             }}>
               <div className="m3-heritage-num" style={{
                 fontFamily: 'var(--display)', fontSize: '64px', fontWeight: 900,
-                color: 'rgba(12,11,9,0.06)', lineHeight: 0.85, minWidth: '80px',
+                color: 'rgba(26,23,20,0.06)', lineHeight: 0.85, minWidth: '80px',
               }}>{String(i + 1).padStart(2, '0')}</div>
               <div>
                 <div style={{ fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: s.rust, marginBottom: '8px' }}>{item.year}</div>
                 <h3 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '12px' }}>{item.title}</h3>
-                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8 }}>{item.desc}</p>
+                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(26,23,20,0.55)', lineHeight: 1.8 }}>{item.desc}</p>
               </div>
             </div>
           ))}
@@ -730,7 +730,7 @@ const App: React.FC = () => {
         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
           <span style={{ ...tagStyle, color: s.rust }}>RECOGNITION</span>
           <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
-            6-Time Award<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Winner</span>
+            6-Time Award<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Winner</span>
           </h1>
         </div>
       </section>
@@ -754,9 +754,9 @@ const App: React.FC = () => {
       <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
         <span style={{ ...tagStyle, color: s.rust }}>THE HAUTE COUTURE OF RENOVATION</span>
         <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
-          Meet the Master<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Tailors</span>
+          Meet the Master<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Tailors</span>
         </h1>
-        <p style={{ ...bodyTextStyle, color: 'rgba(237,230,217,0.45)', maxWidth: '600px', margin: '24px auto 0' }}>
+        <p style={{ ...bodyTextStyle, color: 'rgba(245,240,235,0.45)', maxWidth: '600px', margin: '24px auto 0' }}>
           Like the finest Milanese fashion houses, we believe luxury cannot be mass-produced.
         </p>
       </section>
@@ -777,8 +777,8 @@ const App: React.FC = () => {
               <div style={{ direction: 'ltr' }}>
                 <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: s.rust, marginBottom: '12px' }}>{person.role}</div>
                 <h2 style={{ fontFamily: 'var(--display)', fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '16px' }}>{person.name}</h2>
-                <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(12,11,9,0.5)', lineHeight: 1.7, marginBottom: '20px' }}>{person.quote}</p>
-                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.45)', lineHeight: 1.8, marginBottom: '24px' }}>{person.bio}</p>
+                <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(26,23,20,0.5)', lineHeight: 1.7, marginBottom: '20px' }}>{person.quote}</p>
+                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(26,23,20,0.45)', lineHeight: 1.8, marginBottom: '24px' }}>{person.bio}</p>
                 <Button variant="outline" onClick={() => setIsFormOpen(true)}>Schedule a Briefing</Button>
               </div>
             </div>
@@ -793,7 +793,7 @@ const App: React.FC = () => {
     <div>
       <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
         <h1 style={{ ...heroTitleStyle, color: s.paper }}>
-          Client <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Stories</span>
+          Client <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Stories</span>
         </h1>
       </section>
       <section className="m3-section" style={{ background: s.paper, padding: '80px 60px' }}>
@@ -805,7 +805,7 @@ const App: React.FC = () => {
               <div style={{ display: 'flex', gap: '3px', marginBottom: '20px' }}>
                 {[...Array(5)].map((_, i) => <Star key={i} size={14} fill={s.rust} style={{ color: s.rust }} />)}
               </div>
-              <p style={{ fontFamily: 'var(--serif)', fontSize: '24px', fontStyle: 'italic', color: 'rgba(12,11,9,0.7)', lineHeight: 1.7, marginBottom: '20px' }}>"{t.quote}"</p>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '24px', fontStyle: 'italic', color: 'rgba(26,23,20,0.7)', lineHeight: 1.7, marginBottom: '20px' }}>"{t.quote}"</p>
               <div style={{ fontFamily: 'var(--ui)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: s.ink }}>{t.name}</div>
               <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', color: s.rust, marginTop: '4px' }}>{t.location}</div>
             </div>
@@ -821,9 +821,9 @@ const App: React.FC = () => {
       <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px' }}>
         <span style={{ ...tagStyle, color: s.rust }}>WHERE WE WORK</span>
         <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
-          Dubai <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Communities</span>
+          Dubai <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Communities</span>
         </h1>
-        <p style={{ ...bodyTextStyle, color: 'rgba(237,230,217,0.45)', marginTop: '20px', maxWidth: '600px' }}>
+        <p style={{ ...bodyTextStyle, color: 'rgba(245,240,235,0.45)', marginTop: '20px', maxWidth: '600px' }}>
           Specialized villa renovation expertise across 13 of Dubai's premier residential areas. 400+ villas transformed.
         </p>
       </section>
@@ -837,7 +837,7 @@ const App: React.FC = () => {
               position: 'relative', height: '350px', overflow: 'hidden', cursor: 'pointer', background: s.ink,
             }}>
               <img src={c.image} alt={c.name} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.65) contrast(1.1)', transition: 'transform 0.7s' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(12,11,9,0.8) 0%, transparent 60%)' }}></div>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,23,20,0.8) 0%, transparent 60%)' }}></div>
               <div style={{ position: 'absolute', bottom: 0, left: 0, padding: '32px', color: s.paper }}>
                 <div style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 900, textTransform: 'uppercase', marginBottom: '4px' }}>{c.name}</div>
                 <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', color: s.rust }}>{c.renovatedCount}+ villas renovated</div>
@@ -870,7 +870,7 @@ const App: React.FC = () => {
       {/* CTA */}
       <section className="m3-section" style={{ background: s.rust, padding: '80px 60px', textAlign: 'center' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '16px' }}>Don't See Your Community?</h2>
-        <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(237,230,217,0.6)', marginBottom: '32px' }}>We serve all premium residential areas in Dubai.</p>
+        <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(245,240,235,0.6)', marginBottom: '32px' }}>We serve all premium residential areas in Dubai.</p>
         <Button variant="white" onClick={() => setIsFormOpen(true)}>Get in Touch</Button>
       </section>
     </div>
@@ -882,9 +882,9 @@ const App: React.FC = () => {
       <section className="m3-section-hero" style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
         <span style={{ ...tagStyle, color: s.rust }}>HOW WE WORK</span>
         <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
-          Our Seamless <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Process</span>
+          Our Seamless <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(245,240,235,0.5)' }}>Process</span>
         </h1>
-        <p style={{ ...bodyTextStyle, color: 'rgba(237,230,217,0.45)', maxWidth: '600px', margin: '24px auto 0' }}>
+        <p style={{ ...bodyTextStyle, color: 'rgba(245,240,235,0.45)', maxWidth: '600px', margin: '24px auto 0' }}>
           From initial consultation to final handover, guided with Italian precision and personal attention.
         </p>
       </section>
@@ -898,12 +898,12 @@ const App: React.FC = () => {
             }}>
               <div className="m3-process-page-num" style={{
                 fontFamily: 'var(--display)', fontSize: '64px', fontWeight: 900,
-                color: 'rgba(12,11,9,0.06)', lineHeight: 0.85, minWidth: '80px',
+                color: 'rgba(26,23,20,0.06)', lineHeight: 0.85, minWidth: '80px',
               }}>{String(idx + 1).padStart(2, '0')}</div>
               <div>
                 <div style={{ fontSize: '32px', marginBottom: '8px' }}>{step.icon}</div>
                 <h3 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '12px' }}>{step.title}</h3>
-                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8 }}>{step.description}</p>
+                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(26,23,20,0.55)', lineHeight: 1.8 }}>{step.description}</p>
               </div>
             </div>
           ))}
@@ -912,7 +912,7 @@ const App: React.FC = () => {
       {/* Timeline */}
       <section className="m3-section" style={{ background: s.ink, padding: '80px 60px' }}>
         <h2 style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, textAlign: 'center', marginBottom: '48px' }}>Typical Timeline</h2>
-        <div className="m3-timeline-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '800px', margin: '0 auto' }}>
+        <div className="m3-timeline-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: 'rgba(245,240,235,0.06)', maxWidth: '800px', margin: '0 auto' }}>
           {[
             { phase: 'Design', duration: '4-6 weeks' },
             { phase: 'Permits', duration: '2-4 weeks' },
@@ -921,7 +921,7 @@ const App: React.FC = () => {
           ].map((item, idx) => (
             <div key={idx} style={{ background: s.ink, padding: '32px', textAlign: 'center' }}>
               <div style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, color: s.rust, marginBottom: '8px' }}>{item.duration}</div>
-              <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.4)' }}>{item.phase}</div>
+              <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.4)' }}>{item.phase}</div>
             </div>
           ))}
         </div>
@@ -1009,14 +1009,14 @@ const bodyTextStyle: React.CSSProperties = {
 const formLabelStyle: React.CSSProperties = {
   fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
   letterSpacing: '0.22em', textTransform: 'uppercase',
-  color: 'rgba(237,230,217,0.3)', display: 'block', marginBottom: '6px',
+  color: 'rgba(245,240,235,0.3)', display: 'block', marginBottom: '6px',
 };
 
 const formInputStyle: React.CSSProperties = {
   width: '100%', background: 'transparent', border: 'none',
-  borderBottom: '1px solid rgba(237,230,217,0.15)',
+  borderBottom: '1px solid rgba(245,240,235,0.15)',
   padding: '10px 0', fontFamily: 'var(--serif)', fontSize: '16px',
-  fontStyle: 'italic', color: '#EDE6D9', outline: 'none',
+  fontStyle: 'italic', color: '#F5F0EB', outline: 'none',
 };
 
 export default App;

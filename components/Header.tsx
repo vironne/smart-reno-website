@@ -92,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
 
   const dropdownInnerStyle: React.CSSProperties = {
     background: 'var(--ink)',
-    border: '1px solid rgba(237,230,217,0.1)',
+    border: '1px solid rgba(245,240,235,0.1)',
     padding: '8px 0',
     width: '220px',
   };
@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
     fontSize: '11px',
     letterSpacing: '0.12em',
     textTransform: 'uppercase',
-    color: 'rgba(237,230,217,0.6)',
+    color: 'rgba(245,240,235,0.6)',
     background: 'none',
     border: 'none',
     cursor: 'pointer',
@@ -147,7 +147,7 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
     cursor: 'pointer',
     textAlign: 'left',
     padding: '8px 0',
-    borderBottom: '1px solid rgba(237,230,217,0.06)',
+    borderBottom: '1px solid rgba(245,240,235,0.06)',
     display: 'block',
     width: '100%',
     lineHeight: 1,
@@ -159,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
     fontSize: '12px',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
-    color: 'rgba(237,230,217,0.4)',
+    color: 'rgba(245,240,235,0.4)',
     background: 'none',
     border: 'none',
     cursor: 'pointer',
@@ -191,24 +191,24 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
               <div style={dropdownStyle}>
                 <div style={dropdownInnerStyle}>
                   <button style={dropdownItemStyle} onClick={() => handleNavigate('heritage')}
-                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
-                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(245,240,235,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(245,240,235,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
                   >Our Heritage</button>
                   <button style={dropdownItemStyle} onClick={() => handleNavigate('awards-recognition')}
-                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
-                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(245,240,235,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(245,240,235,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
                   >Awards</button>
                   <button style={dropdownItemStyle} onClick={() => handleNavigate('founders')}
-                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
-                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(245,240,235,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(245,240,235,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
                   >Meet Marco & Cinzia</button>
                   <button style={dropdownItemStyle} onClick={() => handleNavigate('client-testimonials')}
-                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
-                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(245,240,235,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(245,240,235,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
                   >Client Stories</button>
                   <button style={dropdownItemStyle} onClick={() => handleNavigate('process')}
-                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
-                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(245,240,235,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(245,240,235,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
                   >Process</button>
                 </div>
               </div>

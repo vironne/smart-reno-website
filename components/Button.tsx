@@ -69,7 +69,7 @@ const variantStyles: Record<string, React.CSSProperties> = {
     fontSize: '16px',
     background: 'transparent',
     color: 'var(--paper)',
-    border: '1px solid rgba(237,230,217,0.3)',
+    border: '1px solid rgba(245,240,235,0.3)',
   },
   'ghost': {
     ...baseStyles,

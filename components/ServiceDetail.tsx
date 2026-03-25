@@ -11,7 +11,7 @@ interface ServiceDetailProps {
   onViewProject: (projectId: string) => void;
 }
 
-const s = { ink: '#0C0B09', paper: '#EDE6D9', newsprint: '#D9D1C0', rust: '#C4552A', stone: '#928378' };
+const s = { ink: '#1a1714', paper: '#F5F0EB', newsprint: '#ebe5dd', rust: '#B8976A', stone: '#6b5e52' };
 
 export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack, onConsultationClick, onViewProject }) => {
   const service = SERVICES.find(sv => sv.id === serviceId);
@@ -35,12 +35,12 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
       }}>
         <div style={{ position: 'absolute', inset: 0 }}>
           <img src={service.image} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.65) contrast(1.1)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(12,11,9,0.85) 0%, rgba(12,11,9,0.3) 50%, rgba(12,11,9,0.2) 100%)' }}></div>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,23,20,0.85) 0%, rgba(26,23,20,0.3) 50%, rgba(26,23,20,0.2) 100%)' }}></div>
         </div>
         <div className="m3-svc-hero-content" style={{ position: 'relative', padding: '0 60px 64px', maxWidth: '900px' }}>
           <button onClick={onBack} style={{
             fontFamily: 'var(--ui)', fontSize: '11px', letterSpacing: '0.15em',
-            textTransform: 'uppercase', color: 'rgba(237,230,217,0.5)', background: 'none',
+            textTransform: 'uppercase', color: 'rgba(245,240,235,0.5)', background: 'none',
             border: 'none', cursor: 'pointer', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px',
           }}><ArrowLeft size={16} /> Back to Services</button>
           <div style={{
@@ -53,18 +53,18 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
           }}>{service.title}</h1>
           <p style={{
             fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
-            color: 'rgba(237,230,217,0.55)', marginTop: '20px', maxWidth: '600px', lineHeight: 1.7,
+            color: 'rgba(245,240,235,0.55)', marginTop: '20px', maxWidth: '600px', lineHeight: 1.7,
           }}>{service.fullDescription}</p>
           <div style={{ display: 'flex', gap: '24px', marginTop: '24px' }}>
             <span style={{
               fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
               letterSpacing: '0.14em', textTransform: 'uppercase',
-              color: s.rust, border: '1px solid rgba(196,85,42,0.3)', padding: '6px 14px',
+              color: s.rust, border: '1px solid rgba(184,151,106,0.3)', padding: '6px 14px',
             }}>{service.investmentRange}</span>
             <span style={{
               fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
               letterSpacing: '0.14em', textTransform: 'uppercase',
-              color: 'rgba(237,230,217,0.4)', border: '1px solid rgba(237,230,217,0.1)', padding: '6px 14px',
+              color: 'rgba(245,240,235,0.4)', border: '1px solid rgba(245,240,235,0.1)', padding: '6px 14px',
             }}>{service.timeline}</span>
           </div>
         </div>
@@ -98,7 +98,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
             }}>Ready to Transform?</h3>
             <p style={{
               fontFamily: 'var(--serif)', fontSize: '15px', fontStyle: 'italic',
-              color: 'rgba(237,230,217,0.45)', lineHeight: 1.7, marginBottom: '24px',
+              color: 'rgba(245,240,235,0.45)', lineHeight: 1.7, marginBottom: '24px',
             }}>Book a free consultation to discuss your {service.shortTitle.toLowerCase()} project.</p>
             {['Free site visit & assessment', 'Concept design & 3D visualization', 'Detailed proposal & timeline'].map((item, idx) => (
               <div key={idx} style={{
@@ -109,7 +109,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
                   fontFamily: 'var(--display)', fontSize: '16px', fontWeight: 700,
                   color: s.rust, minWidth: '24px',
                 }}>{idx + 1}</span>
-                <span style={{ fontFamily: 'var(--ui)', fontSize: '12px', color: 'rgba(237,230,217,0.6)' }}>{item}</span>
+                <span style={{ fontFamily: 'var(--ui)', fontSize: '12px', color: 'rgba(245,240,235,0.6)' }}>{item}</span>
               </div>
             ))}
             <Button variant="primary-large" onClick={onConsultationClick} style={{ width: '100%', marginTop: '24px' }}>
@@ -125,7 +125,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, onBack,
           <span style={{ fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust }}>OUR WORK</span>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginTop: '8px' }}>Related Projects</h2>
         </div>
-        <div className="m3-related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '1100px', margin: '0 auto' }}>
+        <div className="m3-related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(245,240,235,0.06)', maxWidth: '1100px', margin: '0 auto' }}>
           {relatedProjects.map(project => (
             <div key={project.id} onClick={() => onViewProject(project.id)} style={{
               background: s.ink, cursor: 'pointer', transition: 'background 0.3s',

@@ -5,12 +5,12 @@
 ═══════════════════════════════════════════ */
 
 :root {
-  --ink: #0C0B09;
-  --paper: #EDE6D9;
-  --newsprint: #D9D1C0;
-  --rust: #C4552A;
-  --rust-pale: #E8896B;
-  --stone: #928378;
+  --ink: #1a1714;
+  --paper: #F5F0EB;
+  --newsprint: #ebe5dd;
+  --rust: #B8976A;
+  --rust-pale: #C9A97D;
+  --stone: #6b5e52;
   --display: 'Big Shoulders Display', Impact, sans-serif;
   --ui: 'Syne', sans-serif;
   --serif: 'EB Garamond', Georgia, serif;
@@ -69,7 +69,7 @@ img { max-width: 100%; height: auto; }
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(237,230,217,0.25);
+  color: rgba(245,240,235,0.25);
   padding: 0 28px;
   white-space: nowrap;
 }
@@ -215,7 +215,7 @@ a { text-decoration: none; color: inherit; }
   .m3-cta-left {
     padding: 60px 24px !important;
     border-right: none !important;
-    border-bottom: 1px solid rgba(237,230,217,0.06) !important;
+    border-bottom: 1px solid rgba(245,240,235,0.06) !important;
   }
   .m3-cta-right { padding: 60px 24px !important; }
 

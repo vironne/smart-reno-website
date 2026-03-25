@@ -7,7 +7,7 @@ interface BeforeAfterSliderProps {
   className?: string;
 }
 
-const s = { ink: '#0C0B09', paper: '#EDE6D9', rust: '#C4552A', stone: '#928378' };
+const s = { ink: '#1a1714', paper: '#F5F0EB', rust: '#B8976A', stone: '#6b5e52' };
 
 export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ before, after, className = '' }) => {
   const [sliderPos, setSliderPos] = useState(50);
@@ -80,7 +80,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ before, af
         position: 'absolute', top: '16px', left: '16px',
         fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
         letterSpacing: '0.2em', textTransform: 'uppercase',
-        color: s.paper, background: 'rgba(12,11,9,0.6)', padding: '6px 12px',
+        color: s.paper, background: 'rgba(26,23,20,0.6)', padding: '6px 12px',
       }}>Before</div>
       <div style={{
         position: 'absolute', top: '16px', right: '16px',

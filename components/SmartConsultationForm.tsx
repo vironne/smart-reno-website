@@ -6,7 +6,7 @@ interface SmartConsultationFormProps {
   onClose: () => void;
 }
 
-const s = { ink: '#0C0B09', paper: '#EDE6D9', rust: '#C4552A', stone: '#928378' };
+const s = { ink: '#1a1714', paper: '#F5F0EB', rust: '#B8976A', stone: '#6b5e52' };
 
 export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ onClose }) => {
   const [step, setStep] = useState(1);
@@ -48,14 +48,14 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
 
   const inputStyle: React.CSSProperties = {
     width: '100%', background: 'transparent', border: 'none',
-    borderBottom: '1px solid rgba(237,230,217,0.15)',
+    borderBottom: '1px solid rgba(245,240,235,0.15)',
     padding: '12px 0', fontFamily: 'var(--serif)', fontSize: '16px',
     fontStyle: 'italic', color: s.paper, outline: 'none',
   };
 
   const optionStyle = (selected: boolean): React.CSSProperties => ({
-    padding: '20px 24px', border: `1px solid ${selected ? s.rust : 'rgba(237,230,217,0.1)'}`,
-    background: selected ? 'rgba(196,85,42,0.08)' : 'transparent',
+    padding: '20px 24px', border: `1px solid ${selected ? s.rust : 'rgba(245,240,235,0.1)'}`,
+    background: selected ? 'rgba(184,151,106,0.08)' : 'transparent',
     cursor: 'pointer', transition: 'all 0.25s', display: 'block', textAlign: 'left',
   });
 
@@ -74,10 +74,10 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
         {/* Progress */}
         <div style={{ marginBottom: '64px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-            <span style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.3)' }}>Step {step} of {totalSteps}</span>
-            <span style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.3)' }}>{Math.round(progress)}%</span>
+            <span style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.3)' }}>Step {step} of {totalSteps}</span>
+            <span style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.3)' }}>{Math.round(progress)}%</span>
           </div>
-          <div style={{ height: '2px', background: 'rgba(237,230,217,0.08)' }}>
+          <div style={{ height: '2px', background: 'rgba(245,240,235,0.08)' }}>
             <div style={{ height: '100%', background: s.rust, transition: 'width 0.5s', width: `${progress}%` }}></div>
           </div>
         </div>
@@ -86,7 +86,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
           {step === 1 && (
             <div>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Where is your property?</h2>
-              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '40px' }}>We specialize in Dubai's premier residential communities.</p>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(245,240,235,0.4)', marginBottom: '40px' }}>We specialize in Dubai's premier residential communities.</p>
               <div className="m3-consult-options-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                 {['Palm Jumeirah', 'Emirates Hills', 'Arabian Ranches', 'Dubai Hills', 'Jumeirah Islands', 'Other'].map(loc => (
                   <label key={loc} style={optionStyle(formData.location === loc.toLowerCase().replace(' ', '-'))}>
@@ -101,7 +101,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
           {step === 2 && (
             <div>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Property Type</h2>
-              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '40px' }}>Select the type of renovation required.</p>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(245,240,235,0.4)', marginBottom: '40px' }}>Select the type of renovation required.</p>
               <div className="m3-consult-options-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                 {['Villa', 'Penthouse', 'Apartment'].map(type => (
                   <label key={type} style={{ ...optionStyle(formData.propertyType === type.toLowerCase()), textAlign: 'center', padding: '40px 24px' }}>
@@ -116,7 +116,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
           {step === 3 && (
             <div>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Project Scope</h2>
-              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '40px' }}>What are we transforming? (Select all)</p>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(245,240,235,0.4)', marginBottom: '40px' }}>What are we transforming? (Select all)</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {[
                   { id: 'full', label: 'Full Villa Renovation', desc: 'Complete interior and structural makeover' },
@@ -138,7 +138,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
                     />
                     <div>
                       <span style={{ fontFamily: 'var(--display)', fontSize: '20px', fontWeight: 700, textTransform: 'uppercase', color: s.paper, display: 'block' }}>{scope.label}</span>
-                      <span style={{ fontFamily: 'var(--serif)', fontSize: '13px', fontStyle: 'italic', color: 'rgba(237,230,217,0.3)' }}>{scope.desc}</span>
+                      <span style={{ fontFamily: 'var(--serif)', fontSize: '13px', fontStyle: 'italic', color: 'rgba(245,240,235,0.3)' }}>{scope.desc}</span>
                     </div>
                     {formData.scope.includes(scope.id) && <Check size={20} style={{ color: s.rust }} />}
                   </label>
@@ -150,12 +150,12 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
           {step === 4 && (
             <div style={{ textAlign: 'center' }}>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Investment Level</h2>
-              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '48px' }}>Select your planned investment.</p>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(245,240,235,0.4)', marginBottom: '48px' }}>Select your planned investment.</p>
               <div style={{ maxWidth: '600px', margin: '0 auto' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '32px' }}>
-                  <span style={{ fontFamily: 'var(--display)', fontSize: '20px', fontWeight: 700, color: 'rgba(237,230,217,0.4)' }}>AED 200K</span>
+                  <span style={{ fontFamily: 'var(--display)', fontSize: '20px', fontWeight: 700, color: 'rgba(245,240,235,0.4)' }}>AED 200K</span>
                   <span style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 900, color: s.rust }}>{(formData.budget / 1000000).toFixed(1)}M</span>
-                  <span style={{ fontFamily: 'var(--display)', fontSize: '20px', fontWeight: 700, color: 'rgba(237,230,217,0.4)' }}>AED 5M+</span>
+                  <span style={{ fontFamily: 'var(--display)', fontSize: '20px', fontWeight: 700, color: 'rgba(245,240,235,0.4)' }}>AED 5M+</span>
                 </div>
                 <input type="range" min="200000" max="5000000" step="100000"
                   value={formData.budget}
@@ -169,7 +169,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
           {step === 5 && (
             <div>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Timeline</h2>
-              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '40px' }}>When would you like to begin?</p>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(245,240,235,0.4)', marginBottom: '40px' }}>When would you like to begin?</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {[
                   { id: 'immediate', label: 'Immediately', desc: 'Ready to start within 2 weeks' },
@@ -179,7 +179,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
                   <label key={time.id} style={optionStyle(formData.timeline === time.id)}>
                     <input type="radio" style={{ display: 'none' }} name="timeline" onChange={() => setFormData({...formData, timeline: time.id})} />
                     <span style={{ fontFamily: 'var(--display)', fontSize: '20px', fontWeight: 700, textTransform: 'uppercase', color: s.paper, display: 'block' }}>{time.label}</span>
-                    <span style={{ fontFamily: 'var(--serif)', fontSize: '13px', fontStyle: 'italic', color: 'rgba(237,230,217,0.3)' }}>{time.desc}</span>
+                    <span style={{ fontFamily: 'var(--serif)', fontSize: '13px', fontStyle: 'italic', color: 'rgba(245,240,235,0.3)' }}>{time.desc}</span>
                   </label>
                 ))}
               </div>
@@ -189,27 +189,27 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
           {step === 6 && (
             <div>
               <h2 style={{ fontFamily: 'var(--display)', fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '8px' }}>Contact Details</h2>
-              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(237,230,217,0.4)', marginBottom: '40px' }}>Marco personally reviews every inquiry.</p>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(245,240,235,0.4)', marginBottom: '40px' }}>Marco personally reviews every inquiry.</p>
               <div className="m3-form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
-                  <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.3)', display: 'block', marginBottom: '6px' }}>First Name</label>
+                  <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.3)', display: 'block', marginBottom: '6px' }}>First Name</label>
                   <input style={inputStyle} placeholder="First Name" required value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} />
                 </div>
                 <div>
-                  <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.3)', display: 'block', marginBottom: '6px' }}>Last Name</label>
+                  <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.3)', display: 'block', marginBottom: '6px' }}>Last Name</label>
                   <input style={inputStyle} placeholder="Last Name" required value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} />
                 </div>
               </div>
               <div style={{ marginTop: '16px' }}>
-                <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.3)', display: 'block', marginBottom: '6px' }}>Email</label>
+                <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.3)', display: 'block', marginBottom: '6px' }}>Email</label>
                 <input style={inputStyle} placeholder="Email" type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
               </div>
               <div style={{ marginTop: '16px' }}>
-                <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.3)', display: 'block', marginBottom: '6px' }}>Phone</label>
+                <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.3)', display: 'block', marginBottom: '6px' }}>Phone</label>
                 <input style={inputStyle} placeholder="+971 XX XXX XXXX" type="tel" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
               </div>
               <div style={{ marginTop: '16px' }}>
-                <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.3)', display: 'block', marginBottom: '6px' }}>Vision</label>
+                <label style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.3)', display: 'block', marginBottom: '6px' }}>Vision</label>
                 <textarea style={{ ...inputStyle, minHeight: '100px', resize: 'vertical' }} placeholder="Tell us about your vision..." value={formData.requirements} onChange={e => setFormData({...formData, requirements: e.target.value})} />
               </div>
             </div>
@@ -225,10 +225,10 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
               </h2>
               {score >= 80 ? (
                 <div style={{ maxWidth: '500px', margin: '0 auto' }}>
-                  <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(237,230,217,0.55)', lineHeight: 1.7, marginBottom: '32px' }}>
+                  <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(245,240,235,0.55)', lineHeight: 1.7, marginBottom: '32px' }}>
                     Your project qualifies for a Priority Strategic Consultation with Marco.
                   </p>
-                  <div style={{ border: '1px solid rgba(237,230,217,0.1)', padding: '32px' }}>
+                  <div style={{ border: '1px solid rgba(245,240,235,0.1)', padding: '32px' }}>
                     <div style={{ fontFamily: 'var(--ui)', fontSize: '12px', fontWeight: 700, color: s.paper, marginBottom: '4px' }}>Marco P.</div>
                     <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', letterSpacing: '0.15em', textTransform: 'uppercase', color: s.rust, marginBottom: '16px' }}>Design Director & Founder</div>
                     <Button variant="primary" style={{ width: '100%' }}>Book via Calendly</Button>
@@ -236,7 +236,7 @@ export const SmartConsultationForm: React.FC<SmartConsultationFormProps> = ({ on
                 </div>
               ) : (
                 <div style={{ maxWidth: '500px', margin: '0 auto' }}>
-                  <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(237,230,217,0.55)', lineHeight: 1.7, marginBottom: '32px' }}>
+                  <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(245,240,235,0.55)', lineHeight: 1.7, marginBottom: '32px' }}>
                     Thank you for sharing your vision. Our team will contact you via WhatsApp within 24 hours.
                   </p>
                   <Button variant="outline-white" onClick={onClose}>Back to Website</Button>

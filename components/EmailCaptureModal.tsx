@@ -8,7 +8,7 @@ interface EmailCaptureModalProps {
   favoritesCount: number;
 }
 
-const s = { ink: '#0C0B09', paper: '#EDE6D9', newsprint: '#D9D1C0', rust: '#C4552A', stone: '#928378' };
+const s = { ink: '#1a1714', paper: '#F5F0EB', newsprint: '#ebe5dd', rust: '#B8976A', stone: '#6b5e52' };
 
 export const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
   isOpen, onClose, onSubmit, favoritesCount
@@ -34,7 +34,7 @@ export const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
 
   return (
     <div style={{
-      position: 'fixed', inset: 0, background: 'rgba(12,11,9,0.85)', zIndex: 50,
+      position: 'fixed', inset: 0, background: 'rgba(26,23,20,0.85)', zIndex: 50,
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px',
     }} onClick={onClose}>
       <div onClick={e => e.stopPropagation()} style={{
@@ -46,7 +46,7 @@ export const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
         }}>
           <button onClick={onClose} style={{
             position: 'absolute', top: '16px', right: '16px',
-            background: 'none', border: 'none', color: 'rgba(237,230,217,0.4)', cursor: 'pointer',
+            background: 'none', border: 'none', color: 'rgba(245,240,235,0.4)', cursor: 'pointer',
           }}><X size={18} /></button>
 
           <div style={{
@@ -65,7 +65,7 @@ export const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
           </h2>
           <p style={{
             fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic',
-            color: 'rgba(237,230,217,0.4)',
+            color: 'rgba(245,240,235,0.4)',
           }}>You have great taste in luxury design</p>
         </div>
 
@@ -86,7 +86,7 @@ export const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
               placeholder="Enter your email"
               style={{
                 width: '100%', background: 'transparent', border: 'none',
-                borderBottom: `1px solid ${error ? '#ef4444' : s.newsprint || '#D9D1C0'}`,
+                borderBottom: `1px solid ${error ? '#ef4444' : s.newsprint || '#ebe5dd'}`,
                 padding: '12px 0', fontFamily: 'var(--serif)', fontSize: '16px',
                 fontStyle: 'italic', color: s.ink, outline: 'none', marginBottom: '4px',
               }}
