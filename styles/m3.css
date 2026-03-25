@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════
+   M3 MANIFESTO DESIGN SYSTEM
+   Smart Renovation — Editorial Design
+═══════════════════════════════════════════ */
+
+:root {
+  --ink: #0C0B09;
+  --paper: #EDE6D9;
+  --newsprint: #D9D1C0;
+  --rust: #C4552A;
+  --rust-pale: #E8896B;
+  --stone: #928378;
+  --display: 'Big Shoulders Display', Impact, sans-serif;
+  --ui: 'Syne', sans-serif;
+  --serif: 'EB Garamond', Georgia, serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+body {
+  font-family: var(--ui);
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══ GRAIN TEXTURE OVERLAY ═══ */
+.m3-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ═══ SCROLL HINT ═══ */
+.m3-scroll-hint {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  font-family: var(--ui);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  mix-blend-mode: exclusion;
+}
+
+.m3-scroll-hint .sh-line {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.3);
+  animation: m3ScrollDown 2s ease-in-out infinite;
+}
+
+@keyframes m3ScrollDown {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ═══ MARQUEE ANIMATION ═══ */
+@keyframes m3Marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.m3-marquee-track {
+  display: flex;
+  animation: m3Marquee 18s linear infinite;
+  width: max-content;
+}
+
+.m3-marquee-item {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237,230,217,0.25);
+  padding: 0 28px;
+  white-space: nowrap;
+}
+
+/* ═══ M3 TYPOGRAPHY ═══ */
+.m3-display {
+  font-family: var(--display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+}
+
+.m3-display-light {
+  font-family: var(--display);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.m3-ui {
+  font-family: var(--ui);
+}
+
+.m3-serif {
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.m3-tag {
+  font-family: var(--ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+.m3-label {
+  font-family: var(--ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.m3-ghost-text {
+  -webkit-text-stroke: 1.5px rgba(237,230,217,0.2);
+  color: transparent;
+}
+
+.m3-ghost-text-dark {
+  -webkit-text-stroke: 1.5px rgba(12,11,9,0.12);
+  color: transparent;
+}
+
+/* ═══ M3 SECTION COUNTER ═══ */
+.m3-section-num {
+  position: fixed;
+  right: 52px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 300;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  mix-blend-mode: exclusion;
+  writing-mode: vertical-rl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.m3-section-num .sn-current {
+  font-size: 18px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.5);
+}
+
+.m3-section-num .sn-total {
+  font-size: 11px;
+}
+
+/* ═══ M3 LINK STYLES ═══ */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ═══ M3 SELECTION ═══ */
+::selection {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rust);
+}
+
+/* ═══ RESPONSIVE HELPERS ═══ */
+@media (max-width: 768px) {
+  .m3-section-num {
+    display: none;
+  }
+  .m3-scroll-hint {
+    display: none;
+  }
+}

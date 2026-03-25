@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, MessageCircle, Star, Calendar } from 'lucide-react';
 import { Button } from './Button';
@@ -12,20 +11,10 @@ const WHATSAPP_NUMBER = '+971501234567';
 const WHATSAPP_MESSAGE = encodeURIComponent('Hello! I\'m interested in discussing a villa renovation project.');
 
 export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
@@ -44,170 +33,265 @@ export const Header: React.FC<HeaderProps> = ({ onConsultationClick, onNavigate 
     onNavigate(page);
   };
 
+  const navStyle: React.CSSProperties = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 200,
+    padding: '24px 32px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    mixBlendMode: 'exclusion',
+  };
+
+  const logoStyle: React.CSSProperties = {
+    fontFamily: 'var(--ui)',
+    fontSize: '13px',
+    fontWeight: 700,
+    letterSpacing: '0.25em',
+    textTransform: 'uppercase',
+    color: 'white',
+    cursor: 'pointer',
+    background: 'none',
+    border: 'none',
+  };
+
+  const navLinkStyle: React.CSSProperties = {
+    fontFamily: 'var(--ui)',
+    fontSize: '11px',
+    letterSpacing: '0.18em',
+    textTransform: 'uppercase',
+    color: 'rgba(255,255,255,0.6)',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'color 0.25s',
+    padding: 0,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+  };
+
+  const navCtaStyle: React.CSSProperties = {
+    ...navLinkStyle,
+    color: 'white',
+    border: '1px solid rgba(255,255,255,0.3)',
+    padding: '8px 18px',
+  };
+
+  const dropdownStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: '100%',
+    left: '-16px',
+    paddingTop: '12px',
+    zIndex: 50,
+    mixBlendMode: 'normal',
+  };
+
+  const dropdownInnerStyle: React.CSSProperties = {
+    background: 'var(--ink)',
+    border: '1px solid rgba(237,230,217,0.1)',
+    padding: '8px 0',
+    width: '220px',
+  };
+
+  const dropdownItemStyle: React.CSSProperties = {
+    display: 'block',
+    width: '100%',
+    textAlign: 'left',
+    padding: '10px 20px',
+    fontFamily: 'var(--ui)',
+    fontSize: '11px',
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    color: 'rgba(237,230,217,0.6)',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+  };
+
+  /* Mobile menu overlay */
+  const mobileMenuStyle: React.CSSProperties = {
+    position: 'fixed',
+    inset: 0,
+    background: 'var(--ink)',
+    zIndex: 9999,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '80px 32px 32px',
+    overflowY: 'auto',
+  };
+
+  const mobileCloseStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: '24px',
+    right: '32px',
+    background: 'none',
+    border: 'none',
+    color: 'var(--paper)',
+    cursor: 'pointer',
+  };
+
+  const mobileLinkStyle: React.CSSProperties = {
+    fontFamily: 'var(--display)',
+    fontSize: '48px',
+    fontWeight: 900,
+    textTransform: 'uppercase',
+    letterSpacing: '-0.02em',
+    color: 'var(--paper)',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    textAlign: 'left',
+    padding: '8px 0',
+    borderBottom: '1px solid rgba(237,230,217,0.06)',
+    display: 'block',
+    width: '100%',
+    lineHeight: 1,
+    marginBottom: '16px',
+  };
+
+  const mobileSubLinkStyle: React.CSSProperties = {
+    fontFamily: 'var(--ui)',
+    fontSize: '12px',
+    letterSpacing: '0.15em',
+    textTransform: 'uppercase',
+    color: 'rgba(237,230,217,0.4)',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    textAlign: 'left',
+    padding: '8px 0 8px 16px',
+    display: 'block',
+    width: '100%',
+  };
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg py-2 md:py-3' : 'bg-white/90 backdrop-blur-md py-3 md:py-5'}`}>
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 flex items-center justify-between h-14 md:h-16">
-        {/* Logo - smaller on mobile */}
-        <div className="flex-shrink-0 cursor-pointer" onClick={() => handleNavigate('home')}>
-          <div className="flex items-center gap-1.5 md:gap-2">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-[#C9A96E] rounded-sm flex items-center justify-center text-white font-bold text-lg md:text-xl">S</div>
-            <div className="flex flex-col">
-              <span className="font-playfair font-bold text-lg md:text-xl tracking-tighter leading-none">SMART</span>
-              <span className="text-[8px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] font-montserrat uppercase opacity-80 leading-none">Renovation</span>
-            </div>
-          </div>
-        </div>
+    <>
+      <nav style={navStyle}>
+        <button style={logoStyle} onClick={() => handleNavigate('home')}>
+          Smart·Renovation
+        </button>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-          <button onClick={() => handleNavigate('home')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
-            Home
-          </button>
-
-          {/* ABOUT - Dropdown (Click + Hover) */}
-          <div className="relative" ref={aboutRef}>
+        <div style={{ display: 'flex', gap: '40px', alignItems: 'center' }} className="m3-desktop-nav">
+          {/* About Dropdown */}
+          <div style={{ position: 'relative' }} ref={aboutRef}>
             <button
+              style={navLinkStyle}
               onClick={() => setIsAboutOpen(!isAboutOpen)}
-              className="flex items-center gap-1 text-sm font-medium hover:text-[#C9A96E] transition-colors"
+              onMouseEnter={() => setIsAboutOpen(true)}
             >
-              About <ChevronDown size={14} className={`transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
+              About <ChevronDown size={12} style={{ transform: isAboutOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
             </button>
             {isAboutOpen && (
-              <div className="absolute top-full -left-4 pt-3 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                <div className="bg-white shadow-xl border border-gray-100 rounded-lg py-4 w-64 overflow-hidden">
-                  <button onClick={() => handleNavigate('heritage')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
-                    Our Italian Heritage
-                  </button>
-                  <button onClick={() => handleNavigate('awards-recognition')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors flex items-center gap-2">
-                    <span>Awards & Recognition</span>
-                    <Star size={14} className="text-[#C9A96E] fill-[#C9A96E]" />
-                  </button>
-                  <button onClick={() => handleNavigate('founders')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
-                    Meet Marco & Cinzia
-                  </button>
-                  <button onClick={() => handleNavigate('client-testimonials')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
-                    Client Testimonials
-                  </button>
-                  <button onClick={() => handleNavigate('process')} className="w-full text-left px-6 py-3 text-sm hover:bg-[#F5F1E8] hover:text-[#C9A96E] transition-colors">
-                    Our Process
-                  </button>
+              <div style={dropdownStyle}>
+                <div style={dropdownInnerStyle}>
+                  <button style={dropdownItemStyle} onClick={() => handleNavigate('heritage')}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                  >Our Heritage</button>
+                  <button style={dropdownItemStyle} onClick={() => handleNavigate('awards-recognition')}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                  >Awards</button>
+                  <button style={dropdownItemStyle} onClick={() => handleNavigate('founders')}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                  >Meet Marco & Cinzia</button>
+                  <button style={dropdownItemStyle} onClick={() => handleNavigate('client-testimonials')}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                  >Client Stories</button>
+                  <button style={dropdownItemStyle} onClick={() => handleNavigate('process')}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--paper)'; (e.target as HTMLElement).style.background = 'rgba(237,230,217,0.04)'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.6)'; (e.target as HTMLElement).style.background = 'none'; }}
+                  >Process</button>
                 </div>
               </div>
             )}
           </div>
 
-          <button onClick={() => handleNavigate('services')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
-            Services
-          </button>
-
-          <button onClick={() => handleNavigate('communities')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
-            Communities
-          </button>
-
-          <button onClick={() => handleNavigate('portfolio')} className="text-sm font-medium hover:text-[#C9A96E] transition-colors">
-            Portfolio
-          </button>
-        </nav>
-
-        {/* Action Buttons */}
-        <div className="flex items-center gap-2 md:gap-4">
-          {/* WhatsApp - Icon only on tablet, text on desktop */}
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center justify-center w-9 h-9 lg:w-auto lg:h-auto lg:px-3 lg:py-2 rounded-full lg:rounded-md bg-[#25D366]/10 hover:bg-[#25D366]/20 transition-colors"
-            title="Chat on WhatsApp"
-          >
-            <MessageCircle size={18} className="text-[#25D366]" />
-            <span className="hidden xl:inline ml-2 text-sm font-medium text-[#25D366]">WhatsApp</span>
-          </a>
-
-          {/* Book Consultation - Compact on mobile */}
-          <Button
-            variant="primary-small"
-            onClick={onConsultationClick}
-            className="md:hidden flex items-center gap-1.5"
-          >
-            <Calendar size={14} />
-            <span>Book</span>
-          </Button>
-
-          {/* Book Consultation - Full on desktop */}
-          <Button
-            onClick={onConsultationClick}
-            className="hidden md:flex"
-          >
-            Book Consultation
-          </Button>
-
-          {/* Mobile menu toggle */}
-          <button
-            className="lg:hidden p-1.5 -mr-1.5"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <button style={navLinkStyle} onClick={() => handleNavigate('services')}
+            onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'white'; }}
+            onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.6)'; }}
+          >Services</button>
+          <button style={navLinkStyle} onClick={() => handleNavigate('communities')}
+            onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'white'; }}
+            onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.6)'; }}
+          >Communities</button>
+          <button style={navLinkStyle} onClick={() => handleNavigate('portfolio')}
+            onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'white'; }}
+            onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.6)'; }}
+          >Portfolio</button>
+          <button style={navCtaStyle} onClick={onConsultationClick}
+            onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'white'; (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.6)'; }}
+            onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'white'; (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.3)'; }}
+          >Consult</button>
         </div>
-      </div>
+
+        {/* Mobile hamburger */}
+        <button
+          style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', display: 'none' }}
+          className="m3-mobile-menu-btn"
+          onClick={() => setIsMenuOpen(true)}
+        >
+          <Menu size={24} />
+        </button>
+      </nav>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[56px] md:top-[72px] bg-white z-40 p-6 md:p-8 flex flex-col gap-4 animate-in slide-in-from-right duration-300 overflow-y-auto">
-          <nav className="flex flex-col gap-3 text-lg font-playfair">
-            {/* HOME */}
-            <button onClick={() => handleNavigate('home')} className="border-b border-gray-100 pb-3 text-left font-bold">
-              Home
-            </button>
+        <div style={mobileMenuStyle}>
+          <button style={mobileCloseStyle} onClick={() => setIsMenuOpen(false)}>
+            <X size={28} />
+          </button>
 
-            {/* ABOUT Section */}
-            <div className="border-b border-gray-100 pb-3">
-              <span className="text-xs font-montserrat uppercase tracking-wider text-gray-400 block mb-2">About</span>
-              <div className="flex flex-col gap-2 pl-3 border-l-2 border-[#C9A96E]/20">
-                <button onClick={() => handleNavigate('heritage')} className="text-base opacity-80 text-left">Our Italian Heritage</button>
-                <button onClick={() => handleNavigate('awards-recognition')} className="text-base opacity-80 text-left flex items-center gap-2">
-                  Awards <Star size={12} className="text-[#C9A96E] fill-[#C9A96E]" />
-                </button>
-                <button onClick={() => handleNavigate('founders')} className="text-base opacity-80 text-left">Meet Marco & Cinzia</button>
-                <button onClick={() => handleNavigate('client-testimonials')} className="text-base opacity-80 text-left">Client Testimonials</button>
-                <button onClick={() => handleNavigate('process')} className="text-base opacity-80 text-left">Our Process</button>
-              </div>
-            </div>
+          <button style={mobileLinkStyle} onClick={() => handleNavigate('home')}>Home</button>
+          <button style={mobileLinkStyle} onClick={() => handleNavigate('services')}>Services</button>
+          <button style={mobileLinkStyle} onClick={() => handleNavigate('portfolio')}>Portfolio</button>
+          <button style={mobileLinkStyle} onClick={() => handleNavigate('communities')}>Communities</button>
 
-            {/* SERVICES */}
-            <button onClick={() => handleNavigate('services')} className="border-b border-gray-100 pb-3 text-left font-bold">
-              Services
-            </button>
+          <div style={{ marginTop: '8px', marginBottom: '24px' }}>
+            <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--rust)', marginBottom: '8px' }}>About</div>
+            <button style={mobileSubLinkStyle} onClick={() => handleNavigate('heritage')}>Our Heritage</button>
+            <button style={mobileSubLinkStyle} onClick={() => handleNavigate('awards-recognition')}>Awards</button>
+            <button style={mobileSubLinkStyle} onClick={() => handleNavigate('founders')}>Marco & Cinzia</button>
+            <button style={mobileSubLinkStyle} onClick={() => handleNavigate('client-testimonials')}>Client Stories</button>
+            <button style={mobileSubLinkStyle} onClick={() => handleNavigate('process')}>Process</button>
+          </div>
 
-            {/* COMMUNITIES */}
-            <button onClick={() => handleNavigate('communities')} className="border-b border-gray-100 pb-3 text-left font-bold">
-              Communities
-            </button>
-
-            {/* PORTFOLIO */}
-            <button onClick={() => handleNavigate('portfolio')} className="border-b border-gray-100 pb-3 text-left font-bold">
-              Portfolio
-            </button>
-          </nav>
-
-          {/* Mobile Action Buttons */}
-          <div className="mt-auto flex flex-col gap-3 pt-4">
+          <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 p-3 bg-[#25D366]/10 rounded-lg font-semibold text-[#25D366] text-sm"
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                padding: '14px', fontFamily: 'var(--ui)', fontSize: '12px', fontWeight: 600,
+                letterSpacing: '0.1em', textTransform: 'uppercase',
+                color: '#25D366', border: '1px solid rgba(37,211,102,0.3)',
+              }}
             >
-              <MessageCircle size={18} />
-              Chat on WhatsApp
+              <MessageCircle size={16} /> WhatsApp
             </a>
-            <Button variant="primary" onClick={() => { onConsultationClick(); setIsMenuOpen(false); }} className="w-full justify-center">
-              Book Free Consultation
+            <Button variant="primary" onClick={() => { onConsultationClick(); setIsMenuOpen(false); }}
+              style={{ width: '100%', justifyContent: 'center' }}>
+              Book Consultation
             </Button>
           </div>
         </div>
       )}
-    </header>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .m3-desktop-nav { display: none !important; }
+          .m3-mobile-menu-btn { display: block !important; }
+        }
+      `}</style>
+    </>
   );
 };

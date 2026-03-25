@@ -8,11 +8,10 @@ interface EmailCaptureModalProps {
   favoritesCount: number;
 }
 
+const s = { ink: '#0C0B09', paper: '#EDE6D9', newsprint: '#D9D1C0', rust: '#C4552A', stone: '#928378' };
+
 export const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
-  isOpen,
-  onClose,
-  onSubmit,
-  favoritesCount
+  isOpen, onClose, onSubmit, favoritesCount
 }) => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,113 +22,100 @@ export const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-
     if (!email || !email.includes('@')) {
       setError('Please enter a valid email address');
       return;
     }
-
     setIsSubmitting(true);
-
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-
     onSubmit(email);
     setIsSubmitting(false);
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-      <div
-        className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300"
-        onClick={e => e.stopPropagation()}
-      >
-        {/* Header with gradient */}
-        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#333] p-8 text-white text-center relative overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute top-4 left-4 opacity-20">
-            <Heart size={40} className="fill-current" />
-          </div>
-          <div className="absolute bottom-4 right-4 opacity-20">
-            <Sparkles size={40} />
-          </div>
+    <div style={{
+      position: 'fixed', inset: 0, background: 'rgba(12,11,9,0.85)', zIndex: 50,
+      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px',
+    }} onClick={onClose}>
+      <div onClick={e => e.stopPropagation()} style={{
+        background: s.paper, maxWidth: '420px', width: '100%', overflow: 'hidden',
+      }}>
+        {/* Header — dark */}
+        <div style={{
+          background: s.ink, padding: '40px 32px', textAlign: 'center', position: 'relative',
+        }}>
+          <button onClick={onClose} style={{
+            position: 'absolute', top: '16px', right: '16px',
+            background: 'none', border: 'none', color: 'rgba(237,230,217,0.4)', cursor: 'pointer',
+          }}><X size={18} /></button>
 
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-          >
-            <X size={18} />
-          </button>
-
-          <div className="w-20 h-20 bg-[#C9A96E] rounded-full flex items-center justify-center mx-auto mb-6">
-            <Heart size={36} className="fill-white text-white" />
+          <div style={{
+            width: '56px', height: '56px', background: s.rust,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            margin: '0 auto 20px',
+          }}>
+            <Heart size={28} style={{ color: s.paper, fill: s.paper }} />
           </div>
 
-          <h2 className="text-2xl font-playfair font-bold mb-2">
-            You've saved {favoritesCount} favorites!
+          <h2 style={{
+            fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 900,
+            textTransform: 'uppercase', color: s.paper, marginBottom: '4px',
+          }}>
+            {favoritesCount} Favorites Saved!
           </h2>
-          <p className="text-white/70 text-sm">
-            You have great taste in luxury design
-          </p>
+          <p style={{
+            fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic',
+            color: 'rgba(237,230,217,0.4)',
+          }}>You have great taste in luxury design</p>
         </div>
 
-        {/* Form */}
-        <div className="p-8">
-          <div className="text-center mb-6">
-            <h3 className="text-xl font-bold text-[#1A1A1A] mb-2">
-              Unlock Your Inspiration Board
-            </h3>
-            <p className="text-[#707070] text-sm leading-relaxed">
-              Enter your email to receive your personalized collection and exclusive renovation insights from our design team.
-            </p>
-          </div>
+        {/* Form — paper */}
+        <div style={{ padding: '32px' }}>
+          <h3 style={{
+            fontFamily: 'var(--display)', fontSize: '20px', fontWeight: 700,
+            textTransform: 'uppercase', color: s.ink, marginBottom: '8px', textAlign: 'center',
+          }}>Unlock Your Inspiration Board</h3>
+          <p style={{
+            fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic',
+            color: s.stone, lineHeight: 1.6, textAlign: 'center', marginBottom: '24px',
+          }}>Enter your email to receive your personalized collection and exclusive renovation insights.</p>
 
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                className={`w-full px-5 py-4 border-2 rounded-xl text-lg transition-colors focus:outline-none focus:border-[#C9A96E] ${
-                  error ? 'border-red-400' : 'border-gray-200'
-                }`}
-              />
-              {error && (
-                <p className="text-red-500 text-sm mt-2">{error}</p>
-              )}
-            </div>
+            <input type="email" value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              style={{
+                width: '100%', background: 'transparent', border: 'none',
+                borderBottom: `1px solid ${error ? '#ef4444' : s.newsprint || '#D9D1C0'}`,
+                padding: '12px 0', fontFamily: 'var(--serif)', fontSize: '16px',
+                fontStyle: 'italic', color: s.ink, outline: 'none', marginBottom: '4px',
+              }}
+            />
+            {error && <p style={{ fontFamily: 'var(--ui)', fontSize: '11px', color: '#ef4444', marginTop: '4px' }}>{error}</p>}
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-[#C9A96E] hover:bg-[#b8986a] text-white py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70"
-            >
-              {isSubmitting ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                <>
-                  <Send size={20} />
-                  Get My Inspiration Board
-                </>
-              )}
+            <button type="submit" disabled={isSubmitting} style={{
+              width: '100%', fontFamily: 'var(--display)', fontSize: '16px', fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '0.04em',
+              background: s.rust, color: s.paper, border: 'none',
+              padding: '14px', cursor: 'pointer', marginTop: '20px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+              opacity: isSubmitting ? 0.7 : 1,
+            }}>
+              {isSubmitting ? 'Sending...' : <><Send size={16} /> Get My Board</>}
             </button>
           </form>
 
-          <p className="text-center text-xs text-[#707070] mt-6">
-            By submitting, you agree to receive design inspiration and renovation tips.
-            <br />Unsubscribe anytime.
-          </p>
+          <p style={{
+            fontFamily: 'var(--serif)', fontSize: '11px', fontStyle: 'italic',
+            color: s.stone, textAlign: 'center', marginTop: '16px',
+          }}>No spam. Unsubscribe anytime.</p>
 
-          <button
-            onClick={onClose}
-            className="w-full mt-4 text-[#707070] hover:text-[#1A1A1A] text-sm font-medium transition-colors"
-          >
-            Maybe later
-          </button>
+          <button onClick={onClose} style={{
+            width: '100%', fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
+            letterSpacing: '0.1em', textTransform: 'uppercase',
+            color: s.stone, background: 'none', border: 'none', cursor: 'pointer',
+            marginTop: '12px', padding: '8px',
+          }}>Maybe later</button>
         </div>
       </div>
     </div>

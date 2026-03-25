@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -7,6 +6,8 @@ interface BeforeAfterSliderProps {
   after: string;
   className?: string;
 }
+
+const s = { ink: '#0C0B09', paper: '#EDE6D9', rust: '#C4552A', stone: '#928378' };
 
 export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ before, after, className = '' }) => {
   const [sliderPos, setSliderPos] = useState(50);
@@ -17,18 +18,13 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ before, af
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-    const percent = (x / rect.width) * 100;
-    setSliderPos(percent);
+    setSliderPos((x / rect.width) * 100);
   };
 
   const handleMouseDown = () => { isDragging.current = true; };
   const handleMouseUp = () => { isDragging.current = false; };
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging.current) handleMove(e.clientX);
-  };
-  const handleTouchMove = (e: React.TouchEvent) => {
-    handleMove(e.touches[0].clientX);
-  };
+  const handleMouseMove = (e: React.MouseEvent) => { if (isDragging.current) handleMove(e.clientX); };
+  const handleTouchMove = (e: React.TouchEvent) => { handleMove(e.touches[0].clientX); };
 
   useEffect(() => {
     window.addEventListener('mouseup', handleMouseUp);
@@ -36,44 +32,62 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ before, af
   }, []);
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className={`relative overflow-hidden select-none cursor-ew-resize rounded-2xl group ${className}`}
+      style={{
+        position: 'relative', overflow: 'hidden', userSelect: 'none',
+        cursor: 'ew-resize', height: '500px', background: s.ink,
+      }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
     >
-      {/* After Image (Full background) */}
-      <img src={after} alt="After Renovation" className="w-full h-full object-cover pointer-events-none" />
+      {/* After (full bg) */}
+      <img src={after} alt="After" style={{
+        width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none',
+        filter: 'saturate(0.7) contrast(1.1)',
+      }} />
 
-      {/* Before Image (Clipped) */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
-      >
-        <img src={before} alt="Before Renovation" className="w-full h-full object-cover" />
+      {/* Before (clipped) */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        clipPath: `inset(0 ${100 - sliderPos}% 0 0)`,
+      }}>
+        <img src={before} alt="Before" style={{
+          width: '100%', height: '100%', objectFit: 'cover',
+          filter: 'saturate(0.4) contrast(0.9)',
+        }} />
       </div>
 
-      {/* Slider Handle */}
-      <div 
-        className="absolute inset-y-0 w-1 bg-white shadow-xl pointer-events-none"
-        style={{ left: `${sliderPos}%` }}
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center border-4 border-white/20">
-          <div className="flex gap-1 text-[#C9A96E]">
-            <ChevronLeft size={16} />
-            <ChevronRight size={16} />
-          </div>
+      {/* Slider handle */}
+      <div style={{
+        position: 'absolute', inset: '0 auto 0 auto', width: '2px',
+        background: s.paper, pointerEvents: 'none', left: `${sliderPos}%`,
+      }}>
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '40px', height: '40px', background: s.paper,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px',
+        }}>
+          <ChevronLeft size={14} style={{ color: s.rust }} />
+          <ChevronRight size={14} style={{ color: s.rust }} />
         </div>
       </div>
 
       {/* Labels */}
-      <div className="absolute top-6 left-6 px-4 py-2 bg-black/60 backdrop-blur-md text-white rounded-lg text-sm font-medium tracking-wide">
-        BEFORE
-      </div>
-      <div className="absolute top-6 right-6 px-4 py-2 bg-[#C9A96E] text-white rounded-lg text-sm font-medium tracking-wide">
-        AFTER
-      </div>
+      <div style={{
+        position: 'absolute', top: '16px', left: '16px',
+        fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
+        letterSpacing: '0.2em', textTransform: 'uppercase',
+        color: s.paper, background: 'rgba(12,11,9,0.6)', padding: '6px 12px',
+      }}>Before</div>
+      <div style={{
+        position: 'absolute', top: '16px', right: '16px',
+        fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
+        letterSpacing: '0.2em', textTransform: 'uppercase',
+        color: s.paper, background: s.rust, padding: '6px 12px',
+      }}>After</div>
     </div>
   );
 };

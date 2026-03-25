@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Clock, Banknote } from 'lucide-react';
 import { SERVICES } from '../constants';
 import { Button } from './Button';
@@ -8,110 +8,109 @@ interface ServicesIndexProps {
   onConsultationClick: () => void;
 }
 
-export const ServicesIndex: React.FC<ServicesIndexProps> = ({
-  onNavigate,
-  onConsultationClick
-}) => {
+const s = { ink: '#0C0B09', paper: '#EDE6D9', newsprint: '#D9D1C0', rust: '#C4552A', stone: '#928378' };
+
+export const ServicesIndex: React.FC<ServicesIndexProps> = ({ onNavigate, onConsultationClick }) => {
+  const [hovered, setHovered] = useState<number | null>(null);
+
   return (
-    <div className="animate-in fade-in py-12">
-      <div className="container mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <span className="text-[#C9A96E] text-sm uppercase tracking-widest font-bold block mb-4">
-            OUR EXPERTISE
-          </span>
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-6">
-            Bespoke Renovation Services
-          </h1>
-          <p className="text-xl text-[#707070] max-w-3xl mx-auto leading-relaxed">
-            From complete villa transformations to stunning kitchens and resort-style pools,
-            we deliver Italian craftsmanship across every aspect of luxury living.
-          </p>
-        </div>
+    <div>
+      {/* Hero */}
+      <section style={{
+        background: s.ink, padding: '160px 60px 80px', textAlign: 'center',
+      }}>
+        <span style={{
+          fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600,
+          letterSpacing: '0.35em', textTransform: 'uppercase', color: s.rust,
+        }}>OUR EXPERTISE</span>
+        <h1 style={{
+          fontFamily: 'var(--display)', fontSize: 'clamp(48px, 8vw, 96px)', fontWeight: 900,
+          textTransform: 'uppercase', letterSpacing: '-0.03em', lineHeight: 0.88,
+          color: s.paper, marginTop: '16px',
+        }}>
+          Bespoke<br/>
+          <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Services</span>
+        </h1>
+        <p style={{
+          fontFamily: 'var(--serif)', fontSize: '20px', fontStyle: 'italic',
+          color: 'rgba(237,230,217,0.45)', marginTop: '24px', maxWidth: '560px',
+          marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6,
+        }}>From complete villa transformations to stunning kitchens and resort-style pools.</p>
+      </section>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {SERVICES.map((service, index) => (
-            <div
-              key={service.id}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+      {/* Service List — M3 numbered list */}
+      <section style={{ background: s.ink, minHeight: '80vh', display: 'flex', flexDirection: 'column' }}>
+        {SERVICES.map((service, i) => {
+          const isHovered = hovered === i;
+          return (
+            <div key={service.id}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
               onClick={() => onNavigate(service.id)}
+              style={{
+                display: 'flex', alignItems: 'center',
+                padding: isHovered ? '32px 60px 32px 76px' : '32px 60px',
+                borderBottom: '1px solid rgba(237,230,217,0.05)',
+                cursor: 'pointer', transition: 'all 0.3s',
+                background: isHovered ? 'rgba(237,230,217,0.02)' : 'transparent',
+              }}
             >
-              {/* Image */}
-              <div className="relative h-[300px] overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                {/* Icon Badge */}
-                <div className="absolute top-6 left-6 w-16 h-16 bg-white/95 rounded-2xl flex items-center justify-center text-3xl shadow-lg">
-                  {service.icon}
-                </div>
-
-                {/* Title Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                  <h3 className="text-2xl md:text-3xl font-playfair font-bold mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/80 text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
+              <span style={{
+                fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900,
+                color: isHovered ? 'rgba(196,85,42,0.3)' : 'rgba(237,230,217,0.08)',
+                minWidth: '72px', lineHeight: 1, transition: 'color 0.3s',
+              }}>{String(i + 1).padStart(2, '0')}</span>
+              <div style={{ flex: 1 }}>
+                <div style={{
+                  fontFamily: 'var(--display)', fontSize: 'clamp(28px, 4vw, 56px)', fontWeight: 700,
+                  textTransform: 'uppercase', letterSpacing: '-0.01em',
+                  color: isHovered ? s.paper : 'rgba(237,230,217,0.7)',
+                  lineHeight: 1, transition: 'color 0.3s',
+                }}>{service.title}</div>
+                <div style={{
+                  fontFamily: 'var(--serif)', fontSize: '15px', fontStyle: 'italic',
+                  color: isHovered ? 'rgba(237,230,217,0.5)' : 'rgba(237,230,217,0.2)',
+                  marginTop: '8px', transition: 'color 0.3s', maxWidth: '500px',
+                }}>{service.description}</div>
               </div>
-
-              {/* Content */}
-              <div className="p-8">
-                <div className="flex flex-wrap gap-4 mb-6">
-                  <div className="flex items-center gap-2 text-sm text-[#707070]">
-                    <Banknote size={16} className="text-[#C9A96E]" />
-                    <span>{service.investmentRange}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-[#707070]">
-                    <Clock size={16} className="text-[#C9A96E]" />
-                    <span>{service.timeline}</span>
-                  </div>
-                </div>
-
-                {/* Features Preview */}
-                <ul className="space-y-2 mb-6">
-                  {service.features.slice(0, 3).map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-[#707070]">
-                      <span className="w-1.5 h-1.5 bg-[#C9A96E] rounded-full" />
-                      {feature}
-                    </li>
-                  ))}
-                  {service.features.length > 3 && (
-                    <li className="text-sm text-[#C9A96E] font-medium">
-                      +{service.features.length - 3} more included
-                    </li>
-                  )}
-                </ul>
-
-                <div className="flex items-center gap-2 text-[#C9A96E] font-semibold group-hover:gap-4 transition-all">
-                  Learn More <ArrowRight size={18} />
-                </div>
+              <div style={{ textAlign: 'right', marginRight: '24px' }}>
+                <div style={{
+                  fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
+                  letterSpacing: '0.14em', textTransform: 'uppercase',
+                  color: isHovered ? s.rust : 'rgba(237,230,217,0.2)',
+                  transition: 'color 0.3s',
+                }}>{service.timeline}</div>
+                <div style={{
+                  fontFamily: 'var(--ui)', fontSize: '9px',
+                  letterSpacing: '0.1em', textTransform: 'uppercase',
+                  color: 'rgba(237,230,217,0.15)', marginTop: '4px',
+                }}>{service.investmentRange}</div>
               </div>
+              <span style={{
+                fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700,
+                color: s.rust, opacity: isHovered ? 1 : 0,
+                transform: isHovered ? 'translateX(0)' : 'translateX(-12px)',
+                transition: 'all 0.35s',
+              }}>→</span>
             </div>
-          ))}
-        </div>
+          );
+        })}
+      </section>
 
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-[#1A1A1A] to-[#333] rounded-3xl p-12 text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-4">
-            Not Sure Which Service You Need?
-          </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-            Book a free consultation with our design team. We'll assess your villa
-            and recommend the perfect approach for your vision and budget.
-          </p>
-          <Button variant="primary-large" onClick={onConsultationClick}>
-            Book Free Consultation
-          </Button>
-        </div>
-      </div>
+      {/* CTA */}
+      <section style={{
+        background: s.rust, padding: '80px 60px', textAlign: 'center',
+      }}>
+        <h2 style={{
+          fontFamily: 'var(--display)', fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 900,
+          textTransform: 'uppercase', color: s.paper, marginBottom: '16px',
+        }}>Not Sure Which Service?</h2>
+        <p style={{
+          fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
+          color: 'rgba(237,230,217,0.6)', marginBottom: '32px', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto',
+        }}>Book a free consultation. We'll assess your villa and recommend the perfect approach.</p>
+        <Button variant="white" onClick={onConsultationClick}>Book Free Consultation</Button>
+      </section>
     </div>
   );
 };

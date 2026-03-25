@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Renovation — MANIFESTO</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;300;400;700;900&family=Syne:wght@400;600;700;800&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0C0B09;
+  --paper: #EDE6D9;
+  --newsprint: #D9D1C0;
+  --rust: #C4552A;
+  --rust-pale: #E8896B;
+  --stone: #928378;
+  --display: 'Big Shoulders Display', Impact, sans-serif;
+  --ui: 'Syne', sans-serif;
+  --serif: 'EB Garamond', Georgia, serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;overflow-y:scroll;height:100%}
+body{font-family:var(--ui);cursor:none;overflow-x:hidden}
+
+/* grain */
+.grain{position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+/* CURSOR */
+#c{position:fixed;width:10px;height:10px;background:var(--rust);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:exclusion;transition:width .2s,height .2s}
+#cr{position:fixed;width:40px;height:40px;border:1px solid rgba(196,85,42,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .08s linear}
+body:has(a:hover) #c,body:has(button:hover) #c{width:36px;height:36px}
+
+/* NAV — fixed, mix-blend exclusion, barely there */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:24px 52px;display:flex;align-items:center;justify-content:space-between;mix-blend-mode:exclusion}
+.nav-logo{font-family:var(--ui);font-size:13px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:white;text-decoration:none}
+.nav-r{display:flex;gap:40px;align-items:center}
+.nav-r a{font-family:var(--ui);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;transition:color .25s}
+.nav-r a:hover{color:white}
+.nav-cta{color:white!important;border:1px solid rgba(255,255,255,.3)!important;padding:8px 18px}
+
+/* SECTION — scroll snap */
+section{scroll-snap-align:start;scroll-snap-stop:always;height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+
+/* SCROLL INDICATOR — fixed */
+.scroll-hint{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);z-index:300;font-family:var(--ui);font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:10px;mix-blend-mode:exclusion}
+.sh-line{width:1px;height:32px;background:rgba(255,255,255,.3);animation:scrollDown 2s ease-in-out infinite}
+@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* SECTION COUNTER */
+.section-num{position:fixed;right:52px;top:50%;transform:translateY(-50%);z-index:300;font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);mix-blend-mode:exclusion;writing-mode:vertical-rl;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sn-current{font-size:18px;font-weight:900;color:rgba(255,255,255,.5)}
+.sn-total{font-size:11px}
+
+/* ═══════════════════════════════
+   SECTION 0 — INTRO / BRAND
+═══════════════════════════════ */
+#s0{background:var(--ink)}
+.s0-inner{text-align:center;padding:0 80px}
+.s0-tag{font-family:var(--ui);font-size:10px;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:rgba(237,230,217,.3);margin-bottom:32px}
+.s0-h{font-family:var(--display);font-size:clamp(80px,14vw,200px);font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:.85;color:var(--paper)}
+.s0-h .ghost{-webkit-text-stroke:1.5px rgba(237,230,217,.2);color:transparent;display:block}
+.s0-h .solid{display:block}
+.s0-h .rust{color:var(--rust);font-weight:300;font-style:italic;display:block}
+.s0-desc{font-family:var(--serif);font-size:22px;font-style:italic;color:rgba(237,230,217,.45);margin-top:40px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.6}
+.s0-scroll{margin-top:52px;display:flex;align-items:center;justify-content:center;gap:16px}
+.s0-scroll a{font-family:var(--display);font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--paper);text-decoration:none;display:flex;align-items:center;gap:12px;transition:color .25s}
+.s0-scroll a span{font-size:16px;transition:transform .3s}
+.s0-scroll a:hover{color:var(--rust)}
+.s0-scroll a:hover span{transform:translateX(6px)}
+.s0-sep{width:1px;height:32px;background:rgba(237,230,217,.15)}
+/* floating award */
+.s0-award{position:absolute;bottom:48px;right:52px;border:1px solid rgba(237,230,217,.12);padding:14px 20px}
+.s0a-yr{font-family:var(--ui);font-size:9px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--rust);margin-bottom:4px}
+.s0a-name{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(237,230,217,.6)}
+
+/* ═══════════════════════════════
+   SECTION 1 — THE STATEMENT
+═══════════════════════════════ */
+#s1{background:var(--rust)}
+.s1-inner{padding:0 80px;max-width:1200px;width:100%}
+.s1-h{font-family:var(--display);font-size:clamp(60px,10vw,144px);font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:.88;color:var(--paper)}
+.s1-h .light{font-weight:300;font-style:italic;color:rgba(237,230,217,.6);display:block}
+.s1-h .small{font-size:.55em;color:rgba(237,230,217,.35);display:block;letter-spacing:.02em}
+/* stat strip bottom */
+.s1-stats{position:absolute;bottom:0;left:0;right:0;background:rgba(12,11,9,.2);display:grid;grid-template-columns:repeat(4,1fr)}
+.s1-stat{padding:20px 40px;border-right:1px solid rgba(237,230,217,.1);text-align:center}
+.s1-stat:last-child{border-right:none}
+.s1-sn{font-family:var(--display);font-size:40px;font-weight:900;color:var(--paper);line-height:1}
+.s1-sn sup{font-size:.38em;color:rgba(237,230,217,.6);vertical-align:super}
+.s1-sl{font-family:var(--ui);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,230,217,.5);margin-top:4px}
+
+/* ═══════════════════════════════
+   SECTION 2 — THE NUMBERS
+═══════════════════════════════ */
+#s2{background:var(--paper)}
+.s2-inner{width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr 1fr 1fr}
+.s2-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--newsprint);cursor:pointer;transition:background .35s;padding:48px}
+.s2-cell:last-child{border-right:none}
+.s2-cell:hover{background:var(--ink)}
+.s2-n{font-family:var(--display);font-size:clamp(80px,10vw,140px);font-weight:900;letter-spacing:-.03em;line-height:.85;color:var(--ink);text-align:center;transition:color .35s}
+.s2-n sup{font-size:.38em;color:var(--rust);vertical-align:super;transition:color .35s}
+.s2-cell:hover .s2-n{color:var(--paper)}
+.s2-cell:hover .s2-n sup{color:var(--rust)}
+.s2-label{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--stone);margin-top:14px;text-align:center;transition:color .35s}
+.s2-cell:hover .s2-label{color:rgba(237,230,217,.4)}
+.s2-ghost{font-family:var(--display);font-size:clamp(11px,1.2vw,16px);font-weight:300;font-style:italic;color:var(--newsprint);margin-top:6px;text-align:center;transition:color .35s}
+.s2-cell:hover .s2-ghost{color:rgba(237,230,217,.2)}
+
+/* ═══════════════════════════════
+   SECTION 3 — THE SERVICES
+═══════════════════════════════ */
+#s3{background:var(--ink)}
+.s3-inner{width:100%;height:100%;display:flex;flex-direction:column}
+.s3-head{padding:48px 60px 24px;border-bottom:1px solid rgba(237,230,217,.06)}
+.s3-title{font-family:var(--display);font-size:clamp(40px,5vw,64px);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.9;color:var(--paper)}
+.s3-title em{color:var(--rust);font-weight:300;font-style:italic}
+.s3-list{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+.s3-item{display:flex;align-items:baseline;padding:0 60px;border-bottom:1px solid rgba(237,230,217,.05);cursor:pointer;transition:all .3s;flex:1;align-items:center}
+.s3-item:last-child{border-bottom:none}
+.s3-item:hover{padding-left:76px;background:rgba(237,230,217,.02)}
+.s3-num{font-family:var(--display);font-size:32px;font-weight:900;color:rgba(237,230,217,.08);min-width:72px;line-height:1;transition:color .3s}
+.s3-item:hover .s3-num{color:rgba(196,85,42,.2)}
+.s3-name{font-family:var(--display);font-size:clamp(28px,3.5vw,52px);font-weight:700;text-transform:uppercase;letter-spacing:-.01em;color:rgba(237,230,217,.7);flex:1;line-height:1;transition:color .3s}
+.s3-item:hover .s3-name{color:var(--paper)}
+.s3-time{font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,230,217,.2);white-space:nowrap;transition:color .3s}
+.s3-item:hover .s3-time{color:var(--rust)}
+.s3-arrow{font-family:var(--display);font-size:28px;font-weight:700;color:var(--rust);opacity:0;transform:translateX(-12px);transition:all .35s;margin-left:24px}
+.s3-item:hover .s3-arrow{opacity:1;transform:translateX(0)}
+
+/* ═══════════════════════════════
+   SECTION 4 — THE PROJECT
+═══════════════════════════════ */
+#s4{background:var(--ink);padding:0}
+.s4-inner{width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr}
+.s4-img{position:relative;overflow:hidden}
+.s4-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.65) contrast(1.1);transition:transform 10s ease}
+#s4:hover .s4-img img{transform:scale(1.04)}
+.s4-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(12,11,9,.4) 0%,transparent 100%)}
+.s4-text{display:flex;flex-direction:column;justify-content:space-between;padding:72px 64px}
+.s4-eyebrow{font-family:var(--ui);font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--rust)}
+.s4-project-title{font-family:var(--display);font-size:clamp(52px,7vw,96px);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.88;color:var(--paper)}
+.s4-project-title .ghost{-webkit-text-stroke:1px rgba(237,230,217,.2);color:transparent;display:block}
+.s4-meta{display:flex;gap:24px;padding-top:24px;border-top:1px solid rgba(237,230,217,.08)}
+.s4m{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--stone)}
+.s4-cta{display:flex;flex-direction:column;gap:12px}
+.s4-award{font-family:var(--ui);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(237,230,217,.25)}
+.s4-link{font-family:var(--display);font-size:24px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--rust);text-decoration:none;display:flex;align-items:center;gap:14px;transition:color .3s}
+.s4-link:hover{color:var(--paper)}
+.s4-link span{font-size:18px;transition:transform .3s}
+.s4-link:hover span{transform:translateX(8px)}
+
+/* ═══════════════════════════════
+   SECTION 5 — THE PROCESS
+═══════════════════════════════ */
+#s5{background:var(--paper)}
+.s5-inner{width:100%;height:100%;display:flex;flex-direction:column}
+.s5-head{padding:48px 60px 0}
+.s5-title{font-family:var(--display);font-size:clamp(40px,5vw,64px);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.9;color:var(--ink)}
+.s5-title em{color:var(--rust);font-weight:300;font-style:italic}
+.s5-steps{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--newsprint)}
+.s5-step{background:var(--paper);padding:48px 52px;display:flex;flex-direction:column;justify-content:space-between;transition:background .4s;cursor:pointer;border-right:1px solid var(--newsprint)}
+.s5-step:last-child{border-right:none}
+.s5-step:hover{background:var(--ink)}
+.s5-sn{font-family:var(--display);font-size:96px;font-weight:900;color:rgba(12,11,9,.06);line-height:.85;margin-bottom:20px;transition:color .4s}
+.s5-step:hover .s5-sn{color:rgba(237,230,217,.04)}
+.s5-st{font-family:var(--display);font-size:32px;font-weight:700;text-transform:uppercase;letter-spacing:-.01em;color:var(--ink);margin-bottom:12px;line-height:1;transition:color .4s}
+.s5-step:hover .s5-st{color:var(--paper)}
+.s5-sd{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(12,11,9,.55);line-height:1.8;transition:color .4s}
+.s5-step:hover .s5-sd{color:rgba(237,230,217,.5)}
+.s5-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.s5-tag{font-family:var(--ui);font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);border:1px solid rgba(196,85,42,.3);padding:3px 10px;transition:color .4s,border-color .4s}
+.s5-step:hover .s5-tag{color:var(--rust);border-color:rgba(196,85,42,.4)}
+
+/* ═══════════════════════════════
+   SECTION 6 — THE CTA (Manifesto + Form)
+═══════════════════════════════ */
+#s6{background:var(--ink);align-items:stretch}
+.s6-inner{width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr}
+.s6-left{display:flex;flex-direction:column;justify-content:center;padding:80px 64px;border-right:1px solid rgba(237,230,217,.06)}
+.s6-declaration{font-family:var(--display);font-size:clamp(56px,8vw,112px);font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:.88;color:var(--paper);margin-bottom:32px}
+.s6-declaration em{color:var(--rust);font-weight:300;font-style:italic;display:block}
+.s6-body{font-family:var(--serif);font-size:18px;font-style:italic;color:rgba(237,230,217,.45);line-height:1.75;max-width:380px;margin-bottom:36px}
+.s6-guarantees{display:flex;flex-direction:column;gap:10px}
+.s6g{font-family:var(--ui);font-size:12px;font-weight:500;letter-spacing:.04em;color:rgba(237,230,217,.4);display:flex;align-items:center;gap:10px}
+.s6g::before{content:'✓';color:var(--rust);font-weight:700}
+.s6-right{display:flex;flex-direction:column;justify-content:center;padding:80px 64px}
+.s6-form-title{font-family:var(--display);font-size:32px;font-weight:700;text-transform:uppercase;letter-spacing:-.01em;color:var(--paper);margin-bottom:32px}
+.fg{margin-bottom:16px}
+.fg label{font-family:var(--ui);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(237,230,217,.3);display:block;margin-bottom:6px}
+.fg input,.fg select{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(237,230,217,.15);padding:10px 0;font-family:var(--serif);font-size:16px;font-style:italic;color:var(--paper);outline:none;transition:border-color .25s}
+.fg input:focus,.fg select:focus{border-color:rgba(196,85,42,.5)}
+.fg input::placeholder{color:rgba(237,230,217,.2)}
+.fg select option{background:var(--ink)}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg-submit{width:100%;font-family:var(--display);font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:var(--rust);color:var(--paper);border:none;padding:16px;cursor:pointer;margin-top:10px;transition:all .25s}
+.fg-submit:hover{background:var(--paper);color:var(--rust)}
+.fg-note{font-family:var(--serif);font-size:13px;font-style:italic;color:rgba(237,230,217,.25);text-align:center;margin-top:10px}
+
+/* FOOTER — compact inside last section */
+.footer-strip{background:rgba(237,230,217,.03);border-top:1px solid rgba(237,230,217,.06);grid-column:span 2;padding:16px 64px;display:flex;justify-content:space-between;align-items:center}
+.fs-logo{font-family:var(--display);font-size:16px;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;color:rgba(237,230,217,.4)}
+.fs-logo em{color:var(--rust);font-weight:300;font-style:italic}
+.fs-links{display:flex;gap:24px}
+.fs-links a{font-family:var(--ui);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(237,230,217,.2);text-decoration:none;transition:color .25s}
+.fs-links a:hover{color:rgba(237,230,217,.55)}
+.fs-copy{font-family:var(--ui);font-size:10px;letter-spacing:.08em;color:rgba(237,230,217,.15)}
+
+.badge{position:fixed;bottom:28px;left:28px;z-index:300;background:var(--rust);color:var(--paper);font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:12px 20px}
+
+/* Marquee in s1 */
+.s1-marquee{position:absolute;top:48px;left:0;right:0;overflow:hidden}
+.s1-mtrack{display:flex;animation:marquee 18s linear infinite;width:max-content}
+.s1-mitem{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(237,230,217,.25);padding:0 28px;white-space:nowrap}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+<div id="c"></div>
+<div id="cr"></div>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Smart·Renovation</a>
+  <div class="nav-r">
+    <a href="#s3">Services</a>
+    <a href="#s4">Work</a>
+    <a href="#s5">Process</a>
+    <a href="#s6" class="nav-cta">Consult</a>
+  </div>
+</nav>
+
+<!-- SCROLL HINT -->
+<div class="scroll-hint"><div class="sh-line"></div><span>Scroll</span></div>
+
+<!-- SECTION NUM -->
+<div class="section-num"><span class="sn-current" id="snCurrent">01</span><span>·</span><span class="sn-total">07</span></div>
+
+<!-- ═══ S0: BRAND ═══ -->
+<section id="s0">
+  <div class="s0-inner">
+    <p class="s0-tag">Award-Winning · Dubai · Since 1970</p>
+    <h1 class="s0-h">
+      <span class="solid">We Build</span>
+      <span class="ghost">Interiors</span>
+      <span class="rust">That Last.</span>
+    </h1>
+    <p class="s0-desc">Interior renovation rooted in Italian craftsmanship. Five decades of European expertise, brought to Dubai's most exceptional spaces.</p>
+    <div class="s0-scroll">
+      <a href="#s6">Book Free Consultation <span>→</span></a>
+      <div class="s0-sep"></div>
+      <a href="#s4" style="font-size:14px;color:rgba(237,230,217,.35)">View Portfolio <span style="font-size:11px">↗</span></a>
+    </div>
+  </div>
+  <div class="s0-award">
+    <div class="s0a-yr">ALA 2025</div>
+    <div class="s0a-name">Boutique Firm of the Year</div>
+  </div>
+</section>
+
+<!-- ═══ S1: THE STATEMENT ═══ -->
+<section id="s1">
+  <div class="s1-marquee"><div class="s1-mtrack"><span class="s1-mitem">Villa Renovation ·</span><span class="s1-mitem">Italian Craftsmanship ·</span><span class="s1-mitem">ALA 2025 ·</span><span class="s1-mitem">Fixed Price ·</span><span class="s1-mitem">On Time ·</span><span class="s1-mitem">Since 1970 ·</span><span class="s1-mitem">Villa Renovation ·</span><span class="s1-mitem">Italian Craftsmanship ·</span><span class="s1-mitem">ALA 2025 ·</span><span class="s1-mitem">Fixed Price ·</span><span class="s1-mitem">On Time ·</span><span class="s1-mitem">Since 1970 ·</span></div></div>
+  <div class="s1-inner">
+    <h2 class="s1-h">
+      We Don't<br>
+      <span class="light">Decorate.</span><br>
+      We Transform.
+      <span class="small">500 projects. 0 delays. 6 awards.</span>
+    </h2>
+  </div>
+  <div class="s1-stats">
+    <div class="s1-stat"><div class="s1-sn">55<sup>+</sup></div><div class="s1-sl">Years</div></div>
+    <div class="s1-stat"><div class="s1-sn">500<sup>+</sup></div><div class="s1-sl">Projects</div></div>
+    <div class="s1-stat"><div class="s1-sn">6<sup>×</sup></div><div class="s1-sl">Awards</div></div>
+    <div class="s1-stat"><div class="s1-sn">100<sup>%</sup></div><div class="s1-sl">On Time</div></div>
+  </div>
+</section>
+
+<!-- ═══ S2: THE NUMBERS ═══ -->
+<section id="s2">
+  <div class="s2-inner">
+    <div class="s2-cell"><div class="s2-n">55<sup>+</sup></div><div class="s2-label">Years of Excellence</div><div class="s2-ghost">Est. 1970 · Dubai, UAE</div></div>
+    <div class="s2-cell"><div class="s2-n">500<sup>+</sup></div><div class="s2-label">Projects Delivered</div><div class="s2-ghost">Villas, kitchens, offices</div></div>
+    <div class="s2-cell"><div class="s2-n">6<sup>×</sup></div><div class="s2-label">Industry Awards</div><div class="s2-ghost">ALA · DME · 2022–2025</div></div>
+    <div class="s2-cell"><div class="s2-n">100<sup>%</sup></div><div class="s2-label">Client Satisfaction</div><div class="s2-ghost">Since project one</div></div>
+  </div>
+</section>
+
+<!-- ═══ S3: SERVICES ═══ -->
+<section id="s3">
+  <div class="s3-inner">
+    <div class="s3-head"><h2 class="s3-title">What We <em>Build</em></h2></div>
+    <div class="s3-list">
+      <div class="s3-item"><span class="s3-num">01</span><span class="s3-name">Villa Renovation</span><span class="s3-time">8–12 weeks</span><span class="s3-arrow">→</span></div>
+      <div class="s3-item"><span class="s3-num">02</span><span class="s3-name">Interior Fit-Out</span><span class="s3-time">6–10 weeks</span><span class="s3-arrow">→</span></div>
+      <div class="s3-item"><span class="s3-num">03</span><span class="s3-name">Kitchen Renovation</span><span class="s3-time">3–5 weeks</span><span class="s3-arrow">→</span></div>
+      <div class="s3-item"><span class="s3-num">04</span><span class="s3-name">Landscape Design</span><span class="s3-time">4–8 weeks</span><span class="s3-arrow">→</span></div>
+      <div class="s3-item"><span class="s3-num">05</span><span class="s3-name">Office Interior Design</span><span class="s3-time">4–6 weeks</span><span class="s3-arrow">→</span></div>
+      <div class="s3-item"><span class="s3-num">06</span><span class="s3-name">Retail Interior Design</span><span class="s3-time">4–7 weeks</span><span class="s3-arrow">→</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S4: PROJECT SPOTLIGHT ═══ -->
+<section id="s4">
+  <div class="s4-inner">
+    <div class="s4-img">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&q=80" alt="">
+    </div>
+    <div class="s4-text">
+      <div>
+        <p class="s4-eyebrow">Featured Project · Palm Jumeirah</p>
+        <h2 class="s4-project-title">
+          Palm<br>
+          <span class="ghost">Jumeirah</span><br>
+          Villa.
+        </h2>
+        <div class="s4-meta">
+          <span class="s4m">Full Renovation</span>
+          <span class="s4m">Dubai · 2024</span>
+          <span class="s4m">12 weeks</span>
+        </div>
+      </div>
+      <div class="s4-cta">
+        <span class="s4-award">ALA 2025 · Boutique Firm of the Year</span>
+        <a href="#s6" class="s4-link">Start Your Project <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S5: PROCESS ═══ -->
+<section id="s5">
+  <div class="s5-inner">
+    <div class="s5-head"><h2 class="s5-title">How We <em>Work</em></h2></div>
+    <div class="s5-steps">
+      <div class="s5-step"><div><div class="s5-sn">01</div><div class="s5-st">Discovery</div><p class="s5-sd">Free site visit, accurate measurements and structural assessment. We listen before we draw.</p></div><div class="s5-tags"><span class="s5-tag">Free visit</span><span class="s5-tag">Brief</span><span class="s5-tag">Budget</span></div></div>
+      <div class="s5-step"><div><div class="s5-sn">02</div><div class="s5-st">Planning</div><p class="s5-sd">Technical drawings, mood boards, fixed-price contract. Permits and logistics fully managed.</p></div><div class="s5-tags"><span class="s5-tag">Drawings</span><span class="s5-tag">Fixed price</span><span class="s5-tag">Timeline</span></div></div>
+      <div class="s5-step"><div><div class="s5-sn">03</div><div class="s5-st">Delivery</div><p class="s5-sd">End-to-end project management. On time. Within budget. Every trade, every deadline accountable.</p></div><div class="s5-tags"><span class="s5-tag">On time</span><span class="s5-tag">Handover</span><span class="s5-tag">Warranty</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S6: CTA ═══ -->
+<section id="s6" style="display:block;height:auto;min-height:100vh">
+  <div class="s6-inner" style="min-height:calc(100vh - 52px);display:grid">
+    <div class="s6-left">
+      <h2 class="s6-declaration">Start Your<br><em>Project.</em></h2>
+      <p class="s6-body">Free consultation with Marco and Cinzia. We visit your property, listen to your vision and tell you exactly what's possible — no obligation.</p>
+      <div class="s6-guarantees">
+        <span class="s6g">Free site visit — same week</span>
+        <span class="s6g">Fixed-price quote — no surprises</span>
+        <span class="s6g">On-time delivery — guaranteed</span>
+        <span class="s6g">55+ years of Italian craftsmanship</span>
+      </div>
+    </div>
+    <div class="s6-right">
+      <div class="s6-form-title">Book Free Consultation</div>
+      <div class="fg-row">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="Marco"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Rossi"></div>
+      </div>
+      <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+971 XX XXX XXXX"></div>
+      <div class="fg"><label>Project Type</label><select><option>Villa Renovation</option><option>Kitchen Renovation</option><option>Interior Fit-Out</option><option>Office Interior Design</option><option>Landscape Design</option></select></div>
+      <button class="fg-submit">Send My Brief →</button>
+      <p class="fg-note">We respond within 24 hours. No spam. Free site visit included.</p>
+    </div>
+  </div>
+  <div class="footer-strip">
+    <span class="fs-logo">Smart·<em>Renovation</em></span>
+    <div class="fs-links"><a href="#">+971 04 XXX XXXX</a><a href="#">Dubai, UAE</a><a href="#">Instagram</a><a href="#">LinkedIn</a></div>
+    <span class="fs-copy">© 2025 Smart Renovation LLC</span>
+  </div>
+</section>
+
+<div class="badge">Matter / M3 — Manifesto</div>
+
+<script>
+// Cursor
+const c=document.getElementById('c'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop);})();
+
+// Section counter
+const sections=document.querySelectorAll('section');
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const idx=Array.from(sections).indexOf(e.target)+1;
+      document.getElementById('snCurrent').textContent=String(idx).padStart(2,'0');
+    }
+  });
+},{threshold:.5});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

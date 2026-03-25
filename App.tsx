@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Button } from './components/Button';
@@ -51,6 +50,16 @@ const ALL_COMMUNITIES = [
 const FLAGSHIP_COMMUNITIES = ALL_COMMUNITIES.slice(0, 5);
 const OTHER_COMMUNITIES = ALL_COMMUNITIES.slice(5);
 
+/* ═══ M3 Inline Style Helpers ═══ */
+const s = {
+  ink: '#0C0B09',
+  paper: '#EDE6D9',
+  newsprint: '#D9D1C0',
+  rust: '#C4552A',
+  rustPale: '#E8896B',
+  stone: '#928378',
+};
+
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState('home');
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -60,25 +69,22 @@ const App: React.FC = () => {
   const [communityFilter, setCommunityFilter] = useState<string>('All');
   const [selectedService, setSelectedService] = useState<string>('');
   const [selectedProject, setSelectedProject] = useState<string>('');
+  const [hoveredStat, setHoveredStat] = useState<number | null>(null);
+  const [hoveredService, setHoveredService] = useState<number | null>(null);
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${WHATSAPP_MESSAGE}`;
 
   useEffect(() => {
     const submitted = localStorage.getItem('smartreno_email_submitted');
-    if (submitted) {
-      setHasSubmittedEmail(true);
-    }
+    if (submitted) setHasSubmittedEmail(true);
     const favorites = localStorage.getItem('smartreno_favorites');
-    if (favorites) {
-      setFavoritesCount(JSON.parse(favorites).length);
-    }
+    if (favorites) setFavoritesCount(JSON.parse(favorites).length);
   }, []);
 
   const handleFavoritesThresholdReached = () => {
     const favorites = localStorage.getItem('smartreno_favorites');
-    if (favorites) {
-      setFavoritesCount(JSON.parse(favorites).length);
-    }
+    if (favorites) setFavoritesCount(JSON.parse(favorites).length);
     setIsEmailModalOpen(true);
   };
 
@@ -92,16 +98,13 @@ const App: React.FC = () => {
 
   const handleNavigate = (page: string) => {
     if (page.startsWith('project:')) {
-      const projectId = page.replace('project:', '');
-      setSelectedProject(projectId);
+      setSelectedProject(page.replace('project:', ''));
       setActivePage('project-detail');
     } else if (page.startsWith('service:')) {
-      const serviceId = page.replace('service:', '');
-      setSelectedService(serviceId);
+      setSelectedService(page.replace('service:', ''));
       setActivePage('service-detail');
     } else if (page.startsWith('community:')) {
-      const community = page.replace('community:', '');
-      setCommunityFilter(community);
+      setCommunityFilter(page.replace('community:', ''));
       setActivePage('portfolio');
     } else if (page === 'portfolio') {
       setCommunityFilter('All');
@@ -114,337 +117,604 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
+  /* ═══════════════════════════════
+     M3 HOME — MANIFESTO STYLE
+  ═══════════════════════════════ */
   const renderHome = () => (
-    <div className="animate-in fade-in duration-700">
-      {/* Hero Section */}
-      <section className="relative h-screen min-h-[700px] flex flex-col justify-end overflow-hidden">
-        <div className="absolute inset-0 bg-[#1A1A1A]">
-          <img src="https://images.unsplash.com/photo-1600607687940-47a04b629753?auto=format&fit=crop&q=80&w=1920" className="w-full h-full object-cover opacity-60" alt="Luxury Villa" />
-          <div className="absolute inset-0 bg-gradient-overlay"></div>
-          <div className="absolute inset-0 bg-black/10 mix-blend-overlay"></div>
+    <div>
+      {/* ═══ HERO — S0: BRAND ═══ */}
+      <section style={{
+        background: s.ink,
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{ textAlign: 'center', padding: '0 40px', maxWidth: '1200px' }}>
+          <p style={{
+            fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600,
+            letterSpacing: '0.35em', textTransform: 'uppercase',
+            color: 'rgba(237,230,217,0.3)', marginBottom: '32px',
+          }}>Award-Winning · Dubai · Since 1970</p>
+
+          <h1 style={{
+            fontFamily: 'var(--display)', fontWeight: 900, textTransform: 'uppercase',
+            letterSpacing: '-0.03em', lineHeight: 0.85,
+            fontSize: 'clamp(60px, 14vw, 200px)', color: s.paper,
+          }}>
+            <span style={{ display: 'block' }}>We Build</span>
+            <span style={{
+              display: 'block',
+              WebkitTextStroke: '1.5px rgba(237,230,217,0.2)',
+              color: 'transparent',
+            }}>Interiors</span>
+            <span style={{
+              display: 'block', color: s.rust,
+              fontWeight: 300, fontStyle: 'italic',
+            }}>That Last.</span>
+          </h1>
+
+          <p style={{
+            fontFamily: 'var(--serif)', fontSize: '22px', fontStyle: 'italic',
+            color: 'rgba(237,230,217,0.45)', marginTop: '40px',
+            maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6,
+          }}>Interior renovation rooted in Italian craftsmanship. Five decades of European expertise, brought to Dubai's most exceptional spaces.</p>
+
+          <div style={{
+            marginTop: '52px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', gap: '16px', flexWrap: 'wrap',
+          }}>
+            <button onClick={() => setIsFormOpen(true)} style={{
+              fontFamily: 'var(--display)', fontSize: '20px', fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '0.04em',
+              color: s.paper, background: 'none', border: 'none', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: '12px', transition: 'color 0.25s',
+            }}>Book Free Consultation <span style={{ fontSize: '16px' }}>→</span></button>
+            <div style={{ width: '1px', height: '32px', background: 'rgba(237,230,217,0.15)' }}></div>
+            <button onClick={() => handleNavigate('portfolio')} style={{
+              fontFamily: 'var(--display)', fontSize: '14px', fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '0.04em',
+              color: 'rgba(237,230,217,0.35)', background: 'none', border: 'none', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: '8px',
+            }}>View Portfolio <span style={{ fontSize: '11px' }}>↗</span></button>
+          </div>
         </div>
 
-        <div className="relative container mx-auto px-6 md:px-12 pb-24 text-white">
-          <div className="max-w-4xl">
-            <h1 className="text-5xl md:text-8xl font-playfair font-bold mb-6 leading-[1.1]">
-              50 Years of Italian <br /> Design Excellence
-            </h1>
-            <p className="text-xl md:text-2xl opacity-90 mb-10 font-light max-w-2xl leading-relaxed">
-              Transforming Dubai's finest villas with European craftsmanship and award-winning service.
-            </p>
-
-            <div className="flex flex-wrap gap-8 mb-12 text-sm font-semibold tracking-wider uppercase">
-              <span className="flex items-center gap-2"><Award size={20} className="text-[#C9A96E]" /> 6-Time Award Winner</span>
-              <span className="flex items-center gap-2"><Star size={20} className="text-[#C9A96E]" /> 4.9/5 Google Rating</span>
-              <span className="flex items-center gap-2">🇮🇹 Italian Heritage Since 1970</span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="primary-large" onClick={() => setIsFormOpen(true)}>Schedule Your Consultation</Button>
-              <Button variant="outline-white" className="px-10 py-4 text-lg" onClick={() => handleNavigate('portfolio')}>Explore Our Work</Button>
-            </div>
-          </div>
+        {/* Award badge */}
+        <div style={{
+          position: 'absolute', bottom: '48px', right: '52px',
+          border: '1px solid rgba(237,230,217,0.12)', padding: '14px 20px',
+        }}>
+          <div style={{
+            fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
+            letterSpacing: '0.25em', textTransform: 'uppercase', color: s.rust, marginBottom: '4px',
+          }}>ALA 2025</div>
+          <div style={{
+            fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic',
+            color: 'rgba(237,230,217,0.6)',
+          }}>Boutique Firm of the Year</div>
         </div>
       </section>
 
-      {/* Community Grid */}
-      <section className="py-24 bg-[#F5F1E8]">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl mb-4">Find Your Community</h2>
-            <p className="text-[#707070] max-w-2xl mx-auto text-lg font-light">Specialized villa renovation expertise in Dubai's premier residential areas.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {COMMUNITIES.map(community => (
-              <div
-                key={community.id}
-                className="group relative h-[400px] rounded-2xl overflow-hidden shadow-xl cursor-pointer"
-                onClick={() => handleNavigate(`community:${community.name}`)}
-              >
-                <img src={community.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={community.name} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 p-8 text-white">
-                  <h3 className="text-3xl font-playfair mb-2">{community.name}</h3>
-                  <p className="text-sm opacity-80 mb-4">{community.renovatedCount}+ Villas Renovated</p>
-                  <div className="flex items-center gap-2 text-[#C9A96E] font-semibold text-sm">
-                    VIEW PROJECTS <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
-                  </div>
-                </div>
-              </div>
+      {/* ═══ S1: THE STATEMENT — rust ═══ */}
+      <section style={{
+        background: s.rust, minHeight: '100vh',
+        display: 'flex', alignItems: 'center',
+        position: 'relative', overflow: 'hidden',
+      }}>
+        {/* Marquee */}
+        <div style={{ position: 'absolute', top: '48px', left: 0, right: 0, overflow: 'hidden' }}>
+          <div className="m3-marquee-track" style={{ display: 'flex', width: 'max-content' }}>
+            {['Villa Renovation ·', 'Italian Craftsmanship ·', 'ALA 2025 ·', 'Fixed Price ·', 'On Time ·', 'Since 1970 ·',
+              'Villa Renovation ·', 'Italian Craftsmanship ·', 'ALA 2025 ·', 'Fixed Price ·', 'On Time ·', 'Since 1970 ·',
+            ].map((item, i) => (
+              <span key={i} className="m3-marquee-item">{item}</span>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Button variant="outline" onClick={() => handleNavigate('communities')}>View All 13 Communities</Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Smart Renovation */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            <div className="text-center group">
-              <div className="w-20 h-20 bg-[#C9A96E]/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-[#C9A96E] group-hover:text-white">
-                <span className="text-3xl">🇮🇹</span>
-              </div>
-              <h3 className="text-2xl font-playfair font-bold mb-4">Italian Heritage</h3>
-              <p className="text-[#707070] leading-relaxed mb-6">50+ years of design expertise from Milan to Dubai. We personally source premium materials from Europe twice annually.</p>
-              <button onClick={() => handleNavigate('heritage')} className="text-[#C9A96E] font-semibold hover:underline">Learn Our Story →</button>
-            </div>
-            <div className="text-center group">
-              <div className="w-20 h-20 bg-[#C9A96E]/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-[#C9A96E] group-hover:text-white">
-                <span className="text-3xl">🏆</span>
-              </div>
-              <h3 className="text-2xl font-playfair font-bold mb-4">Award-Winning</h3>
-              <p className="text-[#707070] leading-relaxed mb-6">Recognized by the Architecture Leaders Awards. 6 major awards in 3 years for design and build excellence.</p>
-              <button onClick={() => handleNavigate('awards-recognition')} className="text-[#C9A96E] font-semibold hover:underline">View Awards →</button>
-            </div>
-            <div className="text-center group">
-              <div className="w-20 h-20 bg-[#C9A96E]/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-[#C9A96E] group-hover:text-white">
-                <span className="text-3xl">👥</span>
-              </div>
-              <h3 className="text-2xl font-playfair font-bold mb-4">Haute Couture Approach</h3>
-              <p className="text-[#707070] leading-relaxed mb-6">Marco & Cinzia personally oversee every project like master tailors. Your villa transformation is bespoke, never off-the-rack.</p>
-              <button onClick={() => handleNavigate('founders')} className="text-[#C9A96E] font-semibold hover:underline">Meet Our Team →</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Transformations */}
-      <section className="py-24 bg-[#F5F1E8]">
-        <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-center text-4xl md:text-5xl font-playfair mb-16">Featured Transformations</h2>
-          <div className="max-w-6xl mx-auto">
-            <BeforeAfterSlider
-              before={PROJECTS[0].beforeImage}
-              after={PROJECTS[0].afterImage}
-              className="h-[600px] shadow-2xl"
-            />
-            <div className="mt-10 text-center">
-              <h3 className="text-3xl font-playfair mb-4">{PROJECTS[0].title}</h3>
-              <div className="flex flex-wrap justify-center gap-8 text-[#707070] font-montserrat font-medium text-sm">
-                <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-[#C9A96E]" /> {PROJECTS[0].investment} Investment</span>
-                <span className="flex items-center gap-2"><Clock size={16} className="text-[#C9A96E]" /> {PROJECTS[0].timeline} Completion</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Process Overview */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-playfair mb-4">Our Seamless Process</h2>
-            <p className="text-[#707070] max-w-2xl mx-auto text-lg font-light">How we bring Italian craftsmanship to your doorstep.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
-             <div className="hidden lg:block absolute top-10 left-0 w-full h-px bg-[#E5E5E5] -z-10"></div>
-             {PROCESS_STEPS.slice(0, 4).map((step, idx) => (
-                <div key={idx} className="relative group text-center lg:text-left">
-                  <div className="w-20 h-20 bg-white border border-[#E5E5E5] rounded-full flex items-center justify-center text-3xl mb-6 mx-auto lg:mx-0 shadow-sm transition-all group-hover:border-[#C9A96E]">
-                    {step.icon}
-                  </div>
-                  <h4 className="text-xl font-bold mb-3 font-montserrat">{step.title}</h4>
-                  <p className="text-[#707070] text-sm leading-relaxed">{step.description}</p>
-                </div>
-             ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button variant="outline" onClick={() => handleNavigate('process')}>See Full Process</Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-24 bg-[#1A1A1A] text-white">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-playfair mb-4">Client Stories</h2>
-            <p className="text-white/60">Direct experiences from Dubai's premier villa owners.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 p-10 rounded-2xl relative group hover:bg-white/10 transition-colors">
-                <Quote className="absolute top-6 right-6 text-white/10" size={40} />
-                <div className="flex gap-1 mb-6">
-                  {[...Array(t.rating)].map((_, i) => <Star key={i} size={16} fill="#C9A96E" className="text-[#C9A96E]" />)}
-                </div>
-                <p className="text-lg italic mb-8 leading-relaxed opacity-90">"{t.quote}"</p>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="font-bold">{t.name}</div>
-                    <div className="text-[#C9A96E] text-xs uppercase tracking-widest">{t.location}</div>
-                  </div>
-                  {t.video && <PlayCircle className="text-[#C9A96E]" size={24} />}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-16 text-center">
-            <Button variant="outline-white" onClick={() => handleNavigate('client-testimonials')}>Read All Reviews</Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Awards & Press */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6 md:px-12 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-[#707070] mb-12">Industry Validation</p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-             <div className="text-xl font-bold font-serif">DESIGN MIDDLE EAST</div>
-             <div className="text-xl font-bold font-serif">ARCHITECTURAL DIGEST</div>
-             <div className="text-xl font-bold font-serif">VOGUE LIVING</div>
-             <div className="text-xl font-bold font-serif">LUXURY LIFE</div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-32 bg-gradient-gold text-white text-center">
-        <div className="container mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-playfair mb-8">Elevate Your Lifestyle</h2>
-          <p className="text-xl opacity-90 mb-12 max-w-2xl mx-auto font-light leading-relaxed">Book your priority strategic consultation with our design directors.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="white" className="px-12 py-5 text-lg" onClick={() => setIsFormOpen(true)}>Book Free Consultation</Button>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-12 py-5 text-lg font-semibold bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-lg transition-all"
-            >
-              <MessageCircle size={20} />
-              Chat on WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-
-  const renderHeritage = () => (
-    <div className="animate-in fade-in pt-12 pb-24">
-      <section className="container mx-auto px-6 md:px-12 max-w-5xl">
-        <div className="mb-16">
-          <span className="text-[#C9A96E] text-sm uppercase tracking-widest font-bold block mb-4">OUR STORY</span>
-          <h1 className="text-6xl font-playfair font-bold mb-8">From Milan to Dubai: <br /> 50 Years of Excellence</h1>
-          <p className="text-2xl font-light text-[#707070] leading-relaxed mb-12">
-            Smart Renovation isn't just a fit-out company; it's a legacy of Italian craftsmanship
-            that began in the workshops of Lombardy in 1970 and blossomed in the luxury estates of Dubai.
-          </p>
         </div>
 
-        <div className="grid gap-24 relative before:absolute before:left-[19px] before:top-0 before:bottom-0 before:w-px before:bg-[#E5E5E5]">
+        <div style={{ padding: '0 60px', maxWidth: '1200px', width: '100%' }}>
+          <h2 style={{
+            fontFamily: 'var(--display)', fontWeight: 900, textTransform: 'uppercase',
+            letterSpacing: '-0.03em', lineHeight: 0.88,
+            fontSize: 'clamp(48px, 10vw, 144px)', color: s.paper,
+          }}>
+            We Don't<br/>
+            <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.6)', display: 'block' }}>Decorate.</span>
+            We Transform.
+            <span style={{
+              fontSize: '0.55em', color: 'rgba(237,230,217,0.35)', display: 'block', letterSpacing: '0.02em',
+            }}>500 projects. 0 delays. 6 awards.</span>
+          </h2>
+        </div>
+
+        {/* Stat strip */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0,
+          background: 'rgba(12,11,9,0.2)',
+          display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+        }}>
           {[
-            { year: '1970', title: 'The Italian Roots', desc: 'Our family established a luxury furniture and design workshop in Milan, specializing in bespoke Italian interiors.' },
-            { year: '1995', title: 'European Expansion', desc: 'Expanding across the EU, handling restoration of historical villas in Lake Como and Tuscany.' },
-            { year: '2015', title: 'Landing in Dubai', desc: 'Bringing the "Turnkey Italian" concept to the Middle East, starting with a single Signature Villa on Palm Jumeirah.' },
-            { year: '2026', title: 'Dubai\'s Premier Firm', desc: 'Today, we are a 6-time award-winning firm with over 400 villas transformed across the UAE.' }
-          ].map((item, i) => (
-            <div key={i} className="pl-16 relative">
-              <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-white border-2 border-[#C9A96E] flex items-center justify-center font-bold text-xs">
-                {i+1}
+            { num: '55', sup: '+', label: 'Years' },
+            { num: '500', sup: '+', label: 'Projects' },
+            { num: '6', sup: '×', label: 'Awards' },
+            { num: '100', sup: '%', label: 'On Time' },
+          ].map((stat, i) => (
+            <div key={i} style={{
+              padding: '20px 40px', textAlign: 'center',
+              borderRight: i < 3 ? '1px solid rgba(237,230,217,0.1)' : 'none',
+            }}>
+              <div style={{
+                fontFamily: 'var(--display)', fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 900,
+                color: s.paper, lineHeight: 1,
+              }}>{stat.num}<sup style={{ fontSize: '0.38em', color: 'rgba(237,230,217,0.6)', verticalAlign: 'super' }}>{stat.sup}</sup></div>
+              <div style={{
+                fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
+                letterSpacing: '0.2em', textTransform: 'uppercase',
+                color: 'rgba(237,230,217,0.5)', marginTop: '4px',
+              }}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ S2: THE NUMBERS — paper grid ═══ */}
+      <section style={{ background: s.paper, minHeight: '100vh', display: 'flex' }}>
+        <div style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', minHeight: '100vh' }}>
+          {[
+            { num: '55', sup: '+', label: 'Years of Excellence', ghost: 'Est. 1970 · Dubai, UAE' },
+            { num: '500', sup: '+', label: 'Projects Delivered', ghost: 'Villas, kitchens, offices' },
+            { num: '6', sup: '×', label: 'Industry Awards', ghost: 'ALA · DME · 2022–2025' },
+            { num: '100', sup: '%', label: 'Client Satisfaction', ghost: 'Since project one' },
+          ].map((cell, i) => {
+            const isHovered = hoveredStat === i;
+            return (
+              <div key={i}
+                onMouseEnter={() => setHoveredStat(i)}
+                onMouseLeave={() => setHoveredStat(null)}
+                style={{
+                  display: 'flex', flexDirection: 'column', alignItems: 'center',
+                  justifyContent: 'center', cursor: 'pointer', transition: 'background 0.35s',
+                  padding: '48px', borderRight: i < 3 ? `1px solid ${s.newsprint}` : 'none',
+                  background: isHovered ? s.ink : 'transparent',
+                }}
+              >
+                <div style={{
+                  fontFamily: 'var(--display)', fontSize: 'clamp(60px, 10vw, 140px)', fontWeight: 900,
+                  letterSpacing: '-0.03em', lineHeight: 0.85, textAlign: 'center',
+                  color: isHovered ? s.paper : s.ink, transition: 'color 0.35s',
+                }}>
+                  {cell.num}<sup style={{ fontSize: '0.38em', color: s.rust, verticalAlign: 'super' }}>{cell.sup}</sup>
+                </div>
+                <div style={{
+                  fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 700,
+                  letterSpacing: '0.22em', textTransform: 'uppercase',
+                  color: isHovered ? 'rgba(237,230,217,0.4)' : s.stone,
+                  marginTop: '14px', textAlign: 'center', transition: 'color 0.35s',
+                }}>{cell.label}</div>
+                <div style={{
+                  fontFamily: 'var(--display)', fontSize: 'clamp(11px, 1.2vw, 16px)',
+                  fontWeight: 300, fontStyle: 'italic',
+                  color: isHovered ? 'rgba(237,230,217,0.2)' : s.newsprint,
+                  marginTop: '6px', textAlign: 'center', transition: 'color 0.35s',
+                }}>{cell.ghost}</div>
               </div>
-              <div className="text-[#C9A96E] font-bold text-xl font-montserrat mb-2">{item.year}</div>
-              <h3 className="text-3xl font-playfair mb-4">{item.title}</h3>
-              <p className="text-[#707070] leading-relaxed text-lg">{item.desc}</p>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ═══ S3: SERVICES — ink background, numbered list ═══ */}
+      <section style={{ background: s.ink, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{
+          padding: '48px 60px 24px',
+          borderBottom: '1px solid rgba(237,230,217,0.06)',
+        }}>
+          <h2 style={{
+            fontFamily: 'var(--display)', fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: 900,
+            textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 0.9, color: s.paper,
+          }}>What We <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Build</em></h2>
+        </div>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+          {SERVICES.map((svc, i) => {
+            const isHovered = hoveredService === i;
+            return (
+              <div key={svc.id}
+                onMouseEnter={() => setHoveredService(i)}
+                onMouseLeave={() => setHoveredService(null)}
+                onClick={() => handleNavigate(`service:${svc.id}`)}
+                style={{
+                  display: 'flex', alignItems: 'center',
+                  padding: isHovered ? '0 60px 0 76px' : '0 60px',
+                  borderBottom: i < SERVICES.length - 1 ? '1px solid rgba(237,230,217,0.05)' : 'none',
+                  cursor: 'pointer', transition: 'all 0.3s', flex: 1,
+                  background: isHovered ? 'rgba(237,230,217,0.02)' : 'transparent',
+                }}
+              >
+                <span style={{
+                  fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900,
+                  color: isHovered ? 'rgba(196,85,42,0.2)' : 'rgba(237,230,217,0.08)',
+                  minWidth: '72px', lineHeight: 1, transition: 'color 0.3s',
+                }}>{String(i + 1).padStart(2, '0')}</span>
+                <span style={{
+                  fontFamily: 'var(--display)', fontSize: 'clamp(24px, 3.5vw, 52px)', fontWeight: 700,
+                  textTransform: 'uppercase', letterSpacing: '-0.01em',
+                  color: isHovered ? s.paper : 'rgba(237,230,217,0.7)',
+                  flex: 1, lineHeight: 1, transition: 'color 0.3s',
+                }}>{svc.shortTitle}</span>
+                <span style={{
+                  fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 600,
+                  letterSpacing: '0.14em', textTransform: 'uppercase',
+                  color: isHovered ? s.rust : 'rgba(237,230,217,0.2)',
+                  whiteSpace: 'nowrap', transition: 'color 0.3s',
+                }}>{svc.timeline}</span>
+                <span style={{
+                  fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700,
+                  color: s.rust, opacity: isHovered ? 1 : 0,
+                  transform: isHovered ? 'translateX(0)' : 'translateX(-12px)',
+                  transition: 'all 0.35s', marginLeft: '24px',
+                }}>→</span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ═══ S4: FEATURED PROJECT ═══ */}
+      <section style={{ background: s.ink, minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+        <div style={{ position: 'relative', overflow: 'hidden' }}>
+          <img
+            src={PROJECTS[0].afterImage}
+            alt={PROJECTS[0].title}
+            style={{
+              width: '100%', height: '100%', objectFit: 'cover',
+              filter: 'saturate(0.65) contrast(1.1)',
+            }}
+          />
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(to right, rgba(12,11,9,0.4) 0%, transparent 100%)',
+          }}></div>
+        </div>
+        <div style={{
+          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          padding: '72px 64px',
+        }}>
+          <div>
+            <p style={{
+              fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600,
+              letterSpacing: '0.3em', textTransform: 'uppercase', color: s.rust,
+            }}>Featured Project · {PROJECTS[0].location}</p>
+            <h2 style={{
+              fontFamily: 'var(--display)', fontSize: 'clamp(40px, 7vw, 96px)', fontWeight: 900,
+              textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 0.88,
+              color: s.paper, marginTop: '16px',
+            }}>
+              {PROJECTS[0].location.split(' ')[0]}<br/>
+              <span style={{
+                WebkitTextStroke: '1px rgba(237,230,217,0.2)', color: 'transparent', display: 'block',
+              }}>{PROJECTS[0].location.split(' ').slice(1).join(' ') || 'Villa'}</span>
+              Villa.
+            </h2>
+            <div style={{
+              display: 'flex', gap: '24px', paddingTop: '24px',
+              borderTop: '1px solid rgba(237,230,217,0.08)', marginTop: '24px',
+            }}>
+              <span style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: s.stone }}>{PROJECTS[0].style || 'Full Renovation'}</span>
+              <span style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: s.stone }}>Dubai · {PROJECTS[0].completion || '2024'}</span>
+              <span style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: s.stone }}>{PROJECTS[0].timeline}</span>
             </div>
-          ))}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <span style={{
+              fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
+              letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.25)',
+            }}>ALA 2025 · Boutique Firm of the Year</span>
+            <button onClick={() => handleNavigate(`project:${PROJECTS[0].id}`)} style={{
+              fontFamily: 'var(--display)', fontSize: '24px', fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '0.02em', color: s.rust,
+              background: 'none', border: 'none', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: '14px', transition: 'color 0.3s',
+              textAlign: 'left',
+            }}>View Project <span style={{ fontSize: '18px' }}>→</span></button>
+          </div>
         </div>
       </section>
-    </div>
-  );
 
-  const renderAwards = () => (
-    <div className="animate-in fade-in pt-12 pb-24 bg-[#F5F1E8]">
-      <section className="container mx-auto px-6 md:px-12">
-        <div className="text-center mb-16">
-          <span className="text-[#C9A96E] text-sm uppercase tracking-widest font-bold">RECOGNITION</span>
-          <h1 className="text-6xl font-playfair font-bold mt-4 mb-6">6-Time Award Winner</h1>
-          <p className="text-[#707070] max-w-2xl mx-auto">Industry-vetted excellence. We are the most recognized boutique renovation firm in the UAE.</p>
+      {/* ═══ S5: PROCESS — 3-column grid ═══ */}
+      <section style={{ background: s.paper, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '48px 60px 0' }}>
+          <h2 style={{
+            fontFamily: 'var(--display)', fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: 900,
+            textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 0.9, color: s.ink,
+          }}>How We <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Work</em></h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {AWARDS.map((award, i) => (
-            <div key={i} className="bg-white p-10 rounded-xl shadow-lg border-t-4 border-[#C9A96E]">
-              <div className="text-4xl mb-4">🏆</div>
-              <div className="text-xs font-bold text-[#C9A96E] uppercase mb-2">{award.year}</div>
-              <h3 className="text-xl font-bold font-playfair mb-3">{award.title}</h3>
-              <p className="text-sm text-[#707070]">{award.body}</p>
+        <div style={{
+          flex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 0, background: s.newsprint,
+        }}>
+          {[
+            { num: '01', title: 'Discovery', desc: 'Free site visit, accurate measurements and structural assessment. We listen before we draw.', tags: ['Free visit', 'Brief', 'Budget'] },
+            { num: '02', title: 'Planning', desc: 'Technical drawings, mood boards, fixed-price contract. Permits and logistics fully managed.', tags: ['Drawings', 'Fixed price', 'Timeline'] },
+            { num: '03', title: 'Delivery', desc: 'End-to-end project management. On time. Within budget. Every trade, every deadline accountable.', tags: ['On time', 'Handover', 'Warranty'] },
+          ].map((step, i) => {
+            const isHovered = hoveredStep === i;
+            return (
+              <div key={i}
+                onMouseEnter={() => setHoveredStep(i)}
+                onMouseLeave={() => setHoveredStep(null)}
+                style={{
+                  background: isHovered ? s.ink : s.paper,
+                  padding: '48px 52px', display: 'flex', flexDirection: 'column',
+                  justifyContent: 'space-between', transition: 'background 0.4s', cursor: 'pointer',
+                  borderRight: i < 2 ? `1px solid ${s.newsprint}` : 'none',
+                }}
+              >
+                <div>
+                  <div style={{
+                    fontFamily: 'var(--display)', fontSize: '96px', fontWeight: 900,
+                    color: isHovered ? 'rgba(237,230,217,0.04)' : 'rgba(12,11,9,0.06)',
+                    lineHeight: 0.85, marginBottom: '20px', transition: 'color 0.4s',
+                  }}>{step.num}</div>
+                  <div style={{
+                    fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 700,
+                    textTransform: 'uppercase', letterSpacing: '-0.01em',
+                    color: isHovered ? s.paper : s.ink,
+                    marginBottom: '12px', lineHeight: 1, transition: 'color 0.4s',
+                  }}>{step.title}</div>
+                  <p style={{
+                    fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic',
+                    color: isHovered ? 'rgba(237,230,217,0.5)' : 'rgba(12,11,9,0.55)',
+                    lineHeight: 1.8, transition: 'color 0.4s',
+                  }}>{step.desc}</p>
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '16px' }}>
+                  {step.tags.map((tag, ti) => (
+                    <span key={ti} style={{
+                      fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
+                      letterSpacing: '0.14em', textTransform: 'uppercase',
+                      color: s.rust, border: `1px solid rgba(196,85,42,${isHovered ? '0.4' : '0.3'})`,
+                      padding: '3px 10px', transition: 'color 0.4s, border-color 0.4s',
+                    }}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ═══ TESTIMONIALS — editorial ═══ */}
+      <section style={{ background: s.ink, padding: '100px 60px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <h2 style={{
+              fontFamily: 'var(--display)', fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: 900,
+              textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 0.9, color: s.paper,
+            }}>Client <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Stories</em></h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)' }}>
+            {TESTIMONIALS.map((t, idx) => (
+              <div key={idx} style={{
+                background: s.ink, padding: '48px 40px', position: 'relative',
+              }}>
+                <Quote size={32} style={{ color: 'rgba(237,230,217,0.06)', position: 'absolute', top: '24px', right: '24px' }} />
+                <div style={{ display: 'flex', gap: '3px', marginBottom: '24px' }}>
+                  {[...Array(t.rating)].map((_, i) => (
+                    <Star key={i} size={14} fill={s.rust} style={{ color: s.rust }} />
+                  ))}
+                </div>
+                <p style={{
+                  fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
+                  color: 'rgba(237,230,217,0.7)', lineHeight: 1.8, marginBottom: '32px',
+                }}>"{t.quote}"</p>
+                <div style={{ borderTop: '1px solid rgba(237,230,217,0.06)', paddingTop: '16px' }}>
+                  <div style={{
+                    fontFamily: 'var(--ui)', fontSize: '12px', fontWeight: 700,
+                    letterSpacing: '0.1em', textTransform: 'uppercase', color: s.paper,
+                  }}>{t.name}</div>
+                  <div style={{
+                    fontFamily: 'var(--ui)', fontSize: '9px', letterSpacing: '0.2em',
+                    textTransform: 'uppercase', color: s.rust, marginTop: '4px',
+                  }}>{t.location}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ CTA — split manifesto + form ═══ */}
+      <section style={{ background: s.ink }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '100vh' }}>
+          {/* Left: Manifesto */}
+          <div style={{
+            display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            padding: '80px 64px', borderRight: '1px solid rgba(237,230,217,0.06)',
+          }}>
+            <h2 style={{
+              fontFamily: 'var(--display)', fontSize: 'clamp(48px, 8vw, 112px)', fontWeight: 900,
+              textTransform: 'uppercase', letterSpacing: '-0.03em', lineHeight: 0.88,
+              color: s.paper, marginBottom: '32px',
+            }}>
+              Start Your<br/>
+              <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic', display: 'block' }}>Project.</em>
+            </h2>
+            <p style={{
+              fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic',
+              color: 'rgba(237,230,217,0.45)', lineHeight: 1.75,
+              maxWidth: '380px', marginBottom: '36px',
+            }}>Free consultation with Marco and Cinzia. We visit your property, listen to your vision and tell you exactly what's possible — no obligation.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {[
+                'Free site visit — same week',
+                'Fixed-price quote — no surprises',
+                'On-time delivery — guaranteed',
+                '55+ years of Italian craftsmanship',
+              ].map((g, i) => (
+                <span key={i} style={{
+                  fontFamily: 'var(--ui)', fontSize: '12px', fontWeight: 500,
+                  letterSpacing: '0.04em', color: 'rgba(237,230,217,0.4)',
+                  display: 'flex', alignItems: 'center', gap: '10px',
+                }}>
+                  <span style={{ color: s.rust, fontWeight: 700 }}>✓</span> {g}
+                </span>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+          </div>
 
-  const renderFounders = () => (
-    <div className="animate-in fade-in py-24">
-      <section className="container mx-auto px-6 md:px-12">
-        <div className="text-center mb-20">
-          <span className="text-[#C9A96E] text-sm uppercase tracking-widest font-bold block mb-4">THE HAUTE COUTURE OF RENOVATION</span>
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-6">Meet the Master Tailors</h1>
-          <p className="text-xl text-[#707070] max-w-3xl mx-auto leading-relaxed">
-            Like the finest Milanese fashion houses, we believe luxury cannot be mass-produced.
-            Every villa we transform is a bespoke creation, personally crafted by our founders.
-          </p>
+          {/* Right: Mini form */}
+          <div style={{
+            display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            padding: '80px 64px',
+          }}>
+            <div style={{
+              fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '-0.01em', color: s.paper,
+              marginBottom: '32px',
+            }}>Book Free Consultation</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+              <div>
+                <label style={formLabelStyle}>First Name</label>
+                <input type="text" placeholder="Marco" style={formInputStyle} />
+              </div>
+              <div>
+                <label style={formLabelStyle}>Last Name</label>
+                <input type="text" placeholder="Rossi" style={formInputStyle} />
+              </div>
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              <label style={formLabelStyle}>Phone Number</label>
+              <input type="tel" placeholder="+971 XX XXX XXXX" style={formInputStyle} />
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              <label style={formLabelStyle}>Project Type</label>
+              <select style={{ ...formInputStyle, appearance: 'none' as const }}>
+                {SERVICES.map(svc => (
+                  <option key={svc.id} style={{ background: s.ink }}>{svc.shortTitle}</option>
+                ))}
+              </select>
+            </div>
+            <button onClick={() => setIsFormOpen(true)} style={{
+              width: '100%', fontFamily: 'var(--display)', fontSize: '18px', fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '0.04em',
+              background: s.rust, color: s.paper, border: 'none',
+              padding: '16px', cursor: 'pointer', marginTop: '10px', transition: 'all 0.25s',
+            }}>Send My Brief →</button>
+            <p style={{
+              fontFamily: 'var(--serif)', fontSize: '13px', fontStyle: 'italic',
+              color: 'rgba(237,230,217,0.25)', textAlign: 'center', marginTop: '10px',
+            }}>We respond within 24 hours. No spam. Free site visit included.</p>
+          </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-20 items-center mb-32">
-          <div className="lg:w-1/2">
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" className="rounded-2xl shadow-2xl" alt="Marco" />
-          </div>
-          <div className="lg:w-1/2">
-            <span className="text-[#C9A96E] font-bold uppercase tracking-widest text-sm">FOUNDER & CREATIVE DIRECTOR</span>
-            <h2 className="text-5xl font-playfair font-bold my-6">Marco P.</h2>
-            <p className="text-lg text-[#707070] leading-relaxed mb-8 italic">"Every villa tells a story. My job is to ensure that story is written in Italian marble and European light."</p>
-            <p className="text-[#707070] leading-relaxed mb-8">With over 30 years of personal experience in high-end structural renovations, Marco leads the design and site engineering teams. Like a master tailor measuring for a bespoke suit, he personally sources every slab of marble and every fixture.</p>
-            <Button variant="outline" onClick={() => setIsFormOpen(true)}>Schedule a Briefing with Marco</Button>
-          </div>
-        </div>
-        <div className="flex flex-col lg:flex-row-reverse gap-20 items-center">
-          <div className="lg:w-1/2">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800" className="rounded-2xl shadow-2xl" alt="Cinzia" />
-          </div>
-          <div className="lg:w-1/2">
-            <span className="text-[#C9A96E] font-bold uppercase tracking-widest text-sm">CO-FOUNDER & RELATIONS DIRECTOR</span>
-            <h2 className="text-5xl font-playfair font-bold my-6">Cinzia D.</h2>
-            <p className="text-lg text-[#707070] leading-relaxed mb-8 italic">"We don't just build rooms; we curate experiences for Dubai's most discerning families."</p>
-            <p className="text-[#707070] leading-relaxed mb-8">Cinzia manages our client partnerships with the attentiveness of a private couturier. She ensures that the "haute couture" experience extends beyond design.</p>
-            <Button variant="outline" onClick={() => setIsFormOpen(true)}>Consult with Cinzia</Button>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-
-  const renderTestimonials = () => (
-    <div className="animate-in fade-in py-24 bg-white">
-      <section className="container mx-auto px-6 md:px-12">
-        <div className="text-center mb-16">
-          <h1 className="text-6xl font-playfair font-bold mb-6">Client Stories</h1>
-          <div className="flex justify-center gap-4 mb-12 flex-wrap">
-            {['All', 'Palm Jumeirah', 'Emirates Hills', 'Arabian Ranches'].map(f => (
-              <button key={f} className={`px-6 py-2 rounded-full border transition-all ${f === 'All' ? 'bg-[#C9A96E] text-white border-[#C9A96E]' : 'border-gray-200 hover:border-[#C9A96E]'}`}>
-                {f}
+        {/* Communities grid before footer */}
+        <div style={{ padding: '60px', borderTop: '1px solid rgba(237,230,217,0.06)' }}>
+          <h3 style={{
+            fontFamily: 'var(--display)', fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 900,
+            textTransform: 'uppercase', color: s.paper, marginBottom: '32px',
+          }}>Communities We <em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Serve</em></h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)' }}>
+            {COMMUNITIES.map((c) => (
+              <button key={c.id} onClick={() => handleNavigate(`community:${c.name}`)} style={{
+                background: s.ink, padding: '24px', textAlign: 'left', border: 'none', cursor: 'pointer',
+                transition: 'background 0.3s',
+              }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(237,230,217,0.03)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = s.ink; }}
+              >
+                <div style={{
+                  fontFamily: 'var(--display)', fontSize: '18px', fontWeight: 700,
+                  textTransform: 'uppercase', color: s.paper, marginBottom: '4px',
+                }}>{c.name}</div>
+                <div style={{
+                  fontFamily: 'var(--ui)', fontSize: '9px', letterSpacing: '0.15em',
+                  textTransform: 'uppercase', color: s.rust,
+                }}>{c.renovatedCount}+ villas</div>
               </button>
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {TESTIMONIALS.map((t, idx) => (
-            <div key={idx} className="p-12 border border-gray-100 rounded-3xl bg-[#F5F1E8]/30">
-               <div className="flex gap-1 mb-6">
-                 {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="#C9A96E" className="text-[#C9A96E]" />)}
-               </div>
-               <p className="text-2xl font-playfair italic mb-8 leading-relaxed">"{t.quote}"</p>
-               <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-[#C9A96E] flex items-center justify-center text-white font-bold">{t.name[0]}</div>
-                 <div>
-                   <div className="font-bold">{t.name}</div>
-                   <div className="text-sm text-[#707070]">{t.location}</div>
-                 </div>
-               </div>
+
+        {/* Footer strip */}
+        <div style={{
+          background: 'rgba(237,230,217,0.03)',
+          borderTop: '1px solid rgba(237,230,217,0.06)',
+          padding: '16px 64px',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          flexWrap: 'wrap', gap: '16px',
+        }}>
+          <span style={{
+            fontFamily: 'var(--display)', fontSize: '16px', fontWeight: 900,
+            textTransform: 'uppercase', letterSpacing: '-0.01em', color: 'rgba(237,230,217,0.4)',
+          }}>Smart·<em style={{ color: s.rust, fontWeight: 300, fontStyle: 'italic' }}>Renovation</em></span>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            {[
+              { label: '+971 4 235 0599', href: 'tel:+97142350599' },
+              { label: 'Dubai, UAE', href: '#' },
+              { label: 'Instagram', href: '#' },
+              { label: 'LinkedIn', href: '#' },
+            ].map((link, i) => (
+              <a key={i} href={link.href} style={{
+                fontFamily: 'var(--ui)', fontSize: '10px', letterSpacing: '0.15em',
+                textTransform: 'uppercase', color: 'rgba(237,230,217,0.2)',
+                transition: 'color 0.25s',
+              }}
+                onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.55)'; }}
+                onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'rgba(237,230,217,0.2)'; }}
+              >{link.label}</a>
+            ))}
+          </div>
+          <span style={{
+            fontFamily: 'var(--ui)', fontSize: '10px', letterSpacing: '0.08em',
+            color: 'rgba(237,230,217,0.15)',
+          }}>© 2025 Smart Renovation LLC</span>
+        </div>
+      </section>
+    </div>
+  );
+
+  /* ═══ HERITAGE PAGE ═══ */
+  const renderHeritage = () => (
+    <div>
+      <section style={{
+        background: s.ink, padding: '160px 60px 100px', minHeight: '60vh',
+        display: 'flex', alignItems: 'flex-end',
+      }}>
+        <div style={{ maxWidth: '900px' }}>
+          <span style={{ ...tagStyle, color: s.rust }}>OUR STORY</span>
+          <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
+            From Milan to Dubai:<br/>
+            <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>50 Years of Excellence</span>
+          </h1>
+          <p style={{ ...bodyTextStyle, color: 'rgba(237,230,217,0.5)', marginTop: '24px', maxWidth: '600px' }}>
+            Smart Renovation isn't just a fit-out company; it's a legacy of Italian craftsmanship that began in the workshops of Lombardy in 1970 and blossomed in the luxury estates of Dubai.
+          </p>
+        </div>
+      </section>
+      <section style={{ background: s.paper, padding: '80px 60px' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          {[
+            { year: '1970', title: 'The Italian Roots', desc: 'Our family established a luxury furniture and design workshop in Milan, specializing in bespoke Italian interiors.' },
+            { year: '1995', title: 'European Expansion', desc: 'Expanding across the EU, handling restoration of historical villas in Lake Como and Tuscany.' },
+            { year: '2015', title: 'Landing in Dubai', desc: 'Bringing the "Turnkey Italian" concept to the Middle East, starting with a single Signature Villa on Palm Jumeirah.' },
+            { year: '2026', title: 'Dubai\'s Premier Firm', desc: 'Today, we are a 6-time award-winning firm with over 400 villas transformed across the UAE.' },
+          ].map((item, i) => (
+            <div key={i} style={{
+              display: 'flex', gap: '40px', padding: '40px 0',
+              borderBottom: i < 3 ? `1px solid ${s.newsprint}` : 'none',
+            }}>
+              <div style={{
+                fontFamily: 'var(--display)', fontSize: '64px', fontWeight: 900,
+                color: 'rgba(12,11,9,0.06)', lineHeight: 0.85, minWidth: '80px',
+              }}>{String(i + 1).padStart(2, '0')}</div>
+              <div>
+                <div style={{ fontFamily: 'var(--ui)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: s.rust, marginBottom: '8px' }}>{item.year}</div>
+                <h3 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '12px' }}>{item.title}</h3>
+                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8 }}>{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -452,177 +722,227 @@ const App: React.FC = () => {
     </div>
   );
 
-  // NEW: Communities Hub Page
-  const renderCommunitiesHub = () => (
-    <div className="animate-in fade-in">
-      {/* Hero */}
-      <section className="relative h-[60vh] min-h-[400px] flex items-end pb-16">
-        <div className="absolute inset-0 bg-black">
-          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=1920" className="w-full h-full object-cover opacity-60" alt="Dubai Communities" />
-          <div className="absolute inset-0 bg-gradient-overlay"></div>
-        </div>
-        <div className="relative container mx-auto px-6 md:px-12 text-white">
-          <span className="text-[#C9A96E] text-sm uppercase tracking-widest font-bold block mb-4">WHERE WE WORK</span>
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-4">Dubai Communities</h1>
-          <p className="text-xl max-w-2xl font-light opacity-90 leading-relaxed">
-            Specialized villa renovation expertise across 13 of Dubai's premier residential areas. 400+ villas transformed.
-          </p>
+  /* ═══ AWARDS PAGE ═══ */
+  const renderAwards = () => (
+    <div>
+      <section style={{ background: s.ink, padding: '160px 60px 80px' }}>
+        <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+          <span style={{ ...tagStyle, color: s.rust }}>RECOGNITION</span>
+          <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
+            6-Time Award<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Winner</span>
+          </h1>
         </div>
       </section>
-
-      {/* Flagship Communities */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-3xl font-playfair font-bold mb-12">Flagship Communities</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {FLAGSHIP_COMMUNITIES.map(community => (
-              <div
-                key={community.id}
-                className="group relative h-[350px] rounded-2xl overflow-hidden shadow-xl cursor-pointer"
-                onClick={() => handleNavigate(`community:${community.name}`)}
-              >
-                <img src={community.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={community.name} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <h3 className="text-2xl font-playfair mb-2">{community.name}</h3>
-                  <p className="text-sm opacity-80 mb-2">{community.renovatedCount}+ Villas Renovated</p>
-                  <p className="text-xs opacity-60">{community.description}</p>
-                </div>
-                <div className="absolute top-4 right-4 bg-[#C9A96E] text-white text-xs px-3 py-1 rounded-full font-semibold">
-                  FLAGSHIP
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Map Placeholder */}
-      <section className="py-16 bg-[#F5F1E8]">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="bg-white rounded-2xl p-12 shadow-lg text-center">
-            <Map size={48} className="mx-auto mb-6 text-[#C9A96E]" />
-            <h3 className="text-2xl font-playfair font-bold mb-4">Interactive Community Map</h3>
-            <p className="text-[#707070] mb-6">Explore our projects across Dubai's premium residential areas</p>
-            <div className="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
-              <span className="text-[#707070]">Map Integration Coming Soon</span>
+      <section style={{ background: s.paper, padding: '80px 60px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint, maxWidth: '1000px', margin: '0 auto' }}>
+          {AWARDS.map((award, i) => (
+            <div key={i} style={{ background: s.paper, padding: '40px', textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: s.rust, marginBottom: '12px' }}>{award.year}</div>
+              <h3 style={{ fontFamily: 'var(--display)', fontSize: '22px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '8px', lineHeight: 1.1 }}>{award.title}</h3>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '14px', fontStyle: 'italic', color: s.stone }}>{award.body}</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Other Communities */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-3xl font-playfair font-bold mb-12">Other Communities We Serve</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {OTHER_COMMUNITIES.map(community => (
-              <div
-                key={community.id}
-                className="group p-6 border border-gray-100 rounded-xl hover:border-[#C9A96E] hover:shadow-lg transition-all cursor-pointer"
-                onClick={() => handleNavigate(`community:${community.name}`)}
-              >
-                <div className="h-32 rounded-lg overflow-hidden mb-4">
-                  <img src={community.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={community.name} />
-                </div>
-                <h3 className="font-bold mb-1">{community.name}</h3>
-                <p className="text-sm text-[#707070] mb-2">{community.renovatedCount}+ villas</p>
-                <p className="text-xs text-[#707070]">{community.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-gradient-gold text-white text-center">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-playfair mb-6">Don't See Your Community?</h2>
-          <p className="text-lg opacity-90 mb-8 max-w-xl mx-auto">We serve all premium residential areas in Dubai. Contact us for a custom consultation.</p>
-          <Button variant="white" onClick={() => setIsFormOpen(true)}>Get in Touch</Button>
+          ))}
         </div>
       </section>
     </div>
   );
 
-  // NEW: Process Page
-  const renderProcess = () => (
-    <div className="animate-in fade-in">
-      {/* Hero */}
-      <section className="py-24 bg-[#F5F1E8]">
-        <div className="container mx-auto px-6 md:px-12 text-center">
-          <span className="text-[#C9A96E] text-sm uppercase tracking-widest font-bold block mb-4">HOW WE WORK</span>
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-6">Our Seamless Process</h1>
-          <p className="text-xl text-[#707070] max-w-3xl mx-auto leading-relaxed">
-            From initial consultation to final handover, we guide you through every step with Italian precision and personal attention.
-          </p>
+  /* ═══ FOUNDERS PAGE ═══ */
+  const renderFounders = () => (
+    <div>
+      <section style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
+        <span style={{ ...tagStyle, color: s.rust }}>THE HAUTE COUTURE OF RENOVATION</span>
+        <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
+          Meet the Master<br/><span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Tailors</span>
+        </h1>
+        <p style={{ ...bodyTextStyle, color: 'rgba(237,230,217,0.45)', maxWidth: '600px', margin: '24px auto 0' }}>
+          Like the finest Milanese fashion houses, we believe luxury cannot be mass-produced.
+        </p>
+      </section>
+      <section style={{ background: s.paper, padding: '80px 60px' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          {[
+            { name: 'Marco P.', role: 'FOUNDER & CREATIVE DIRECTOR', quote: '"Every villa tells a story. My job is to ensure that story is written in Italian marble and European light."', bio: 'With over 30 years of personal experience in high-end structural renovations, Marco leads the design and site engineering teams.', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800' },
+            { name: 'Cinzia D.', role: 'CO-FOUNDER & RELATIONS DIRECTOR', quote: '"We don\'t just build rooms; we curate experiences for Dubai\'s most discerning families."', bio: 'Cinzia manages our client partnerships with the attentiveness of a private couturier.', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800' },
+          ].map((person, i) => (
+            <div key={i} style={{
+              display: 'grid', gridTemplateColumns: i % 2 === 0 ? '1fr 1fr' : '1fr 1fr',
+              gap: '64px', marginBottom: i === 0 ? '80px' : 0, alignItems: 'center',
+              direction: i % 2 === 1 ? 'rtl' : 'ltr',
+            }}>
+              <div style={{ direction: 'ltr' }}>
+                <img src={person.img} alt={person.name} style={{ width: '100%', height: '500px', objectFit: 'cover', filter: 'saturate(0.7) contrast(1.1)' }} />
+              </div>
+              <div style={{ direction: 'ltr' }}>
+                <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: s.rust, marginBottom: '12px' }}>{person.role}</div>
+                <h2 style={{ fontFamily: 'var(--display)', fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', color: s.ink, marginBottom: '16px' }}>{person.name}</h2>
+                <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(12,11,9,0.5)', lineHeight: 1.7, marginBottom: '20px' }}>{person.quote}</p>
+                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.45)', lineHeight: 1.8, marginBottom: '24px' }}>{person.bio}</p>
+                <Button variant="outline" onClick={() => setIsFormOpen(true)}>Schedule a Briefing</Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+
+  /* ═══ TESTIMONIALS PAGE ═══ */
+  const renderTestimonials = () => (
+    <div>
+      <section style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
+        <h1 style={{ ...heroTitleStyle, color: s.paper }}>
+          Client <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Stories</span>
+        </h1>
+      </section>
+      <section style={{ background: s.paper, padding: '80px 60px' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          {TESTIMONIALS.map((t, idx) => (
+            <div key={idx} style={{
+              padding: '48px 0', borderBottom: idx < TESTIMONIALS.length - 1 ? `1px solid ${s.newsprint}` : 'none',
+            }}>
+              <div style={{ display: 'flex', gap: '3px', marginBottom: '20px' }}>
+                {[...Array(5)].map((_, i) => <Star key={i} size={14} fill={s.rust} style={{ color: s.rust }} />)}
+              </div>
+              <p style={{ fontFamily: 'var(--serif)', fontSize: '24px', fontStyle: 'italic', color: 'rgba(12,11,9,0.7)', lineHeight: 1.7, marginBottom: '20px' }}>"{t.quote}"</p>
+              <div style={{ fontFamily: 'var(--ui)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: s.ink }}>{t.name}</div>
+              <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', color: s.rust, marginTop: '4px' }}>{t.location}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+
+  /* ═══ COMMUNITIES HUB ═══ */
+  const renderCommunitiesHub = () => (
+    <div>
+      <section style={{ background: s.ink, padding: '160px 60px 80px' }}>
+        <span style={{ ...tagStyle, color: s.rust }}>WHERE WE WORK</span>
+        <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
+          Dubai <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Communities</span>
+        </h1>
+        <p style={{ ...bodyTextStyle, color: 'rgba(237,230,217,0.45)', marginTop: '20px', maxWidth: '600px' }}>
+          Specialized villa renovation expertise across 13 of Dubai's premier residential areas. 400+ villas transformed.
+        </p>
+      </section>
+
+      {/* Flagship grid */}
+      <section style={{ background: s.paper, padding: '80px 60px' }}>
+        <h2 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>Flagship Communities</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: s.newsprint }}>
+          {FLAGSHIP_COMMUNITIES.map((c) => (
+            <div key={c.id} onClick={() => handleNavigate(`community:${c.name}`)} style={{
+              position: 'relative', height: '350px', overflow: 'hidden', cursor: 'pointer', background: s.ink,
+            }}>
+              <img src={c.image} alt={c.name} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.65) contrast(1.1)', transition: 'transform 0.7s' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(12,11,9,0.8) 0%, transparent 60%)' }}></div>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, padding: '32px', color: s.paper }}>
+                <div style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 900, textTransform: 'uppercase', marginBottom: '4px' }}>{c.name}</div>
+                <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', color: s.rust }}>{c.renovatedCount}+ villas renovated</div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Process Steps */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 md:px-12 max-w-5xl">
-          <div className="space-y-16">
-            {PROCESS_STEPS.map((step, idx) => (
-              <div key={idx} className="flex flex-col lg:flex-row gap-12 items-start">
-                <div className="flex-shrink-0">
-                  <div className="w-24 h-24 bg-[#F5F1E8] rounded-full flex items-center justify-center text-4xl border-2 border-[#C9A96E]">
-                    {step.icon}
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="text-[#C9A96E] font-bold text-sm">STEP {idx + 1}</span>
-                    <div className="h-px flex-1 bg-[#E5E5E5]"></div>
-                  </div>
-                  <h3 className="text-3xl font-playfair font-bold mb-4">{step.title}</h3>
-                  <p className="text-lg text-[#707070] leading-relaxed">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="py-20 bg-[#1A1A1A] text-white">
-        <div className="container mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl font-playfair mb-12">Typical Project Timeline</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {[
-              { phase: 'Design', duration: '4-6 weeks' },
-              { phase: 'Permits', duration: '2-4 weeks' },
-              { phase: 'Construction', duration: '3-8 months' },
-              { phase: 'Handover', duration: '1-2 weeks' },
-            ].map((item, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-4xl font-playfair text-[#C9A96E] mb-2">{item.duration}</div>
-                <div className="text-white/60 uppercase tracking-wider text-sm">{item.phase}</div>
-              </div>
-            ))}
-          </div>
+      {/* Other communities */}
+      <section style={{ background: s.paper, padding: '0 60px 80px' }}>
+        <h2 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '32px' }}>Other Communities</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: s.newsprint }}>
+          {OTHER_COMMUNITIES.map((c) => (
+            <button key={c.id} onClick={() => handleNavigate(`community:${c.name}`)} style={{
+              background: s.paper, padding: '24px', textAlign: 'left', border: 'none', cursor: 'pointer',
+              transition: 'background 0.3s',
+            }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = s.ink; (e.currentTarget as HTMLElement).style.color = s.paper; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = s.paper; (e.currentTarget as HTMLElement).style.color = s.ink; }}
+            >
+              <div style={{ fontFamily: 'var(--display)', fontSize: '18px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '4px' }}>{c.name}</div>
+              <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', letterSpacing: '0.15em', textTransform: 'uppercase', color: s.rust }}>{c.renovatedCount}+ villas</div>
+              <div style={{ fontFamily: 'var(--serif)', fontSize: '13px', fontStyle: 'italic', color: s.stone, marginTop: '8px' }}>{c.description}</div>
+            </button>
+          ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-white text-center">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-playfair mb-6">Ready to Start Your Project?</h2>
-          <p className="text-[#707070] mb-8 max-w-xl mx-auto">Book a free consultation to discuss your vision and receive a personalized project plan.</p>
-          <Button variant="primary-large" onClick={() => setIsFormOpen(true)}>Book Free Consultation</Button>
+      <section style={{ background: s.rust, padding: '80px 60px', textAlign: 'center' }}>
+        <h2 style={{ fontFamily: 'var(--display)', fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '16px' }}>Don't See Your Community?</h2>
+        <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: 'rgba(237,230,217,0.6)', marginBottom: '32px' }}>We serve all premium residential areas in Dubai.</p>
+        <Button variant="white" onClick={() => setIsFormOpen(true)}>Get in Touch</Button>
+      </section>
+    </div>
+  );
+
+  /* ═══ PROCESS PAGE ═══ */
+  const renderProcess = () => (
+    <div>
+      <section style={{ background: s.ink, padding: '160px 60px 80px', textAlign: 'center' }}>
+        <span style={{ ...tagStyle, color: s.rust }}>HOW WE WORK</span>
+        <h1 style={{ ...heroTitleStyle, color: s.paper, marginTop: '16px' }}>
+          Our Seamless <span style={{ fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,230,217,0.5)' }}>Process</span>
+        </h1>
+        <p style={{ ...bodyTextStyle, color: 'rgba(237,230,217,0.45)', maxWidth: '600px', margin: '24px auto 0' }}>
+          From initial consultation to final handover, guided with Italian precision and personal attention.
+        </p>
+      </section>
+      <section style={{ background: s.paper, padding: '80px 60px' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          {PROCESS_STEPS.map((step, idx) => (
+            <div key={idx} style={{
+              display: 'flex', gap: '40px', padding: '40px 0',
+              borderBottom: idx < PROCESS_STEPS.length - 1 ? `1px solid ${s.newsprint}` : 'none',
+              alignItems: 'flex-start',
+            }}>
+              <div style={{
+                fontFamily: 'var(--display)', fontSize: '64px', fontWeight: 900,
+                color: 'rgba(12,11,9,0.06)', lineHeight: 0.85, minWidth: '80px',
+              }}>{String(idx + 1).padStart(2, '0')}</div>
+              <div>
+                <div style={{ fontSize: '32px', marginBottom: '8px' }}>{step.icon}</div>
+                <h3 style={{ fontFamily: 'var(--display)', fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', color: s.ink, marginBottom: '12px' }}>{step.title}</h3>
+                <p style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontStyle: 'italic', color: 'rgba(12,11,9,0.55)', lineHeight: 1.8 }}>{step.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
+      </section>
+      {/* Timeline */}
+      <section style={{ background: s.ink, padding: '80px 60px' }}>
+        <h2 style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, textAlign: 'center', marginBottom: '48px' }}>Typical Timeline</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: 'rgba(237,230,217,0.06)', maxWidth: '800px', margin: '0 auto' }}>
+          {[
+            { phase: 'Design', duration: '4-6 weeks' },
+            { phase: 'Permits', duration: '2-4 weeks' },
+            { phase: 'Construction', duration: '3-8 months' },
+            { phase: 'Handover', duration: '1-2 weeks' },
+          ].map((item, idx) => (
+            <div key={idx} style={{ background: s.ink, padding: '32px', textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--display)', fontSize: '32px', fontWeight: 900, color: s.rust, marginBottom: '8px' }}>{item.duration}</div>
+              <div style={{ fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,230,217,0.4)' }}>{item.phase}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ background: s.rust, padding: '80px 60px', textAlign: 'center' }}>
+        <h2 style={{ fontFamily: 'var(--display)', fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', color: s.paper, marginBottom: '16px' }}>Ready to Start?</h2>
+        <Button variant="white" onClick={() => setIsFormOpen(true)}>Book Free Consultation</Button>
       </section>
     </div>
   );
 
   return (
-    <div className="min-h-screen">
+    <div style={{ minHeight: '100vh' }}>
+      {/* Grain overlay */}
+      <div className="m3-grain"></div>
+
       <Header
         onConsultationClick={() => setIsFormOpen(true)}
         onNavigate={handleNavigate}
       />
 
-      <main className="pt-[80px]">
+      <main>
         {activePage === 'home' && renderHome()}
         {activePage === 'heritage' && renderHeritage()}
         {activePage === 'awards-recognition' && renderAwards()}
@@ -631,231 +951,71 @@ const App: React.FC = () => {
         {activePage === 'communities' && renderCommunitiesHub()}
         {activePage === 'process' && renderProcess()}
 
-        {/* Resource Pages */}
         {activePage === 'villa-guide' && (
-          <VillaRenovationGuide
-            onConsultationClick={() => setIsFormOpen(true)}
-            onNavigate={handleNavigate}
-          />
+          <VillaRenovationGuide onConsultationClick={() => setIsFormOpen(true)} onNavigate={handleNavigate} />
         )}
         {activePage === 'materials-guide' && (
-          <MaterialsGuide
-            onConsultationClick={() => setIsFormOpen(true)}
-            onNavigate={handleNavigate}
-          />
+          <MaterialsGuide onConsultationClick={() => setIsFormOpen(true)} onNavigate={handleNavigate} />
         )}
         {activePage === 'noc-guide' && (
-          <NOCApprovalsGuide
-            onConsultationClick={() => setIsFormOpen(true)}
-            onNavigate={handleNavigate}
-          />
+          <NOCApprovalsGuide onConsultationClick={() => setIsFormOpen(true)} onNavigate={handleNavigate} />
         )}
         {activePage === 'blog' && (
-          <BlogPage
-            onConsultationClick={() => setIsFormOpen(true)}
-            onNavigate={handleNavigate}
-          />
+          <BlogPage onConsultationClick={() => setIsFormOpen(true)} onNavigate={handleNavigate} />
         )}
-
-        {/* Services Index Page */}
         {activePage === 'services' && (
-          <ServicesIndex
-            onNavigate={(serviceId) => handleNavigate(`service:${serviceId}`)}
-            onConsultationClick={() => setIsFormOpen(true)}
-          />
+          <ServicesIndex onNavigate={(serviceId) => handleNavigate(`service:${serviceId}`)} onConsultationClick={() => setIsFormOpen(true)} />
         )}
-
-        {/* Service Detail Page */}
         {activePage === 'service-detail' && (
-          <ServiceDetail
-            serviceId={selectedService}
-            onBack={() => handleNavigate('services')}
-            onConsultationClick={() => setIsFormOpen(true)}
-            onViewProject={(id) => {
-              if (SERVICES.find(s => s.id === id)) {
-                handleNavigate(`service:${id}`);
-              } else {
-                handleNavigate('portfolio');
-              }
-            }}
-          />
+          <ServiceDetail serviceId={selectedService} onBack={() => handleNavigate('services')} onConsultationClick={() => setIsFormOpen(true)} onViewProject={(id) => { if (SERVICES.find(ss => ss.id === id)) { handleNavigate(`service:${id}`); } else { handleNavigate('portfolio'); } }} />
         )}
-
-        {/* Portfolio Page with Favorites */}
         {activePage === 'portfolio' && (
-          <PortfolioGallery
-            onFavoritesThresholdReached={handleFavoritesThresholdReached}
-            hasSubmittedEmail={hasSubmittedEmail}
-            initialFilter={communityFilter}
-            onViewProject={(projectId) => handleNavigate(`project:${projectId}`)}
-            onRequestProject={(project) => {
-              localStorage.setItem('smartreno_inspiration_project', JSON.stringify({
-                title: project.title,
-                style: project.style,
-                location: project.location
-              }));
-              setIsFormOpen(true);
-            }}
-          />
+          <PortfolioGallery onFavoritesThresholdReached={handleFavoritesThresholdReached} hasSubmittedEmail={hasSubmittedEmail} initialFilter={communityFilter} onViewProject={(projectId) => handleNavigate(`project:${projectId}`)} onRequestProject={(project) => { localStorage.setItem('smartreno_inspiration_project', JSON.stringify({ title: project.title, style: project.style, location: project.location })); setIsFormOpen(true); }} />
         )}
-
-        {/* Project Detail Page */}
         {activePage === 'project-detail' && (
-          <ProjectDetail
-            projectId={selectedProject}
-            onBack={() => handleNavigate('portfolio')}
-            onConsultationClick={() => setIsFormOpen(true)}
-            onViewProject={(projectId) => handleNavigate(`project:${projectId}`)}
-          />
+          <ProjectDetail projectId={selectedProject} onBack={() => handleNavigate('portfolio')} onConsultationClick={() => setIsFormOpen(true)} onViewProject={(projectId) => handleNavigate(`project:${projectId}`)} />
         )}
-
-        {/* Placeholder for other pages */}
         {(['about'].includes(activePage)) && (
-          <div className="py-40 text-center animate-in fade-in">
-            <h1 className="text-4xl font-playfair mb-8 capitalize">{activePage} Overview</h1>
-            <p className="text-[#707070] mb-8">Detailed content coming soon.</p>
-            <Button onClick={() => handleNavigate('home')}>Return Home</Button>
+          <div style={{ padding: '200px 60px 100px', textAlign: 'center', background: s.paper }}>
+            <h1 style={{ ...heroTitleStyle, color: s.ink }}>{activePage}</h1>
+            <p style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', color: s.stone, marginTop: '16px' }}>Detailed content coming soon.</p>
+            <div style={{ marginTop: '32px' }}><Button onClick={() => handleNavigate('home')}>Return Home</Button></div>
           </div>
         )}
       </main>
 
-      {/* OPTIMIZED 5-COLUMN FOOTER */}
-      <footer className="bg-[#1A1A1A] text-white pt-24 pb-12">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 mb-20">
-            {/* Column 1: EXPLORE */}
-            <div>
-              <h4 className="text-sm font-bold mb-6 uppercase tracking-wider text-[#C9A96E]">Explore</h4>
-              <ul className="space-y-3 text-white/60 text-sm">
-                <li><button onClick={() => handleNavigate('communities')} className="hover:text-[#C9A96E] transition-colors">Communities</button></li>
-                <li><button onClick={() => handleNavigate('portfolio')} className="hover:text-[#C9A96E] transition-colors">Portfolio</button></li>
-                <li><button onClick={() => handleNavigate('process')} className="hover:text-[#C9A96E] transition-colors">Our Process</button></li>
-                <li><button onClick={() => handleNavigate('portfolio')} className="hover:text-[#C9A96E] transition-colors flex items-center gap-2">
-                  <Heart size={12} /> Vision Board
-                </button></li>
-              </ul>
-            </div>
-
-            {/* Column 2: SERVICES */}
-            <div>
-              <h4 className="text-sm font-bold mb-6 uppercase tracking-wider text-[#C9A96E]">Services</h4>
-              <ul className="space-y-3 text-white/60 text-sm">
-                {SERVICES.map(s => (
-                  <li key={s.id}>
-                    <button onClick={() => handleNavigate(`service:${s.id}`)} className="hover:text-[#C9A96E] transition-colors">
-                      {s.shortTitle}
-                    </button>
-                  </li>
-                ))}
-                <li><button onClick={() => handleNavigate('services')} className="text-[#C9A96E] font-semibold">View All →</button></li>
-              </ul>
-            </div>
-
-            {/* Column 3: TOP COMMUNITIES */}
-            <div>
-              <h4 className="text-sm font-bold mb-6 uppercase tracking-wider text-[#C9A96E]">Top Communities</h4>
-              <ul className="space-y-3 text-white/60 text-sm">
-                {FLAGSHIP_COMMUNITIES.slice(0, 5).map(c => (
-                  <li key={c.id}>
-                    <button onClick={() => handleNavigate(`community:${c.name}`)} className="hover:text-[#C9A96E] transition-colors">
-                      {c.name}
-                    </button>
-                  </li>
-                ))}
-                <li><button onClick={() => handleNavigate('communities')} className="text-[#C9A96E] font-semibold">View All (13) →</button></li>
-              </ul>
-            </div>
-
-            {/* Column 4: RESOURCES */}
-            <div>
-              <h4 className="text-sm font-bold mb-6 uppercase tracking-wider text-[#C9A96E]">Resources</h4>
-              <ul className="space-y-3 text-white/60 text-sm">
-                <li>
-                  <button onClick={() => handleNavigate('villa-guide')} className="flex items-center gap-2 hover:text-[#C9A96E] transition-colors">
-                    <FileText size={12} /> Villa Renovation Guide
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => handleNavigate('materials-guide')} className="flex items-center gap-2 hover:text-[#C9A96E] transition-colors">
-                    <FileText size={12} /> Materials Guide
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => handleNavigate('noc-guide')} className="flex items-center gap-2 hover:text-[#C9A96E] transition-colors">
-                    <FileText size={12} /> NOC Approvals Guide
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => handleNavigate('blog')} className="flex items-center gap-2 hover:text-[#C9A96E] transition-colors">
-                    <BookOpen size={12} /> Blog
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 5: CONTACT */}
-            <div>
-              <h4 className="text-sm font-bold mb-6 uppercase tracking-wider text-[#C9A96E]">Contact</h4>
-              <ul className="space-y-4 text-white/60 text-sm">
-                <li className="flex items-start gap-2">
-                  <MapPin size={14} className="mt-1 flex-shrink-0" />
-                  <span>Sheikh Zayed Road, Office 106-108, Dubai, UAE</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Phone size={14} />
-                  <a href="tel:+97142350599" className="hover:text-[#C9A96E]">+971 4 235 0599</a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Mail size={14} />
-                  <a href="mailto:info@smartrenovation.ae" className="hover:text-[#C9A96E]">info@smartrenovation.ae</a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <MessageCircle size={14} className="text-[#25D366]" />
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#25D366]">WhatsApp Chat</a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Clock size={14} />
-                  <span>Sun-Thu: 9AM-6PM</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Social & Bottom */}
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-8 h-8 bg-[#C9A96E] rounded-sm flex items-center justify-center text-white font-bold">S</div>
-              <span className="text-sm text-white/40">© 2026 Smart Renovation. All rights reserved.</span>
-            </div>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 hover:bg-[#C9A96E] flex items-center justify-center transition-all">
-                <Instagram size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 hover:bg-[#C9A96E] flex items-center justify-center transition-all">
-                <Facebook size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 hover:bg-[#C9A96E] flex items-center justify-center transition-all">
-                <Linkedin size={18} />
-              </a>
-            </div>
-            <div className="flex gap-6 text-sm text-white/40">
-              <a href="#" className="hover:text-white">Privacy Policy</a>
-              <a href="#" className="hover:text-white">Terms of Service</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
       {isFormOpen && <SmartConsultationForm onClose={() => setIsFormOpen(false)} />}
-
-      <EmailCaptureModal
-        isOpen={isEmailModalOpen}
-        onClose={() => setIsEmailModalOpen(false)}
-        onSubmit={handleEmailSubmit}
-        favoritesCount={favoritesCount}
-      />
+      <EmailCaptureModal isOpen={isEmailModalOpen} onClose={() => setIsEmailModalOpen(false)} onSubmit={handleEmailSubmit} favoritesCount={favoritesCount} />
     </div>
   );
+};
+
+/* ═══ Shared inline style constants ═══ */
+const tagStyle: React.CSSProperties = {
+  fontFamily: 'var(--ui)', fontSize: '10px', fontWeight: 600,
+  letterSpacing: '0.35em', textTransform: 'uppercase',
+};
+
+const heroTitleStyle: React.CSSProperties = {
+  fontFamily: 'var(--display)', fontSize: 'clamp(48px, 8vw, 96px)', fontWeight: 900,
+  textTransform: 'uppercase', letterSpacing: '-0.03em', lineHeight: 0.88,
+};
+
+const bodyTextStyle: React.CSSProperties = {
+  fontFamily: 'var(--serif)', fontSize: '18px', fontStyle: 'italic', lineHeight: 1.75,
+};
+
+const formLabelStyle: React.CSSProperties = {
+  fontFamily: 'var(--ui)', fontSize: '9px', fontWeight: 600,
+  letterSpacing: '0.22em', textTransform: 'uppercase',
+  color: 'rgba(237,230,217,0.3)', display: 'block', marginBottom: '6px',
+};
+
+const formInputStyle: React.CSSProperties = {
+  width: '100%', background: 'transparent', border: 'none',
+  borderBottom: '1px solid rgba(237,230,217,0.15)',
+  padding: '10px 0', fontFamily: 'var(--serif)', fontSize: '16px',
+  fontStyle: 'italic', color: '#EDE6D9', outline: 'none',
 };
 
 export default App;
